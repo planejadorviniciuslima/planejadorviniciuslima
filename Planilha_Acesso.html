@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilha de Planejamento | Acesso</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0D0D0D;
+    --dark-2: #141414;
+    --dark-3: #1C1C1C;
+    --cream: #F5F0E8;
+    --text-muted: #C8C3BB;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0D0D0D;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--cream);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .page {
+    background: #141414;
+    max-width: 720px;
+    margin: 0 auto;
+    height: 297mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* TOPO */
+  .doc-top {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 40px;
+  }
+
+  .doc-author {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .doc-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.25);
+  }
+
+  /* CONTEÚDO */
+  .doc-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .congrats-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .congrats-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-top: 12px;
+  }
+
+  .congrats-title em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .intro-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.85;
+    max-width: 520px;
+  }
+
+  /* CAIXA DE ACESSO */
+  .access-box {
+    background: var(--dark);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid var(--gold);
+    padding: 36px 40px;
+    position: relative;
+  }
+
+  .access-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .access-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .access-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .access-steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gold);
+    flex-shrink: 0;
+    line-height: 1.3;
+    width: 16px;
+  }
+
+  .access-link-block {
+    background: var(--dark-3);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+  }
+
+  .access-link-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .access-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--gold-light);
+    word-break: break-all;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+
+  /* NOTA FINAL */
+  .closing-note {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.85;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* RODAPÉ */
+  .doc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .doc-footer span {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.2);
+    text-transform: uppercase;
+  }
+
+  /* PRINT */
+  @page { margin: 0; size: A4; }
+
+  @media print {
+    body { background: #141414; }
+    .page { box-shadow: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="doc-top">
+    <span class="doc-author">Vinícius Gomes Lima · Planejador Financeiro</span>
+    <span class="doc-tag">Planilha de Planejamento · Acesso</span>
+  </div>
+
+  <div class="doc-body">
+
+    <div>
+      <span class="congrats-label">Compra confirmada</span>
+      <h1 class="congrats-title">Tudo pronto.<em>Sua planilha espera por você.</em></h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="intro-text">Obrigado pela compra. Abaixo você encontra o link para acessar sua cópia da Planilha de Planejamento. Siga os passos para salvar a planilha na sua conta do Google e começar a usar.</p>
+
+    <div class="access-box">
+      <span class="access-label">Como acessar</span>
+      <div class="access-title">Planilha de Planejamento Financeiro</div>
+
+      <ol class="access-steps">
+        <li>
+          <span class="step-num">1</span>
+          <span>Abra o link abaixo no seu navegador. Você precisará estar logado na sua conta Google (Gmail).</span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span>O Google vai abrir uma tela pedindo para criar uma cópia. Clique em <strong style="color:var(--cream);">Fazer uma cópia</strong>. A planilha será salva no seu Google Drive.</span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span>A partir daí, a planilha é sua. Você pode renomear, editar e acessar quando quiser, de qualquer dispositivo.</span>
+        </li>
+      </ol>
+
+      <div class="access-link-block">
+        <span class="access-link-label">Seu link de acesso</span>
+        <div class="access-link">https://docs.google.com/spreadsheets/d/1gickDS0YBdQbf4kqw_4Nsg3UBFqkprWojyQGgco_rFI/copy?usp=sharing</div>
+      </div>
+    </div>
+
+    <p class="closing-note">Se tiver dúvidas sobre como usar a planilha, entre em contato pelo e-mail <strong style="color:var(--cream);">planejadorviniciuslima@gmail.com</strong>. Será um prazer te ajudar.</p>
+
+  </div>
+
+  <div class="doc-footer">
+    <span>© 2026 Vinícius Gomes Lima</span>
+    <span>planejadorvinicius.com.br</span>
+  </div>
+
+</div>
+
+</body>
+</html>

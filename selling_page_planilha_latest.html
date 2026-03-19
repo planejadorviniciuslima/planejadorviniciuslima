@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilha de Planejamento Financeiro | Vinicius Lima</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0D0D0D;
+    --dark-2: #141414;
+    --dark-3: #1C1C1C;
+    --cream: #F5F0E8;
+    --cream-2: #EDE6D6;
+    --text-muted: #888880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    max-width: 900px;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero p {
+    margin-top: 28px;
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    animation: fadeUp 0.8s 0.6s ease forwards;
+    opacity: 0;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .btn-gold:hover::after { transform: translateX(0); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(201,168,76,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+
+  .btn-outline:hover::before { transform: scaleX(1); }
+  .btn-outline:hover {
+    color: var(--dark);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeUp 1s 1s ease forwards;
+    opacity: 0;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* SECTION */
+  section { position: relative; z-index: 1; }
+
+  .section-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto 64px;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 24px;
+    opacity: 0.5;
+  }
+
+  /* FEATURES SECTION */
+  .features {
+    padding: 120px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 56px;
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 36px;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    background: var(--dark-3);
+    transform: translateY(-4px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .feature-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--cream);
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* BENEFITS SECTION */
+  .benefits {
+    padding: 120px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .benefit-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: border-color 0.3s ease;
+  }
+
+  .benefit-item:hover {
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .benefit-check {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .benefit-content h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--cream);
+  }
+
+  .benefit-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* VIDEO DEMO */
+  .video-demo {
+    padding: 120px 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.2);
+    overflow: hidden;
+    margin-top: 56px;
+  }
+
+  .video-container:hover {
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .video-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.05) 100%);
+    font-size: 64px;
+  }
+
+  /* HOW IT WORKS */
+  .how-it-works {
+    padding: 120px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .steps-container {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+    align-items: start;
+    position: relative;
+  }
+
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 120px;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  .step-content h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--cream);
+  }
+
+  .step-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 120px 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .testimonial-card {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(201,168,76,0.25);
+    background: var(--dark-3);
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .testimonial-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .testimonial-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 120px 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .price-box {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-top: 2px solid var(--gold);
+    padding: 56px 40px;
+    margin-top: 56px;
+    position: relative;
+  }
+
+  .price-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .price-currency {
+    font-size: 24px;
+    vertical-align: super;
+  }
+
+  .price-period {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .price-includes {
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .price-includes li {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .price-includes li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* OFFER BOX */
+  .offer-box {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-top: 2px solid var(--gold);
+    padding: 48px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .offer-box::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .offer-box > * { position: relative; z-index: 1; }
+
+  .offer-product {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .offer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .offer-price-block { margin-bottom: 8px; }
+
+  .offer-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .offer-price sup {
+    font-size: 28px;
+    font-style: normal;
+  }
+
+  .offer-cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .offer-guarantee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .offer-guarantee svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+
+  .offer-installment {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 12px 0 32px;
+  }
+
+  /* FAQ */
+  .faq-section {
+    padding: 120px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .faq-list {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(201,168,76,0.1);
+    background: var(--dark-2);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .faq-item:hover { border-color: rgba(201,168,76,0.25); }
+  .faq-item.open { border-color: rgba(201,168,76,0.3); }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 28px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+  }
+
+  .faq-item.open .faq-question { color: var(--gold-light); }
+
+  .faq-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+    font-size: 16px;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .faq-answer-inner {
+    padding: 0 28px 24px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.85;
+  }
+
+  .faq-answer-inner strong {
+    color: var(--cream-2);
+    font-weight: 500;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    padding: 120px 24px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .final-cta p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark-2);
+    padding: 56px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  .footer-social-link {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .footer-social-link:hover { color: var(--gold); }
+
+  .footer-social-link svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.6); opacity: 0.4; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 1fr; gap: 20px; }
+    .step:not(:last-child)::after { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px; }
+    .features, .benefits, .how-it-works, .testimonials, .pricing, .faq-section {
+      padding: 80px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Ferramenta Financeira</div>
+  <h1>Planejamento financeiro com clareza <em>para cada dia</em></h1>
+  <p>Da projeção de 24 meses ao teto de gastos diário. Uma planilha que transforma seus números em decisões claras e metas que funcionam na sua realidade.</p>
+  <div class="hero-cta">
+    <a href="#preco" class="btn-gold">Obter acesso agora</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label reveal">O QUE VOCÊ RECEBE</div>
+  <h2 class="section-title reveal">Tudo que você precisa<br>em um único lugar</h2>
+  <p class="section-sub reveal">Organização, análise e controle total das suas finanças pessoais.</p>
+
+  <div class="features-grid reveal">
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="10" width="36" height="28" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M6 20h36" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M16 6v8M32 6v8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 30l7-6 7 4 9-8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Projeção de 24 meses ou mais</h3>
+      <p>Visualize sua situação financeira para os próximos 2 anos. A data de início é configurável e todas as colunas se ajustam automaticamente.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="10" width="22" height="28" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M6 20h22" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M13 6v8M21 6v8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="36" cy="32" r="8" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M36 28v4.5l2.5 2.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Teto de gastos diário</h3>
+      <p>Para custos variáveis, a planilha calcula não só o limite mensal, mas quanto você pode gastar por dia. Controle concreto no momento em que a decisão acontece.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M8 14h32M8 24h32M8 34h32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+          <circle cx="18" cy="14" r="4" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="30" cy="24" r="4" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="20" cy="34" r="4" stroke="#C9A84C" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3>Metas automáticas e ajustáveis</h3>
+      <p>Com base nas suas entradas, a planilha recomenda o mínimo a investir e o máximo a gastar por categoria. Você decide o que faz sentido para a sua realidade. Números em vermelho avisam quando há investimento abaixo ou gasto acima da meta.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M24 8v32M12 40h24" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M24 10L10 17M24 10l14 7" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10 17l-3 7h6l-3-7z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M38 17l-3 7h6l-3-7z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Saldo com e sem dívidas</h3>
+      <p>Veja sua saúde financeira separada das dívidas. Dívidas precisam de estratégia própria. A planilha mostra os dois cenários para você não confundir os problemas.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M24 6L8 13v11c0 9.5 6.8 17.5 16 19.5 9.2-2 16-10 16-19.5V13L24 6z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M17 24l5 5 9-10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Reserva de emergência calculada</h3>
+      <p>Cálculo automático do valor exato a acumular com base nos seus custos fixos e variáveis reais. Sem estimativas genéricas, sem regra de bolso.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M14 8v32" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 12h20l-6 8 6 8H14" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Objetivos de vida</h3>
+      <p>Além dos custos fixos e variáveis, a planilha tem uma seção exclusiva para os seus objetivos: a viagem dos sonhos, o imóvel próprio, o carro, o curso. Seu dinheiro organizado em torno do que realmente importa para você.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="section-label reveal">POR QUE USAR</div>
+  <h2 class="section-title reveal">Benefícios reais<br>para sua vida financeira</h2>
+
+  <div class="benefits-list reveal">
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-content">
+        <h3>Controle real no dia a dia</h3>
+        <p>Saber o teto mensal não é suficiente. A planilha calcula quanto você pode gastar hoje, tornando o controle uma decisão do momento, não uma análise do mês passado.</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-content">
+        <h3>Clareza sobre dívidas</h3>
+        <p>Ver o saldo com e sem dívidas separadamente revela a saúde real do fluxo de caixa. Problemas diferentes precisam de estratégias diferentes.</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-content">
+        <h3>Metas que você vai realmente seguir</h3>
+        <p>A planilha recomenda com base nos seus números. Você ajusta com base na sua realidade. Sem metas arbitrárias que ignoram o seu contexto.</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-content">
+        <h3>Seus dados, só seus</h3>
+        <p>Tudo no seu Google Drive, sem dependência de plataformas externas, sem assinatura mensal, sem risco de perder o acesso.</p>
+      </div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-check">✓</div>
+      <div class="benefit-content">
+        <h3>Reserva de emergência sem achismo</h3>
+        <p>O valor exato calculado com base nos seus custos reais, não em percentuais genéricos de manual. Você sabe exatamente o que precisa guardar.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIDEO DEMO -->
+<section class="video-demo">
+  <div class="section-label reveal">VEJA NA PRÁTICA</div>
+  <h2 class="section-title reveal">Conheça a planilha<br>em <em>ação</em></h2>
+  <p class="section-sub reveal">Assista um tour completo mostrando como a planilha funciona e como ela pode transformar sua organização financeira.</p>
+
+  <div class="video-container reveal">
+    <iframe class="video-frame" src="https://www.youtube.com/embed/qzSL7Na8mnw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="section-label reveal">COMO FUNCIONA</div>
+  <h2 class="section-title reveal">4 passos<br>para o controle total</h2>
+
+  <div class="steps-container reveal">
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <h3>Faça uma cópia para seu Google Drive</h3>
+        <p>Após a compra, você receberá um link para a planilha. Faça uma cópia para sua conta do Google e pronto! Seu arquivo pessoal está pronto para usar.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <h3>Configure conforme a sua realidade</h3>
+        <p>Siga as instruções da própria planilha: selecione a data de início, defina suas metas de investimento, gastos e objetivos de vida, e configure sua reserva de emergência. A planilha recomenda os valores. Você decide o que faz sentido para o seu momento.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <h3>Registre suas movimentações</h3>
+        <p>A cada transação, adicione um lançamento. Os saldos, tetos de gastos e metas são atualizados automaticamente. Números em vermelho sinalizam investimento abaixo ou gasto acima do que você definiu como meta.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <h3>Acompanhe pelo painel resumido</h3>
+        <p>Recolha os grupos de linhas e a planilha se transforma em um painel limpo com os números reais e as metas lado a lado. Visão completa da sua situação financeira em segundos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section id="preco" class="pricing">
+  <div class="section-label reveal">ACESSO</div>
+  <h2 class="section-title reveal">Um investimento<br>no seu futuro</h2>
+
+  <div class="price-box reveal">
+    <p class="offer-product">Planilha de Planejamento · Google Sheets</p>
+    <p class="offer-title" style="margin-bottom:24px;">Pagamento único. Acesso imediato e vitalício.</p>
+    <div class="offer-price-block" style="margin-bottom:24px;">
+      <div class="offer-price"><sup>R$</sup> 47</div>
+    </div>
+    <p class="offer-installment" style="margin-top:0; margin-bottom:32px; color:#C8C3BB;">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
+
+    <ul class="price-includes">
+      <li>Projeção de 24 meses com data configurável</li>
+      <li>Teto de gastos diário e mensal para custos variáveis</li>
+      <li>Metas automáticas de investimento e gastos por categoria</li>
+      <li>Saldo com e sem dívidas</li>
+      <li>Cálculo automático da reserva de emergência</li>
+      <li>Seção de objetivos de vida</li>
+      <li>Google Sheets com acesso vitalício</li>
+    </ul>
+
+    <a href="https://pay.hotmart.com/Q104986210Q" target="_blank" class="btn-gold">Comprar agora</a>
+
+    <div class="offer-guarantee" style="margin-top:24px; color:#C8C3BB;">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Garantia de 7 dias. Se não for útil para você, basta solicitar o reembolso.
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="faq-section">
+    <div class="section-label reveal">Dúvidas frequentes</div>
+    <h2 class="section-title reveal">Perguntas sobre<br>a <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-light)">planilha</em></h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Preciso ter conta no Google para usar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim, a planilha funciona no Google Sheets, que é gratuito. Se você usa Gmail, já tem uma conta Google e já pode acessar. Não é necessário instalar nenhum programa: basta abrir o link no navegador. Para quem nunca usou Google Sheets, a experiência é muito parecida com o Excel, e a planilha vem com um guia de boas-vindas com instruções passo a passo.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Preciso ter conhecimento técnico para usar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Não. A planilha foi desenhada para ser intuitiva. Se você sabe usar Google Sheets, consegue usar normalmente. Incluímos um guia de boas-vindas com instruções passo a passo.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Funciona no celular?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim. Google Sheets funciona no celular, mas a planilha foi otimizada para desktop (melhor experiência). No celular você consegue consultar, mas para adicionar lançamentos e customizações, recomendamos computador.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como recebo a planilha após a compra?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Assim que o pagamento for confirmado, você receberá um email com o link para a planilha. Basta clicar e fazer uma cópia para sua conta do Google Drive. É imediato.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Posso compartilhar com outras pessoas?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            A planilha é para uso pessoal. Se quiser compartilhar com cônjuge, companheiro ou familiar que vive com você, não tem problema. Apenas não distribua para terceiros ou use comercialmente.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          E se preciso de ajuda durante o uso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Você pode me contactar via email para dúvidas sobre como usar a planilha. Envie uma mensagem para planejadorviniciuslima@gmail.com e será um prazer te ajudar.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Tenho direito a reembolso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim. De acordo com o Código de Defesa do Consumidor, você tem 7 dias corridos a partir da compra para solicitar reembolso integral, sem precisar justificar. Basta entrar em contato pelo canal indicado na confirmação.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="divider reveal"></div>
+  <h2 class="reveal">Comece seu controle<br>financeiro <em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-light)">agora mesmo.</em></h2>
+  <p class="reveal">Uma ferramenta confiável para organizar suas finanças e tomar decisões com mais clareza. Acesso permanente, sem assinatura.</p>
+  <div class="reveal" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+    <a href="#preco" class="btn-gold">Acessar a planilha</a>
+    <a href="index_latest.html" class="btn-outline">Voltar ao início</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Vinícius Gomes Lima</div>
+  <p>© 2026 · Planejador Financeiro · Todos os direitos reservados</p>
+  <div class="footer-social">
+    <a href="https://instagram.com/planejadorvinicius" target="_blank" class="footer-social-link" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="https://tiktok.com/@planejadorvinicius" target="_blank" class="footer-social-link" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+      </svg>
+    </a>
+    <a href="https://threads.net/@planejadorvinicius" target="_blank" class="footer-social-link" title="Threads">
+      <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M141.537 88.988a66 66 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.502 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.569.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 9.988 15.773 12.796 26.02l16.078-4.36c-3.42-12.568-8.758-23.431-15.998-32.44C147.754 10.812 126.661 1.205 97.07 1h-.113C67.393 1.205 46.576 10.848 32.157 28.276 19.21 43.97 12.529 66.333 12.305 95.9v.2c.224 29.567 6.904 51.93 19.852 67.625 14.419 17.428 35.236 27.07 64.848 27.276h.113c26.372-.179 44.932-7.086 60.2-22.334 20.003-19.963 19.386-44.916 12.786-60.26-4.711-10.985-13.492-19.896-28.567-25.52Z"/>
+        <path d="M97.733 127.809c-11.537.634-23.255-4.537-23.851-15.546-.427-8.028 5.765-16.972 24.853-18.071 2.175-.125 4.31-.187 6.41-.187 6.077 0 11.768.558 16.996 1.635-1.935 24.117-12.654 31.553-24.408 32.169Z"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+</script>
+
+</body>
+</html>

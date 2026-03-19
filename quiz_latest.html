@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra seu momento financeiro · Vinícius Gomes Lima</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --dark: #0D0D0D;
+    --dark-2: #141414;
+    --dark-3: #1C1C1C;
+    --cream: #F5F0E8;
+    --cream-2: #EDE6D6;
+    --text-muted: #888880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* AMBIENT GLOW */
+  .ambient {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    transition: all 1.2s ease;
+  }
+  .ambient-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    top: -150px; left: -150px;
+  }
+  .ambient-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+    bottom: -100px; right: -100px;
+  }
+
+  /* STAGE */
+  .stage {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 640px;
+    padding: 40px 28px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    transition: opacity 0.4s;
+  }
+
+  .signature {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* PROGRESS DOTS */
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+  }
+
+  .dot.done {
+    background: var(--gold);
+    box-shadow: 0 0 8px rgba(201,168,76,0.5);
+  }
+
+  .dot.current {
+    background: var(--gold);
+    width: 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 12px rgba(201,168,76,0.6);
+  }
+
+  /* SLIDE CONTAINER */
+  .slide-viewport {
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* QUESTION BLOCK */
+  .question-block {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+  }
+
+  .question-block.active {
+    position: relative;
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ANIMATIONS */
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(48px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-48px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideOutLeft {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-48px); }
+  }
+  @keyframes slideOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(48px); }
+  }
+
+  .slide-in-right  { animation: slideInRight  0.38s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .slide-in-left   { animation: slideInLeft   0.38s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .slide-out-left  { animation: slideOutLeft  0.28s ease forwards; }
+  .slide-out-right { animation: slideOutRight 0.28s ease forwards; }
+
+  /* Q NUMBER + TEXT */
+  .q-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .q-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  /* OPTIONS */
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 22px;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.1);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* shimmer sweep on hover */
+  .option::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.05), transparent);
+    transition: left 0.5s ease;
+  }
+  .option:hover::after { left: 160%; }
+
+  .option:hover {
+    border-color: rgba(201,168,76,0.35);
+    background: var(--dark-3);
+  }
+
+  .option:active { transform: scale(0.99); }
+
+  .option.selected {
+    border-color: rgba(201,168,76,0.6);
+    background: var(--dark-3);
+  }
+
+  /* check box */
+  .opt-check {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(201,168,76,0.35);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .option.selected .opt-check {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(201,168,76,0.45);
+    transform: scale(1.1);
+  }
+
+  /* checkmark svg */
+  .opt-check svg {
+    width: 10px; height: 10px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease 0.05s;
+  }
+  .option.selected .opt-check svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* left accent bar */
+  .option::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+  }
+  .option.selected::before { transform: scaleY(1); }
+
+  .opt-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--cream-2);
+    transition: color 0.2s;
+  }
+  .option.selected .opt-text { color: var(--cream); }
+
+  /* NAV BUTTONS */
+  .quiz-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: color 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    visibility: hidden;
+  }
+  .btn-back.visible { visibility: visible; }
+  .btn-back:hover { color: var(--cream); }
+
+  .btn-next {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.25);
+    color: rgba(201,168,76,0.4);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    cursor: default;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-next::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    z-index: 0;
+  }
+
+  .btn-next span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+
+  .btn-next.enabled {
+    border-color: var(--gold);
+    color: var(--gold);
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(201,168,76,0.12);
+  }
+
+  .btn-next.enabled:hover::before { transform: scaleX(1); }
+  .btn-next.enabled:hover span { color: var(--dark); }
+  .btn-next.enabled:hover { box-shadow: 0 0 28px rgba(201,168,76,0.25); }
+
+  /* INTRO */
+  #intro {
+    text-align: center;
+    animation: slideInRight 0.5s ease forwards;
+  }
+
+  .intro-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .intro-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 440px;
+    margin: 0 auto 48px;
+  }
+
+  .btn-start {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-start::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    z-index: 0;
+  }
+  .btn-start span { position: relative; z-index: 1; transition: color 0.3s; }
+  .btn-start:hover::before { transform: scaleX(1); }
+  .btn-start:hover span { color: var(--dark); }
+  .btn-start:hover { box-shadow: 0 0 32px rgba(201,168,76,0.25); }
+
+  .intro-meta {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+  }
+
+  /* RESULT */
+  #result {
+    display: none;
+    animation: slideInRight 0.5s ease forwards;
+  }
+  #result.show { display: block; }
+
+  .result-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .result-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .result-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 36px;
+  }
+
+  .result-card {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 36px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .result-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .rc-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .rc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .rc-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .rc-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .rc-includes li {
+    font-size: 13px;
+    color: var(--cream-2);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .rc-includes li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+  }
+
+  .btn-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    text-decoration: none;
+    transition: background 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .btn-cta:hover::before { transform: translateX(100%); }
+  .btn-cta:hover { background: var(--gold-light); box-shadow: 0 4px 24px rgba(201,168,76,0.3); }
+
+  .btn-cta-outline {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    text-decoration: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .btn-cta-outline:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.12);
+  }
+
+  .result-also {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 20px 0 10px;
+    text-align: center;
+  }
+
+  .result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+
+  .btn-restart {
+    display: inline-block;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.25s;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0;
+  }
+  .btn-restart:hover { color: var(--cream); }
+
+  .btn-home {
+    display: inline-block;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.25s;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0;
+  }
+  .btn-home:hover { color: var(--cream); }
+
+  /* SCORE REVEAL (result animation) */
+  @keyframes scoreReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #result > * {
+    animation: scoreReveal 0.5s ease forwards;
+    opacity: 0;
+  }
+  #result > *:nth-child(1) { animation-delay: 0.05s; }
+  #result > *:nth-child(2) { animation-delay: 0.15s; }
+  #result > *:nth-child(3) { animation-delay: 0.25s; }
+  #result > *:nth-child(4) { animation-delay: 0.35s; }
+  #result > *:nth-child(5) { animation-delay: 0.42s; }
+  #result > *:nth-child(6) { animation-delay: 0.48s; }
+
+  /* TABLET */
+  @media (max-width: 768px) {
+    .stage { padding: 32px 24px; }
+    .top-bar { margin-bottom: 32px; }
+    .intro-sub { margin-bottom: 36px; }
+    .result-card { padding: 28px 24px; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 480px) {
+    /* Não centralizar verticalmente — deixar rolar naturalmente */
+    body { justify-content: flex-start; }
+
+    .stage {
+      padding: 48px 20px;
+      padding-bottom: max(48px, env(safe-area-inset-bottom, 24px));
+      min-height: auto;
+    }
+
+    .top-bar { margin-bottom: 24px; }
+
+    .intro-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .intro-sub { margin-bottom: 28px; }
+
+    .btn-start {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+    }
+
+    .q-text { margin-bottom: 24px; }
+
+    .options-list { gap: 8px; margin-bottom: 24px; }
+
+    .option {
+      padding: 16px 16px;
+      min-height: 52px; /* touch target */
+    }
+
+    .opt-text { font-size: 13px; }
+
+    .quiz-nav { margin-top: 4px; }
+
+    .btn-back {
+      font-size: 10px;
+      padding: 12px 0;
+      min-height: 44px;
+    }
+
+    .result-card { padding: 24px 18px; }
+
+    .rc-title { font-size: 1.3rem; }
+
+    .btn-cta {
+      padding: 18px 20px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+
+    .btn-cta-outline {
+      padding: 16px 20px;
+      font-size: 11px;
+    }
+
+    .result-desc { margin-bottom: 24px; }
+
+    .result-actions { margin-top: 20px; margin-bottom: 8px; }
+  }
+
+  /* TELAS MUITO PEQUENAS */
+  @media (max-width: 360px) {
+    .stage { padding: 40px 16px; }
+    .option { padding: 14px 14px; }
+    .result-card { padding: 20px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+
+<div class="stage">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <div class="intro-label">Vinícius Lima · Planejador Financeiro</div>
+    <h1 class="intro-title">Descubra em que momento<br><em style="font-style:italic; color:var(--gold-light)">financeiro você está</em></h1>
+    <p class="intro-sub">6 perguntas para entender sua situação e indicar o melhor próximo passo.</p>
+    <button class="btn-start" onclick="startQuiz()"><span>Começar →</span></button>
+    <p class="intro-meta">Menos de 2 minutos · Gratuito</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none;">
+
+    <div class="top-bar" id="top-bar">
+      <div class="signature">Planejador Vinicius</div>
+      <div class="progress-dots" id="progress-dots"></div>
+    </div>
+
+    <div class="slide-viewport" id="slide-viewport">
+
+      <!-- Q1: RENDA -->
+      <div class="question-block" data-q="0">
+        <div class="q-eyebrow">01 · Renda</div>
+        <div class="q-text">Qual é sua renda mensal aproximada?</div>
+        <div class="options-list">
+          <div class="option" data-key="renda" data-val="low">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Até R$ 6.000</div>
+          </div>
+          <div class="option" data-key="renda" data-val="high">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Entre R$ 6.000 e R$ 10.000</div>
+          </div>
+          <div class="option" data-key="renda" data-val="high">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Entre R$ 10.000 e R$ 20.000</div>
+          </div>
+          <div class="option" data-key="renda" data-val="high">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Entre R$ 30.000 e R$ 50.000</div>
+          </div>
+          <div class="option" data-key="renda" data-val="high">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Acima de R$ 50.000</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Q2: DÍVIDAS -->
+      <div class="question-block" data-q="1">
+        <div class="q-eyebrow">02 · Dívidas</div>
+        <div class="q-text">Como está sua situação com dívidas hoje?</div>
+        <div class="options-list">
+          <div class="option" data-key="divida" data-val="yes">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho dívidas que me preocupam ou me tiram o sono.</div>
+          </div>
+          <div class="option" data-key="divida" data-val="partial">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho parcelas e compromissos, mas estão dentro do controle.</div>
+          </div>
+          <div class="option" data-key="divida" data-val="no">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Não tenho dívidas.</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back visible" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Q3: ORGANIZAÇÃO -->
+      <div class="question-block" data-q="2">
+        <div class="q-eyebrow">03 · Organização</div>
+        <div class="q-text">Você controla seus gastos mensais com clareza?</div>
+        <div class="options-list">
+          <div class="option" data-key="org" data-val="no">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Não. O dinheiro some e não sei exatamente para onde vai.</div>
+          </div>
+          <div class="option" data-key="org" data-val="partial">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho uma ideia aproximada, mas não acompanho com precisão.</div>
+          </div>
+          <div class="option" data-key="org" data-val="yes">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Sim, tenho controle claro das minhas entradas e saídas.</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back visible" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Q4: APOSENTADORIA -->
+      <div class="question-block" data-q="3">
+        <div class="q-eyebrow">04 · Aposentadoria</div>
+        <div class="q-text">Você tem uma estratégia para a sua aposentadoria?</div>
+        <div class="options-list">
+          <div class="option" data-key="aposentadoria" data-val="no">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Não penso nisso hoje.</div>
+          </div>
+          <div class="option" data-key="aposentadoria" data-val="thinking">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Penso, mas ainda não fiz nada concreto a respeito.</div>
+          </div>
+          <div class="option" data-key="aposentadoria" data-val="partial">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho previdência ou algum investimento para esse fim, mas sem estratégia clara.</div>
+          </div>
+          <div class="option" data-key="aposentadoria" data-val="yes">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho uma estratégia de longo prazo definida e acompanho regularmente.</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back visible" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Q5: PROTEÇÃO -->
+      <div class="question-block" data-q="4">
+        <div class="q-eyebrow">05 · Proteção</div>
+        <div class="q-text">Seu patrimônio e sua renda estão protegidos?</div>
+        <div class="options-list">
+          <div class="option" data-key="protecao" data-val="no">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Não tenho nenhuma proteção contratada.</div>
+          </div>
+          <div class="option" data-key="protecao" data-val="partial">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho alguns seguros, mas não sei se são suficientes para a minha realidade.</div>
+          </div>
+          <div class="option" data-key="protecao" data-val="yes">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho seguros de vida, saúde e patrimônio adequados à minha situação.</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back visible" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Q6: INVESTIMENTOS -->
+      <div class="question-block" data-q="5">
+        <div class="q-eyebrow">06 · Investimentos</div>
+        <div class="q-text">Como estão seus investimentos hoje?</div>
+        <div class="options-list">
+          <div class="option" data-key="investimentos" data-val="no">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Não invisto nada.</div>
+          </div>
+          <div class="option" data-key="investimentos" data-val="partial">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho algo guardado, mas sem estratégia ou objetivo definido.</div>
+          </div>
+          <div class="option" data-key="investimentos" data-val="yes">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Invisto com regularidade, mas sinto que minha carteira poderia estar melhor estruturada.</div>
+          </div>
+          <div class="option" data-key="investimentos" data-val="structured">
+            <div class="opt-check"><svg viewBox="0 0 10 8" fill="none"><polyline points="1,4 4,7 9,1" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="opt-text">Tenho uma carteira estruturada com objetivos e prazos definidos.</div>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back visible" onclick="goBack()">← Voltar</button>
+        </div>
+      </div>
+
+    </div><!-- /slide-viewport -->
+  </div><!-- /quiz -->
+
+  <!-- RESULT -->
+  <div id="result">
+    <div class="result-eyebrow" id="r-tag">Seu perfil</div>
+    <div class="result-title" id="r-title"></div>
+    <p class="result-desc" id="r-desc"></p>
+    <div class="result-card" id="r-card"></div>
+    <div class="result-actions">
+      <button class="btn-restart" onclick="restart()">Refazer o quiz</button>
+      <a href="index_latest.html" class="btn-home">Voltar ao site</a>
+    </div>
+  </div>
+
+</div><!-- /stage -->
+
+<script>
+  const TOTAL = 6;
+  let current = 0;
+  let answers = {}; // { renda, divida, org, strategy }
+  let answersByQ = new Array(TOTAL).fill(null); // for back/restore
+  const questions = document.querySelectorAll('.question-block');
+
+  // Build progress dots
+  const dotsWrap = document.getElementById('progress-dots');
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.id = `dot-${i}`;
+    dotsWrap.appendChild(d);
+  }
+
+  function updateDots(idx) {
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.getElementById(`dot-${i}`);
+      d.className = 'dot' + (i < idx ? ' done' : i === idx ? ' current' : '');
+    }
+  }
+
+  function startQuiz() {
+    const intro = document.getElementById('intro');
+    intro.style.animation = 'slideOutLeft 0.28s ease forwards';
+    setTimeout(() => {
+      intro.style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+      showQuestion(0, 'right');
+    }, 280);
+  }
+
+  let advancing = false;
+
+  function showQuestion(idx, dir) {
+    current = idx;
+    advancing = false;
+    updateDots(idx);
+    questions.forEach(q => {
+      q.classList.remove('active', 'slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
+    });
+    const block = questions[idx];
+    block.classList.add('active');
+    block.classList.add(dir === 'right' ? 'slide-in-right' : 'slide-in-left');
+
+    // Restore saved answer if going back
+    const savedIdx = answersByQ[idx];
+    block.querySelectorAll('.option').forEach((opt, i) => {
+      opt.classList.toggle('selected', i === savedIdx);
+    });
+  }
+
+  // Option click — auto-advance after brief delay
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      if (advancing) return;
+      const block = this.closest('.question-block');
+      const idx = parseInt(block.dataset.q);
+      block.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+      const key = this.dataset.key;
+      const val = this.dataset.val;
+      answers[key] = val;
+      answersByQ[idx] = Array.from(block.querySelectorAll('.option')).indexOf(this);
+      advancing = true;
+      setTimeout(() => {
+        if (idx === TOTAL - 1) { finish(); } else { next(); }
+      }, 380);
+    });
+  });
+
+  function next() {
+    const outBlock = questions[current];
+    outBlock.classList.add('slide-out-left');
+    setTimeout(() => {
+      outBlock.classList.remove('active', 'slide-out-left');
+      showQuestion(current + 1, 'right');
+    }, 280);
+  }
+
+  function goBack() {
+    if (current === 0) return;
+    const outBlock = questions[current];
+    outBlock.classList.add('slide-out-right');
+    setTimeout(() => {
+      outBlock.classList.remove('active', 'slide-out-right');
+      showQuestion(current - 1, 'left');
+    }, 280);
+  }
+
+  function finish() {
+    const outBlock = questions[current];
+    outBlock.classList.add('slide-out-left');
+    setTimeout(() => {
+      outBlock.classList.remove('active');
+      document.getElementById('quiz').style.display = 'none';
+      showResult();
+    }, 280);
+  }
+
+  // Regra de decisão condicional
+  function decide(r) {
+    const highRenda   = r.renda  === 'high'; // apenas acima de R$10k
+    const worriedDebt = r.divida === 'yes';
+    const hasAnyDebt  = r.divida !== 'no';
+    const organized   = r.org    === 'yes';
+
+    const allStrong = (
+      !worriedDebt &&
+      r.org           === 'yes' &&
+      r.aposentadoria === 'yes' &&
+      r.protecao      === 'yes' &&
+      (r.investimentos === 'yes' || r.investimentos === 'structured')
+    );
+
+    if (allStrong)                 return 'EXCELENTE'; // regra 5: sem dívidas preocupantes + todos os aspectos fortes
+    if (highRenda && worriedDebt)  return 'MENTORIA';  // regra 4: alta renda + dívidas preocupantes → PFE direto
+    if (!highRenda && worriedDebt) return 'GUIA_N1';   // regra 1: baixa/média renda + dívidas preocupantes
+    if (!worriedDebt && !organized) return 'PLANILHA'; // regra 2: sem dívidas preocupantes + sem organização
+    return 'GUIA_N2';                                  // regra 3: sem dívidas preocupantes + organizado
+  }
+
+  const pfeBanner = `
+    <div class="result-card" style="margin-top:16px; border-color:rgba(201,168,76,0.4);">
+      <div class="rc-label" style="color:var(--gold-light);">Serviço Personalizado · Recomendado</div>
+      <div class="rc-title">Planejamento Financeiro Estratégico</div>
+      <p class="rc-desc">Nenhum produto digital substitui o acompanhamento próximo e personalizado. Com um planejador ao seu lado, cada decisão é tomada com base na sua realidade, não em conteúdo genérico.</p>
+      <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar sessão estratégica gratuita →</a>
+    </div>`;
+
+  const planilhaBanner = `
+    <div class="result-card" style="margin-top:16px; border-color:rgba(201,168,76,0.2);">
+      <div class="rc-label">Complemento recomendado</div>
+      <div class="rc-title">Planilha de Planejamento</div>
+      <p class="rc-desc">O guia te mostra o que fazer. A Planilha de Planejamento é a ferramenta para executar: projeção de 24 meses, teto de gastos, cálculo automático da reserva de emergência e seção de objetivos.</p>
+      <a href="selling_page_planilha_latest.html" class="btn-cta">Ver detalhes da Planilha →</a>
+    </div>`;
+
+  function showResult() {
+    let tipo = decide(answers);
+
+    const configs = {
+      GUIA_N1: {
+        tag: 'Fase 1 · Recomeço Financeiro',
+        title: 'Você está no momento do recomeço financeiro',
+        desc: 'Antes de pensar em investir ou crescer, o caminho passa por organizar, eliminar dívidas e criar uma base estável. Esse é o momento de agir com método.',
+        card: `
+          <div class="rc-label">Guia · Nível 1</div>
+          <div class="rc-title">Guia Recomeço Financeiro</div>
+          <p class="rc-desc">Um guia prático para quem quer parar de afundar e construir o primeiro degrau de estabilidade financeira.</p>
+          <ul class="rc-includes">
+            <li>Método prático para eliminar dívidas</li>
+            <li>Diagnóstico completo das suas finanças</li>
+            <li>Passo a passo para criar a reserva de emergência</li>
+            <li>Plano de ação de 5 dias para sair da leitura em movimento</li>
+          </ul>
+          <a href="selling_page_guia1.html" class="btn-cta">Ver detalhes do Guia →</a>`
+      },
+      PLANILHA: {
+        tag: 'Fase 2 · Organização Financeira',
+        title: 'Você está na fase de organização financeira',
+        desc: 'O próximo passo é criar um sistema claro para o seu dinheiro. Só com controle real é possível tomar decisões financeiras com confiança.',
+        card: `
+          <div class="rc-label">Ferramenta · Organização Financeira</div>
+          <div class="rc-title">Planilha de Planejamento Financeiro</div>
+          <p class="rc-desc">Para quem quer organizar entradas, gastos e dívidas e enxergar os próximos 24 meses com clareza.</p>
+          <ul class="rc-includes">
+            <li>Orçamento mensal com projeção de 24 meses</li>
+            <li>Controle de dívidas e parcelas de cartão</li>
+            <li>Metas automáticas por categoria</li>
+            <li>Cálculo de reserva de emergência</li>
+            <li>Google Sheets com acesso vitalício</li>
+          </ul>
+          <a href="selling_page_planilha_latest.html" class="btn-cta">Ver detalhes da Planilha →</a>`
+      },
+      GUIA_N2: {
+        tag: 'Fase 3 · Crescimento de Patrimônio',
+        title: 'Você está na fase de crescimento de patrimônio',
+        desc: 'Sua base está organizada. Agora o que separa quem acumula riqueza de quem apenas mantém é ter uma estratégia real de investimentos, aposentadoria e proteção.',
+        card: `
+          <div class="rc-label">Guia Prático · Nível 2</div>
+          <div class="rc-title">Guia Patrimônio Consistente</div>
+          <p class="rc-desc">Para quem já organiza as finanças mas ainda não tem estratégia de crescimento. Abre seus olhos para o que está faltando na construção do patrimônio.</p>
+          <ul class="rc-includes">
+            <li>Os pilares: investimentos, aposentadoria e proteção patrimonial</li>
+            <li>Como estruturar uma carteira por objetivo e prazo</li>
+            <li>Por que renda alta não garante riqueza</li>
+            <li>Quando e como buscar um planejador profissional</li>
+            <li>Guia em PDF com acesso vitalício</li>
+          </ul>
+          <a href="selling_page_guia2.html" class="btn-cta">Ver detalhes do Guia →</a>`
+      },
+      MENTORIA: {
+        tag: 'Fase 1 · Recomeço Financeiro',
+        title: 'Você está no momento do recomeço financeiro',
+        desc: 'Com dívidas no caminho, um guia genérico não é suficiente. O mais eficiente é resolver a situação com estratégia personalizada para a sua realidade.',
+        card: null
+      },
+      EXCELENTE: {
+        tag: 'Parabéns · Perfil Avançado',
+        title: 'Você já construiu uma base financeira sólida',
+        desc: 'Você organiza, investe, se protege e pensa no longo prazo. Isso é raro. E é exatamente o perfil de quem mais se beneficia de um olhar especializado de fora.',
+        card: null
+      },
+    };
+
+    const c = configs[tipo];
+    document.getElementById('r-tag').textContent = c.tag;
+    document.getElementById('r-title').textContent = c.title;
+    document.getElementById('r-desc').textContent = c.desc;
+
+    if (tipo === 'MENTORIA') {
+      document.getElementById('r-card').innerHTML = `
+        <div class="rc-label" style="color:var(--gold-light);">Fase 1 · Recomeço Financeiro · Serviço Personalizado</div>
+        <div class="rc-title">Planejamento Financeiro Estratégico</div>
+        <p class="rc-desc">Para quem precisa resolver as dívidas sem abrir mão de construir patrimônio ao mesmo tempo. Acompanhamento próximo, estratégia real, sem conteúdo genérico.</p>
+        <ul class="rc-includes">
+          <li>Diagnóstico financeiro completo</li>
+          <li>Plano de eliminação de dívidas integrado ao crescimento patrimonial</li>
+          <li>Revisão de carteira e alocação por perfil e objetivos</li>
+          <li>Planejamento de aposentadoria</li>
+          <li>Proteção e crescimento patrimonial</li>
+          <li>Suporte online e sessões de acompanhamento</li>
+        </ul>
+        <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar sessão estratégica gratuita →</a>`;
+    } else if (tipo === 'EXCELENTE') {
+      document.getElementById('r-card').innerHTML = `
+        <div class="rc-label" style="color:var(--gold-light); font-size:13px; letter-spacing:2px;">Parabéns. Você está à frente da maioria.</div>
+        <div class="rc-title" style="font-size:1.3rem;">Organização. Investimentos. Proteção. Aposentadoria.</div>
+        <p class="rc-desc">Você cuida de todos os pilares. Quem chega nesse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar. Um planejador financeiro não vai reorganizar sua vida. Vai identificar ineficiências invisíveis, oportunidades que você ainda não enxergou e garantir que cada decisão esteja alinhada com o que realmente importa para você.</p>
+        <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar uma revisão estratégica gratuita →</a>`;
+    } else {
+      document.getElementById('r-card').innerHTML = c.card;
+      if (tipo === 'GUIA_N1') {
+        document.getElementById('r-card').insertAdjacentHTML('afterend', planilhaBanner);
+      } else if (answers.renda === 'high') {
+        document.getElementById('r-card').insertAdjacentHTML('afterend', pfeBanner);
+      }
+    }
+
+    // Pontos de atenção baseados nas perguntas 1 a 6
+    const atencao = [];
+
+    // Q1 · Renda
+    if (answers.renda === 'low')
+      atencao.push('Renda: sua renda atual limita as opções disponíveis. Organização financeira é o primeiro passo para ampliar sua margem de manobra.');
+
+    // Q2 · Dívidas
+    if (answers.divida === 'yes')
+      atencao.push('Dívidas: você tem dívidas que comprometem sua saúde financeira. Eliminar esse passivo é prioridade antes de qualquer outro movimento.');
+    if (answers.divida === 'partial')
+      atencao.push('Dívidas: você tem parcelas ativas. Vale avaliar se o custo dessas dívidas está impactando sua capacidade de poupar e investir.');
+
+    // Q3 · Organização
+    if (answers.org === 'no')
+      atencao.push('Organização: sem controle dos gastos, é impossível saber quanto sobra, onde está o desperdício ou quando você vai atingir seus objetivos.');
+    if (answers.org === 'partial')
+      atencao.push('Organização: você tem uma noção aproximada, mas falta precisão. Pequenos vazamentos no orçamento acumulam grande impacto no longo prazo.');
+
+    // Q4 · Aposentadoria
+    if (answers.aposentadoria === 'no' || answers.aposentadoria === 'thinking')
+      atencao.push('Aposentadoria: você ainda não tem uma estratégia estruturada para o longo prazo. Cada ano sem plano é capital perdido.');
+    if (answers.aposentadoria === 'partial')
+      atencao.push('Aposentadoria: você tem algo, mas sem uma estratégia clara de objetivos e prazo os resultados ficam abaixo do potencial.');
+
+    // Q5 · Proteção
+    if (answers.protecao === 'no')
+      atencao.push('Proteção: seu patrimônio e renda estão expostos a riscos sem cobertura adequada. Um imprevisto pode comprometer anos de construção.');
+    if (answers.protecao === 'partial')
+      atencao.push('Proteção: você tem seguros, mas vale revisar se cobrem adequadamente sua situação atual.');
+
+    // Q6 · Investimentos
+    if (answers.investimentos === 'no')
+      atencao.push('Investimentos: seu dinheiro ainda não está trabalhando por você. Mesmo valores pequenos, investidos com consistência, fazem diferença.');
+    if (answers.investimentos === 'partial')
+      atencao.push('Investimentos: você poupa, mas sem estratégia os resultados ficam abaixo do potencial da sua renda.');
+
+    if (atencao.length > 0) {
+      const atencaoHTML = `
+        <div class="result-card" style="margin-top:16px; border-color:rgba(201,168,76,0.15);">
+          <div class="rc-label">Pontos de atenção identificados</div>
+          <ul class="rc-includes">${atencao.map(a => `<li>${a}</li>`).join('')}</ul>
+        </div>`;
+      document.getElementById('r-card').insertAdjacentHTML('beforebegin', atencaoHTML);
+    }
+
+    document.getElementById('result').classList.add('show');
+  }
+
+  function restart() {
+    answers = {};
+    answersByQ = new Array(TOTAL).fill(null);
+    const resultEl = document.getElementById('result');
+    resultEl.classList.remove('show');
+    // Remove PFE banner if present
+    const extra = resultEl.nextElementSibling;
+    if (extra && extra.classList.contains('result-card')) extra.remove();
+    // Clear injected cards (pontos de atenção + PFE banner)
+    const rcard = document.getElementById('r-card');
+    let sib = rcard.previousElementSibling;
+    while (sib && sib.classList.contains('result-card')) { const prev = sib.previousElementSibling; sib.remove(); sib = prev; }
+    sib = rcard.nextElementSibling;
+    while (sib && sib.classList.contains('result-card')) { const next = sib.nextElementSibling; sib.remove(); sib = next; }
+    rcard.innerHTML = '';
+    questions.forEach(q => {
+      q.classList.remove('active', 'slide-in-right', 'slide-in-left');
+      q.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    });
+    document.getElementById('quiz').style.display = 'block';
+    showQuestion(0, 'right');
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('quiz').style.display === 'none') return;
+    const block = questions[current];
+    const opts = Array.from(block.querySelectorAll('.option'));
+    const selIdx = opts.findIndex(o => o.classList.contains('selected'));
+    if (e.key === 'ArrowDown') { opts[Math.min(selIdx + 1, opts.length - 1)].click(); e.preventDefault(); }
+    if (e.key === 'ArrowUp')   { opts[Math.max(selIdx - 1, 0)].click(); e.preventDefault(); }
+    if (e.key === 'Enter' && answers[current] !== null) {
+      current === TOTAL - 1 ? finish() : next();
+    }
+  });
+</script>
+</body>
+</html>

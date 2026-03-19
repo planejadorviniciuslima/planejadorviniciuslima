@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Patrimônio Consistente | Vinícius Gomes Lima</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0D0D0D;
+    --dark-2: #141414;
+    --dark-3: #1C1C1C;
+    --cream: #F5F0E8;
+    --text: #F5F0E8;
+    --text-muted: #C8C3BB;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* LAYOUT */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  /* LABELS */
+  .label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  /* HEADINGS */
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 7vw, 64px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* DIVIDER */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+    margin: 24px 0;
+  }
+
+  /* BUTTON */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: background 0.25s ease;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-text h1 { margin-bottom: 24px; }
+
+  .hero-text p {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 460px;
+    margin-bottom: 40px;
+  }
+
+  .hero-price {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .price-current {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .price-original {
+    font-size: 16px;
+    color: rgba(245,240,232,0.3);
+    text-decoration: line-through;
+  }
+
+  .price-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  /* BOOK MOCKUP */
+  .book-mockup {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .book-mockup::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .book-mockup-top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .book-mockup-author {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .book-mockup-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .book-mockup-main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .book-mockup-divider {
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  .book-mockup h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: -0.3px;
+  }
+
+  .book-mockup h4 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .book-mockup-bottom {
+    font-size: 9px;
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.5px;
+  }
+
+  /* PARA QUEM É */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 40px;
+  }
+
+  .pain-item {
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .pain-check {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pain-check svg {
+    width: 10px;
+    height: 10px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .pain-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* PREVIEW DO CONTEÚDO */
+  .chapters-list {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .chapter-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .chapter-row-num {
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gold);
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .chapter-row-content {
+    padding: 18px 24px;
+  }
+
+  .chapter-row-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .chapter-row-content p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .chapters-extras {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .extra-item {
+    background: var(--dark-3);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .extra-item p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* O QUE ESTÁ INCLUÍDO */
+  .includes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 40px;
+  }
+
+  .include-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+  }
+
+  .include-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .include-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .include-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .include-text p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* AUTOR */
+  .author-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* OFERTA */
+  .offer-box {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-top: 2px solid var(--gold);
+    padding: 48px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .offer-box::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .offer-box > * { position: relative; z-index: 1; }
+
+  .offer-product {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .offer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .offer-price-block {
+    margin-bottom: 8px;
+  }
+
+  .offer-from {
+    font-size: 14px;
+    color: rgba(245,240,232,0.35);
+    margin-bottom: 4px;
+  }
+
+  .offer-from span {
+    text-decoration: line-through;
+  }
+
+  .offer-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .offer-price sup {
+    font-size: 28px;
+    vertical-align: super;
+  }
+
+  .price-includes {
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-muted);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0 32px;
+  }
+
+  .price-includes li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    line-height: 1.6;
+  }
+
+  .price-includes li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .offer-installment {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 12px 0 32px;
+  }
+
+  .offer-cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .offer-guarantee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .offer-guarantee svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+
+  /* GARANTIA */
+  .guarantee-inner {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .guarantee-badge {
+    width: 96px;
+    height: 96px;
+    border: 2px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .guarantee-badge .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .guarantee-badge .badge-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* FAQ */
+  .faq-list {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--dark-2);
+    border: 1px solid var(--border);
+  }
+
+  .faq-question {
+    padding: 20px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    user-select: none;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  details[open] .faq-question svg { transform: rotate(45deg); }
+
+  .faq-answer {
+    padding: 0 24px 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .final-cta h2 { margin-bottom: 16px; }
+
+  .final-cta p {
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+
+  .final-cta .btn-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 0.5px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+
+    .hero { padding: 64px 0 56px; }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .book-mockup {
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .pain-grid { grid-template-columns: 1fr; }
+
+    .chapters-extras { grid-template-columns: 1fr; }
+
+    .includes-grid { grid-template-columns: 1fr; }
+
+    .author-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .author-photo {
+      width: 120px;
+      height: 120px;
+    }
+
+    .offer-box { padding: 40px 24px; }
+
+    .offer-price { font-size: 56px; }
+
+    .guarantee-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .guarantee-badge { margin: 0 auto; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <span class="label">Guia · Nível 2</span>
+        <h1>Você ganha bem. <em>Agora é hora de construir de verdade.</em></h1>
+        <div class="divider"></div>
+        <p>Para profissionais e famílias com renda alta que querem parar de improvisar e montar uma estratégia patrimonial consistente.</p>
+
+        <a href="https://pay.hotmart.com/K104807468F" class="btn-primary" style="margin-top:16px;">Quero o guia agora</a>
+      </div>
+
+      <div class="book-mockup">
+        <div class="book-mockup-top">
+          <span class="book-mockup-author">Vinícius Gomes Lima · Planejador Financeiro</span>
+          <span class="book-mockup-tag">Guia · Nível 2</span>
+        </div>
+        <div class="book-mockup-main">
+          <div class="book-mockup-divider"></div>
+          <h4>Patrimônio<em>Consistente</em></h4>
+        </div>
+        <div class="book-mockup-bottom">© 2026 Vinícius Gomes Lima</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section>
+  <div class="container">
+    <span class="label">Para quem é este guia</span>
+    <h2>Você se identifica com alguma dessas situações?</h2>
+
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Você ganha bem, mas não consegue explicar para onde vai o dinheiro no fim do mês.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Tem investimentos em vários lugares, mas sem uma estratégia por trás.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Sente que, com a renda que tem, deveria estar mais avançado financeiramente do que está.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Toma boas decisões no trabalho, mas as decisões financeiras ficam sempre para depois.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Previdência privada, seguro de vida, planejamento sucessório: você sabe que precisa tratar, mas não sabe por onde começar.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-check">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <p>Não tem certeza se no ritmo atual vai chegar onde você quer, nos prazos que importam.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:32px; font-size:15px;">Se você se identificou com pelo menos uma dessas situações, este guia foi escrito para você.</p>
+  </div>
+</section>
+
+<!-- PREVIEW DO CONTEÚDO -->
+<section>
+  <div class="container">
+    <span class="label">O que você vai encontrar</span>
+    <h2>Uma estratégia completa. Do diagnóstico ao patrimônio real.</h2>
+    <p>O guia cobre todos os pilares de uma estrutura financeira sólida para quem tem renda alta, com exemplos do contexto brasileiro e um plano de ação para sair da leitura já em movimento.</p>
+
+    <div class="chapters-list">
+      <div class="chapter-row">
+        <div class="chapter-row-num">1</div>
+        <div class="chapter-row-content">
+          <strong>O mapa do patrimônio</strong>
+          <p>Por que uma renda alta não garante segurança financeira e como entender onde você realmente está.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">2</div>
+        <div class="chapter-row-content">
+          <strong>Avalie seu padrão de vida</strong>
+          <p>Como fazer um diagnóstico financeiro completo, medir os indicadores que revelam sua saúde financeira real e definir onde quer chegar.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">3</div>
+        <div class="chapter-row-content">
+          <strong>Os seis pilares de uma estrutura sólida</strong>
+          <p>A ordem certa para montar cada parte da sua estratégia financeira, sem pular etapas.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">4</div>
+        <div class="chapter-row-content">
+          <strong>Reserva de emergência para quem ganha bem</strong>
+          <p>Quanto guardar, onde guardar e por que a resposta muda completamente quando a renda e os custos fixos são altos.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">5</div>
+        <div class="chapter-row-content">
+          <strong>Investimentos</strong>
+          <p>Como montar uma carteira por objetivos, a diferença entre renda fixa e variável, ETFs, fundos imobiliários e ações no contexto de quem já tem reserva estruturada.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">6</div>
+        <div class="chapter-row-content">
+          <strong>Previdência privada</strong>
+          <p>PGBL ou VGBL, tabela progressiva ou regressiva: como usar a previdência de forma estratégica para reduzir o imposto de renda e planejar a aposentadoria.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">7</div>
+        <div class="chapter-row-content">
+          <strong>Imóvel próprio e decisões de alto valor</strong>
+          <p>Comprar ou alugar, financiar ou à vista: como avaliar o impacto de cada decisão no seu fluxo de caixa e no patrimônio de longo prazo.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">8</div>
+        <div class="chapter-row-content">
+          <strong>Padrão de vida e consumo consciente</strong>
+          <p>Como manter um padrão de vida que faz sentido para você sem comprometer a construção de patrimônio.</p>
+        </div>
+      </div>
+      <div class="chapter-row">
+        <div class="chapter-row-num">9</div>
+        <div class="chapter-row-content">
+          <strong>Quando buscar um planejador financeiro</strong>
+          <p>Os sinais de que a complexidade da sua situação já ultrapassou o que faz sentido gerenciar sozinho e o que esperar desse processo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapters-extras">
+      <div class="extra-item">
+        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Seus próximos 5 dias</strong>Plano de ação prático para começar a reorganizar a estratégia imediatamente após a leitura.</p>
+      </div>
+      <div class="extra-item">
+        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Leituras recomendadas</strong>6 livros selecionados para aprofundar cada pilar do guia.</p>
+      </div>
+      <div class="extra-item">
+        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Ferramentas gratuitas</strong>Sites e plataformas para aplicar as estratégias sem custo adicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE ESTÁ INCLUÍDO -->
+<section>
+  <div class="container">
+    <span class="label">O que você recebe</span>
+    <h2>Tudo incluído no valor único</h2>
+
+    <div class="includes-grid">
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Guia Patrimônio Consistente (PDF)</strong>
+          <p>9 capítulos com estratégias para quem tem renda alta, exemplos com números reais e linguagem direta.</p>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Plano de ação de 5 dias</strong>
+          <p>Cada dia com uma tarefa concreta para sair da leitura já reorganizando a sua estratégia.</p>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Exemplos com números reais</strong>
+          <p>Cálculos e situações do contexto brasileiro, incluindo tributação, IR e previdência privada.</p>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Ferramentas gratuitas indicadas</strong>
+          <p>Sites de fontes oficiais para consultar investimentos, fundos, seguradoras e o seu histórico no sistema financeiro. Sem cadastro, sem aplicativo.</p>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Leituras recomendadas</strong>
+          <p>6 livros selecionados para aprofundar o que você aprendeu, dos clássicos ao contexto brasileiro.</p>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="include-text">
+          <strong>Acesso imediato e vitalício</strong>
+          <p>Disponível para download logo após a confirmação do pagamento, para sempre.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOR -->
+<section>
+  <div class="container">
+    <div class="author-inner">
+      <div class="author-text">
+        <span class="label">Quem escreveu</span>
+        <h2>Vinícius Gomes Lima</h2>
+        <div class="divider"></div>
+        <p>Planejador Financeiro Certificado, formado em Relações Internacionais e com MBA em Finanças, com mais de 16 anos de carreira em multinacionais.</p>
+        <p>Trabalha com profissionais de alta renda, empresários e famílias que querem parar de improvisar e montar uma estratégia financeira de verdade. O problema que vê com mais frequência não é falta de renda. É falta de estrutura.</p>
+        <p>Este guia foi escrito a partir de situações reais, com a linguagem direta de quem entende que quem ganha bem não tem tempo a perder com teoria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section>
+  <div class="container">
+    <h2>O guia completo por um valor único.</h2>
+    <p>9 capítulos, plano de ação, exemplos reais e ferramentas práticas. Tudo que você precisa para montar uma estratégia patrimonial consistente, com acesso imediato e vitalício.</p>
+
+    <div class="offer-box">
+      <p class="offer-product">Guia Patrimônio Consistente · Nível 2</p>
+      <p class="offer-title">Pagamento único. Acesso imediato e vitalício.</p>
+
+      <div class="offer-price-block">
+        <div class="offer-price"><sup>R$</sup> 127</div>
+      </div>
+      <p class="offer-installment">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
+
+      <ul class="price-includes" style="color:#888880">
+        <li>Como estruturar um patrimônio real em qualquer faixa de renda</li>
+        <li>Estratégias de investimento para quem já tem reserva e quer crescer</li>
+        <li>Previdência privada: quando faz sentido, qual escolher e como calcular</li>
+        <li>Imóvel como investimento: o que os números realmente mostram</li>
+        <li>Proteção patrimonial: seguro de vida, DI e o que você provavelmente ignora</li>
+        <li>Plano de ação de 5 dias para sair da leitura já com decisões tomadas</li>
+      </ul>
+
+      <div class="offer-cta-wrap">
+        <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
+      </div>
+
+      <div class="offer-guarantee">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Garantia de 7 dias. Se não for útil para você, basta solicitar o reembolso.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <span class="label">Dúvidas frequentes</span>
+    <h2>Perguntas e respostas</h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          Este guia é para quem já tem o Guia Recomeço Financeiro?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Não necessariamente. O Guia Patrimônio Consistente foi escrito para profissionais com renda alta que já têm as finanças básicas organizadas e querem dar o próximo passo: montar uma estratégia patrimonial de verdade. Se você nunca teve dívidas graves e já tem alguma reserva, este guia é o ponto de partida certo, mesmo sem o Kit.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          Já li muito conteúdo sobre investimentos. O que este guia tem de diferente?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          A maioria do conteúdo sobre investimentos trata o assunto de forma isolada: qual produto escolher, qual rendimento esperar. Este guia trata investimentos como parte de uma estratégia maior que inclui proteção, previdência, planejamento sucessório e padrão de vida. A diferença está na visão integrada, não na lista de produtos.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          Serve para quem tem empresa ou é sócio de negócio?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Sim. O guia foi escrito para profissionais e famílias com renda alta, incluindo empresários e sócios. Questões como holding familiar, planejamento sucessório e proteção patrimonial são abordadas diretamente. Para situações muito específicas de estrutura societária, o guia indica quando faz sentido buscar assessoria especializada.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          O guia aborda a questão do imposto de renda?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Sim. O capítulo sobre previdência privada aborda diretamente o uso do PGBL para dedução no IR, a diferença entre tabela progressiva e regressiva e como calcular o benefício fiscal real para quem declara pelo modelo completo. O guia também menciona o impacto tributário em decisões de investimento e planejamento sucessório.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          Como recebo o guia após a compra?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Imediatamente após o pagamento confirmado, você recebe um e-mail do Hotmart com o link para baixar o PDF. O acesso é vitalício.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          E se eu não gostar?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Você tem 7 dias de garantia. Se por qualquer motivo o guia não atender às suas expectativas, basta solicitar o reembolso diretamente pelo Hotmart. O processo é simples e sem questionamentos.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <span class="label">Comece agora</span>
+    <h2>A renda você já tem.<em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-light);"> Agora é hora da estratégia.</em></h2>
+    <p>O guia está pronto. O próximo passo depende de você.</p>
+    <div class="btn-wrap">
+      <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 Vinícius Gomes Lima · Planejador Financeiro · <a href="/" style="color:inherit;">planejadorvinicius.com.br</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

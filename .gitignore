@@ -1,0 +1,18 @@
+# Exports e testes
+Testes PDF/
+*.pdf
+
+# Materiais antigos
+Materiais e versões antigas/
+
+# Vídeos (muito pesados para git)
+*.mp4
+*.mov
+*.avi
+
+# Thumbnail (apenas para screenshot local)
+thumbnail.html
+
+# Sistema
+.DS_Store
+Thumbs.db

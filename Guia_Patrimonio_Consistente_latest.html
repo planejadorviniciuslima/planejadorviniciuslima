@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Patrimônio Consistente | Vinícius Gomes Lima</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0D0D0D;
+    --dark-2: #141414;
+    --dark-3: #1C1C1C;
+    --cream: #F5F0E8;
+    --text: #F5F0E8;
+    --text-muted: #C8C3BB;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0D0D0D;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .page {
+    background: #141414;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 64px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cover-top { display: flex; flex-direction: column; gap: 6px; }
+
+  .cover-author {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .cover-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .cover-main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 9vw, 80px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    color: var(--cream);
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .cover-tagline {
+    font-size: 15px;
+    color: rgba(245,240,232,0.55);
+    max-width: 380px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .cover-bottom { display: flex; flex-direction: column; gap: 6px; }
+
+  .cover-bottom p {
+    font-size: 11px;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* CONTENT */
+  .content { padding: 56px 56px; }
+  .toc { padding: 56px 56px; }
+
+  .toc-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .toc-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list .toc-title { color: var(--text); font-weight: 400; }
+
+  .toc-list .toc-chapter {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .toc-list .toc-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--border);
+    margin: 0 8px;
+    margin-bottom: 4px;
+  }
+
+  /* CHAPTER HEADER */
+  .chapter-header {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chapter-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 44px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .chapter-intro {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 560px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 36px 0 12px;
+    border-left: 2px solid rgba(201,168,76,0.5);
+    padding-left: 14px;
+    page-break-after: avoid;
+  }
+
+  p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p strong { color: var(--text); font-weight: 500; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 32px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat-item {
+    background: #1C1C1C;
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .stats-source {
+    font-size: 11px;
+    color: #AAAAAA;
+    margin-top: -20px;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 2px solid var(--gold);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: #1C1C1C;
+  }
+
+  .callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: #1C1C1C;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .highlight-box .highlight-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .highlight-box p { font-size: 14px; margin: 0; line-height: 1.75; }
+
+  /* EXAMPLE BOX */
+  .example-box {
+    background: #111111;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-left: 2px solid var(--gold);
+  }
+
+  .example-box .example-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .example-box p { font-size: 14px; margin: 0; color: var(--text); }
+  .example-box p + p { margin-top: 10px; }
+
+  /* BULLET LIST */
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .bullet-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .bullet-list li strong { color: var(--text); font-weight: 500; }
+
+  .bullet-list.def { gap: 20px; }
+
+  .bullet-list.def li {
+    display: block;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .bullet-list.def li::before {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    margin-top: 0;
+    flex-shrink: unset;
+  }
+
+  .bullet-list.def li strong {
+    display: block;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .bullet-list.def li { text-align: left; }
+
+  /* PRIORITY LIST */
+  .priority-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .priority-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #1C1C1C;
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+  }
+
+  .priority-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+    min-width: 20px;
+  }
+
+  .priority-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .priority-content p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .two-col-item {
+    background: #1C1C1C;
+    border: 1px solid var(--border);
+    padding: 20px;
+  }
+
+  .two-col-item .col-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .two-col-item p { font-size: 13px; margin: 0; line-height: 1.65; }
+
+  /* STYLED TABLE */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .styled-table th {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .styled-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .styled-table tr:last-child td { border-bottom: none; }
+  .styled-table tr:nth-child(even) td { background: #111111; }
+  .styled-table td:first-child { font-weight: 500; color: var(--cream); }
+  .styled-table td.highlight { color: var(--gold); font-weight: 500; }
+
+  /* DAYS GRID */
+  .days-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 32px 0;
+  }
+
+  .day-item {
+    display: flex;
+    gap: 0;
+    background: #1C1C1C;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .day-label {
+    background: var(--dark);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    padding: 20px 14px;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .day-content { padding: 20px 24px; flex: 1; }
+
+  .day-content strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .day-content p { font-size: 13px; margin: 0; line-height: 1.7; }
+
+  /* TOOLS */
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 20px;
+    background: #1C1C1C;
+    border: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .tool-url {
+    color: var(--gold);
+    font-weight: 400;
+    white-space: nowrap;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .tool-desc { color: var(--text-muted); flex: 1; }
+
+  /* READING */
+  .reading-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 24px 0;
+  }
+
+  .reading-item {
+    padding: 20px 24px;
+    background: #1C1C1C;
+    border: 1px solid var(--border);
+    border-left: 2px solid transparent;
+  }
+
+  .reading-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .reading-author {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .reading-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin: 0; }
+
+  /* FOOTER */
+  .guide-footer {
+    padding: 32px 56px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #BBBBBB;
+    letter-spacing: 0.5px;
+  }
+
+  .guide-footer strong { color: var(--text-muted); font-weight: 400; }
+
+  /* PRINT */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    body { background: #0D0D0D !important; }
+    .page { max-width: 100%; margin: 0; box-shadow: none; background: #141414 !important; }
+
+    .print-break { page-break-before: always; break-before: page; }
+    .cover { min-height: 297mm; }
+
+    .priority-list,
+    .days-grid,
+    .bullet-list,
+    .reading-grid,
+    .tools-list,
+    .toc-list,
+    .stats-grid,
+    .two-col {
+      display: block !important;
+    }
+
+    .stat-item,
+    .two-col-item {
+      display: block;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .priority-item,
+    .highlight-box,
+    .example-box,
+    .callout,
+    .day-item,
+    .tool-item,
+    .reading-item,
+    .stat-item,
+    .two-col-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      display: block;
+    }
+
+    .bullet-list li {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* replica o padding em cada fragmento de página:
+       garante respiro no topo mesmo quando o conteúdo continua de outra página */
+    .content, .toc {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    /* evita que o h3 fique sozinho no final de página */
+    h3 {
+      page-break-after: avoid;
+      break-after: avoid;
+      margin-top: 12mm !important;
+    }
+    p { orphans: 5; widows: 5; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .cover { padding: 40px 32px; }
+    .content, .toc { padding: 40px 28px; }
+    .guide-footer { padding: 24px 28px; flex-direction: column; gap: 8px; text-align: center; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .day-label { writing-mode: horizontal-tb; transform: none; padding: 12px 16px; font-size: 11px; }
+    .toc-list li { flex-wrap: wrap; }
+    .toc-dots { display: none; }
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- CAPA -->
+<div class="cover">
+  <div class="cover-top">
+    <span class="cover-author">Vinícius Gomes Lima · Planejador Financeiro</span>
+    <span class="cover-tag">Guia Prático · Nível 2</span>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-divider"></div>
+    <h1>Guia Patrimônio<em>Consistente</em></h1>
+    <p class="cover-tagline">Para quem ganha bem e quer parar de deixar dinheiro na mesa. Como transformar renda alta em patrimônio que cresce de forma consistente.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <p>Este guia é para uso pessoal. Reprodução parcial ou total não autorizada.</p>
+    <p>© 2026 Vinícius Gomes Lima</p>
+  </div>
+</div>
+
+<!-- SUMÁRIO -->
+<div class="toc print-break">
+  <div class="toc-label">Sumário</div>
+  <ul class="toc-list">
+    <li>
+      <span class="toc-title">Apresentação</span>
+      <span class="toc-dots"></span>
+      <span>03</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 1</span>
+      <span class="toc-title">Por que renda alta não garante riqueza</span>
+      <span class="toc-dots"></span>
+      <span>04</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 2</span>
+      <span class="toc-title">Avalie seu padrão de vida</span>
+      <span class="toc-dots"></span>
+      <span>06</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 3</span>
+      <span class="toc-title">Os pilares do patrimônio</span>
+      <span class="toc-dots"></span>
+      <span>08</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 4</span>
+      <span class="toc-title">Reserva e proteção</span>
+      <span class="toc-dots"></span>
+      <span>10</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 5</span>
+      <span class="toc-title">Investimentos</span>
+      <span class="toc-dots"></span>
+      <span>12</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 6</span>
+      <span class="toc-title">Previdência privada</span>
+      <span class="toc-dots"></span>
+      <span>14</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 7</span>
+      <span class="toc-title">Aquisição de bens</span>
+      <span class="toc-dots"></span>
+      <span>16</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 8</span>
+      <span class="toc-title">Planejamento sucessório</span>
+      <span class="toc-dots"></span>
+      <span>18</span>
+    </li>
+    <li>
+      <span class="toc-chapter">Cap. 9</span>
+      <span class="toc-title">Quando buscar um planejador financeiro</span>
+      <span class="toc-dots"></span>
+      <span>20</span>
+    </li>
+    <li>
+      <span class="toc-title">O que fazer agora · Seus próximos 5 dias</span>
+      <span class="toc-dots"></span>
+      <span>21</span>
+    </li>
+    <li>
+      <span class="toc-title">Leituras recomendadas</span>
+      <span class="toc-dots"></span>
+      <span>22</span>
+    </li>
+    <li>
+      <span class="toc-title">Ferramentas gratuitas</span>
+      <span class="toc-dots"></span>
+      <span>23</span>
+    </li>
+  </ul>
+</div>
+
+<!-- APRESENTAÇÃO -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Apresentação</span>
+    <h2 class="chapter-title">Por que este guia existe</h2>
+    <p class="chapter-intro">Você trabalha muito, ganha bem. E ainda assim, quando para pra olhar o patrimônio acumulado, o número não reflete o esforço dos últimos anos.</p>
+  </div>
+
+  <p>O dinheiro entra, o padrão de vida sobe junto e sobra menos do que deveria para alguém com a sua renda. Você não está endividado. Mas também não está acumulando no ritmo que poderia. Esse é o paradoxo de quem ganha bem sem estratégia, e ele é muito mais comum do que parece.</p>
+
+  <p>Este guia foi escrito para mudar isso. Não vai te pedir para cortar gastos de forma agressiva nem para abrir mão do padrão de vida que você construiu. Vai te mostrar como usar a renda que você já tem de forma mais inteligente, estruturar os pilares certos na ordem certa e tomar decisões que fazem sentido para a sua fase de vida.</p>
+
+  <h3>Quem escreveu este guia</h3>
+
+  <p>Meu nome é Vinícius Gomes Lima. Sou formado em Relações Internacionais pela UFRJ, tenho MBA em Administração, Finanças e Geração de Valor pela PUC-RS e sou Planejador Financeiro Certificado. Ao longo de mais de 16 anos no mercado corporativo, atuei em multinacionais nos setores de qualidade, atendimento ao cliente e tecnologia, estando grande parte desse tempo à frente de operações internacionais e liderança de times globais.</p>
+
+  <p>Este guia foi escrito para profissionais que ganham bem e querem parar de improvisar. O problema que vejo com mais frequência não é falta de renda. É falta de estrutura.</p>
+</div>
+
+<!-- CAPÍTULO 1 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 1</span>
+    <h2 class="chapter-title">Por que renda alta não garante riqueza</h2>
+    <p class="chapter-intro">Existe uma ilusão muito comum entre quem ganha bem: a de que, chegando em determinado nível de renda, as coisas se resolvem sozinhas. Que o patrimônio vai acumular naturalmente. Que a aposentadoria vai estar garantida. Que sobrar dinheiro no final do mês vai ser consequência automática de ganhar mais. Na prática, quase nunca é assim.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-value">62%</span>
+      <span class="stat-desc">dos profissionais com renda acima de R$10 mil não têm reserva adequada</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">1 em 3</span>
+      <span class="stat-desc">empresários brasileiros não têm plano de aposentadoria estruturado</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">78%</span>
+      <span class="stat-desc">do aumento de renda vira aumento de padrão de vida, não patrimônio</span>
+    </div>
+  </div>
+  <p class="stats-source">Fontes: Serasa Consumidor (2024), Sebrae (2023), FGV IBRE (2023)</p>
+
+  <h3>A armadilha do padrão de vida expansivo</h3>
+
+  <p>Quando a renda sobe, o padrão de vida tende a subir na mesma proporção ou mais. Troca de carro, apartamento maior, escola mais cara para os filhos, viagens mais frequentes. Cada um desses movimentos é, em si, completamente razoável. O problema é quando todos acontecem ao mesmo tempo, sem planejamento, e o espaço para guardar e investir continua o mesmo de antes.</p>
+
+  <p>Esse fenômeno tem um nome nas finanças: inflação de estilo de vida. Ele explica por que médicos, advogados e empresários com renda mensal de R$20.000 ou mais, chegam aos 50 anos sem patrimônio suficiente para manter o padrão atual na aposentadoria.</p>
+
+  <h3>Um cenário que acontece mais do que parece</h3>
+
+  <div class="example-box">
+    <div class="example-label">Exemplo prático</div>
+    <p>Um advogado de 42 anos com renda mensal de R$25.000. Ao longo dos últimos 10 anos, trocou de carro três vezes, financiou um apartamento de R$900.000, matriculou os dois filhos em escola particular e viajou para o exterior todo ano.</p>
+    <p>Hoje, com toda essa renda acumulada ao longo de uma década, o patrimônio líquido é de R$180.000 em investimentos e um apartamento ainda com R$600.000 de saldo devedor. Cada decisão isolada pareceu razoável na época. O problema foi tomar todas ao mesmo tempo, sem planejamento, deixando o espaço para investir sempre em segundo plano.</p>
+  </div>
+
+  <h3>A regra que separa quem acumula de quem não acumula</h3>
+
+  <p>Quem constrói patrimônio de verdade não é necessariamente quem ganha mais. É quem tem uma diferença consistente entre o que entra e o que sai, e direciona essa diferença com inteligência ao longo do tempo.</p>
+
+  <div class="callout">
+    <p>O patrimônio não é o que você ganha. É a diferença entre o que você ganha e o que você gasta, multiplicada pelo tempo.</p>
+  </div>
+
+  <h3>O problema da renda como identidade</h3>
+
+  <p>Para muitos profissionais de alta renda, o padrão de vida é parte da identidade profissional. O carro, o escritório, as viagens e os restaurantes fazem parte da imagem que se projeta no mercado e nos relacionamentos. Abrir mão de qualquer um desses itens parece uma ameaça, não uma escolha financeira.</p>
+
+  <p>Este guia não vai te pedir para cortar tudo. Mas vai te ajudar a separar o que realmente importa para você do que é apenas manutenção de aparência, e a tomar decisões conscientes sobre onde o seu dinheiro vai.</p>
+</div>
+
+<!-- CAPÍTULO 2 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 2</span>
+    <h2 class="chapter-title">Avalie seu padrão de vida</h2>
+    <p class="chapter-intro">Antes de montar qualquer estratégia, você precisa saber o que está acontecendo de verdade com o seu dinheiro.</p>
+  </div>
+
+  <p>Isso significa ir além do extrato bancário e entender a estrutura de custo da sua vida atual. Para quem tem renda alta, o diagnóstico precisa ir além das categorias básicas de gastos e considerar camadas que raramente aparecem em guias financeiros convencionais: custos de status embutidos no padrão de vida, comprometimentos de longo prazo em financiamentos e planos, e a proporção real entre o que entra e o que fica.</p>
+
+  <h3>Os três indicadores que revelam sua saúde financeira real</h3>
+
+  <ul class="bullet-list def">
+    <li><strong>Taxa de poupança:</strong> qual percentual da sua renda você está guardando ou investindo todo mês? Abaixo de 20% para quem ganha bem é sinal de alerta. O objetivo é chegar a 30% ou mais.</li>
+    <li><strong>Comprometimento da renda:</strong> qual percentual está travado em parcelas fixas, como financiamentos, cartões e consórcios? Acima de 40% trava sua capacidade de investir e te deixa vulnerável a imprevistos.</li>
+    <li><strong>Patrimônio acumulado x renda anual:</strong> ao chegar aos 40 anos, o ideal é ter acumulado pelo menos 3 vezes a sua renda anual em patrimônio líquido. Aos 50, de 6 a 8 vezes.</li>
+  </ul>
+
+  <h3>Mapeando os custos fixos reais</h3>
+
+  <p>Profissionais de alta renda costumam ter uma estrutura de custos fixos muito maior do que percebem. Alguns itens que passam despercebidos no dia a dia, mas pesam no orçamento:</p>
+
+  <ul class="bullet-list">
+    <li>Escola dos filhos: mensalidades, material, atividades extracurriculares e transporte somados.</li>
+    <li>Imóvel: parcela do financiamento, condomínio, IPTU, manutenção e seguro.</li>
+    <li>Veículos: parcela, seguro, IPVA, combustível e manutenção de cada carro da família.</li>
+    <li>Planos de saúde: somados para toda a família, frequentemente o segundo maior custo fixo.</li>
+    <li>Funcionários domésticos: salário, encargos, alimentação e transporte.</li>
+    <li>Lazer e alimentação fora: restaurantes, assinaturas de clubes, academias e serviços de conveniência.</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div class="highlight-label">A pergunta certa</div>
+    <p>Para cada custo fixo da sua lista, pergunte: se a minha renda caísse 30% amanhã, eu conseguiria manter esse custo por pelo menos 12 meses? Se a resposta for não para muitos itens, sua estrutura de vida está superexposta.</p>
+  </div>
+
+  <h3>Definindo quanto você quer acumular</h3>
+
+  <p>Antes de qualquer estratégia de investimento, você precisa saber para onde está indo. Quais são os seus objetivos financeiros reais, com prazo e valor definidos?</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Independência financeira:</strong> a partir de qual patrimônio você não precisaria mais trabalhar para manter o padrão atual?</li>
+    <li><strong>Aposentadoria:</strong> com qual renda mensal você quer se aposentar e em quantos anos?</li>
+    <li><strong>Aquisição de bens:</strong> imóvel, carro, viagem, reforma. Cada um com valor e prazo estimados.</li>
+    <li><strong>Educação dos filhos:</strong> faculdade, intercâmbio. O custo hoje mais uma estimativa de inflação.</li>
+  </ul>
+
+  <div class="callout">
+    <p>Objetivos sem número e sem prazo são desejos. Com número e prazo, viram metas que podem ser colocadas num plano.</p>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Planilha de Planejamento</div>
+    <p>A Planilha de Planejamento permite registrar cada objetivo com valor e prazo, calcular quanto guardar por mês para atingi-los e acompanhar o progresso mês a mês ao longo de 24 meses. Disponível em <strong>planejadorvinicius.com.br</strong>.</p>
+    <img src="foto_planilha.png" alt="Planilha de Planejamento" style="width:100%; max-width:320px; display:block; margin-top:12px; border:1px solid rgba(201,168,76,0.25); border-radius:2px;">
+  </div>
+</div>
+
+<!-- CAPÍTULO 3 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 3</span>
+    <h2 class="chapter-title">Os pilares do patrimônio</h2>
+    <p class="chapter-intro">Patrimônio consistente não se constrói com um único movimento certeiro. Ele se constrói colocando as peças certas no lugar, na ordem certa, e mantendo a estrutura de pé ao longo do tempo.</p>
+  </div>
+
+  <div class="callout">
+    <p>Patrimônio é o resultado de decisões boas tomadas repetidamente ao longo de anos.</p>
+  </div>
+
+  <h3>Os seis pilares</h3>
+
+  <div class="priority-list">
+    <div class="priority-item">
+      <span class="priority-num">1</span>
+      <div class="priority-content">
+        <strong>Reserva de emergência</strong>
+        <p>O ponto de partida. Sem reserva, qualquer imprevisto derruba a estrutura toda. Para quem ganha bem, a reserva precisa ser maior e estar em lugares mais adequados do que a poupança.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-num">2</span>
+      <div class="priority-content">
+        <strong>Proteção</strong>
+        <p>Seguros de vida, invalidez e saúde. Quem tem dependentes e patrimônio a proteger não pode ignorar esse pilar. Um evento de saúde sem cobertura adequada pode liquidar anos de acumulação.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-num">3</span>
+      <div class="priority-content">
+        <strong>Previdência privada</strong>
+        <p>Planejamento de longo prazo com benefício fiscal real para quem tem renda alta. Usado de forma estratégica, reduz o imposto de renda e financia a aposentadoria.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-num">4</span>
+      <div class="priority-content">
+        <strong>Investimentos</strong>
+        <p>A parte que mais cresce no longo prazo. Renda fixa para estabilidade, renda variável para crescimento. A proporção certa depende do seu perfil e dos seus objetivos.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-num">5</span>
+      <div class="priority-content">
+        <strong>Aquisição de bens</strong>
+        <p>Imóveis, carros e outros bens de valor. A decisão de comprar, financiar ou alugar tem impacto direto no fluxo de caixa e na composição do patrimônio.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-num">6</span>
+      <div class="priority-content">
+        <strong>Planejamento sucessório</strong>
+        <p>O que acontece com o seu patrimônio se você não estiver mais aqui? Sem estrutura sucessória, o inventário pode consumir até 20% do patrimônio acumulado em custos e impostos.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>A ordem importa</h3>
+
+  <p>Um erro comum é querer investir antes de ter proteção e reserva, ou planejar a sucessão sem ter patrimônio consolidado. A sequência lógica é: reserva e proteção primeiro, depois previdência, depois investimentos e, por fim, a sucessão.</p>
+
+  <p>Isso não significa fazer um de cada vez. Significa dar peso adequado a cada pilar de acordo com a sua fase atual.</p>
+</div>
+
+<!-- CAPÍTULO 4 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 4</span>
+    <h2 class="chapter-title">Reserva e proteção</h2>
+    <p class="chapter-intro">Os dois pilares que a maioria dos profissionais de alta renda negligencia. A reserva parece desnecessária para quem ganha bem. O seguro parece um custo sem retorno. Os dois raciocínios são armadilhas.</p>
+  </div>
+
+  <h3>A reserva de emergência para quem ganha bem</h3>
+
+  <p>Para quem tem alta renda, a reserva precisa ser calculada sobre os custos fixos reais, que costumam ser altos. Uma família com custos fixos de R$15.000 por mês precisa de pelo menos R$90.000 a R$180.000 disponíveis a qualquer momento.</p>
+
+  <div class="two-col">
+    <div class="two-col-item">
+      <div class="col-label">6 a 12 meses</div>
+      <p><strong style="color:var(--cream);">Assalariado de alta renda</strong> com emprego estável. Calculado sobre os custos fixos mensais totais da família.</p>
+    </div>
+    <div class="two-col-item">
+      <div class="col-label">12 meses ou mais</div>
+      <p><strong style="color:var(--cream);">Profissional liberal, empresário ou autônomo.</strong> Renda variável exige reserva maior. Inclua também um colchão para capital de giro se tiver negócio.</p>
+    </div>
+  </div>
+
+  <h3>Onde guardar a reserva de quem tem alta renda</h3>
+
+  <p>A reserva precisa de liquidez imediata, mas isso não significa que precisa render pouco. Para valores maiores, existem opções mais adequadas:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Tesouro Selic:</strong> a base. Seguro, líquido e com rendimento atrelado à taxa básica de juros. Ideal para qualquer tamanho de reserva.</li>
+    <li><strong>CDB com liquidez diária:</strong> de bancos sólidos com rendimento acima de 100% do CDI. Coberto pelo Fundo Garantidor de Créditos até R$250 mil por CPF por instituição. Para valores maiores, distribua entre diferentes bancos.</li>
+    <li><strong>Fundos de renda fixa com resgate disponível no mesmo dia ou no dia seguinte:</strong> de gestoras reconhecidas. Permitem valores maiores com boa rentabilidade e segurança, sem os limites do FGC.</li>
+  </ul>
+
+  <h3>Proteção: o pilar que ninguém quer discutir</h3>
+
+  <p>Para quem tem dependentes, patrimônio acumulado e uma renda que sustenta uma estrutura de vida complexa, a proteção por seguros não é opcional. É parte da estrutura financeira.</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Seguro de vida:</strong> em caso de morte ou invalidez permanente, garante que os dependentes mantenham o padrão de vida e que o patrimônio não precise ser liquidado às pressas. A cobertura ideal costuma ser de 5 a 10 vezes a renda anual.</li>
+    <li><strong>Seguro de invalidez temporária (DIT):</strong> cobre a renda em caso de afastamento por doença ou acidente. Especialmente importante para autônomos e profissionais liberais, que não têm o INSS como proteção real para o seu padrão de vida.</li>
+    <li><strong>Seguro saúde robusto:</strong> um evento de saúde grave sem cobertura adequada pode custar centenas de milhares de reais. Revise as coberturas do seu plano atual: carências, coparticipação, cobertura para doenças graves e internações.</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Quanto gastar com proteção</div>
+    <p>Uma referência razoável é destinar entre 2% e 5% da renda bruta anual ao conjunto de seguros. Valores muito abaixo disso costumam indicar coberturas insuficientes.</p>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Planilha de Planejamento</div>
+    <p>A Planilha de Planejamento calcula automaticamente o tamanho da sua reserva de emergência com base nos custos fixos reais e mostra o progresso mês a mês até você atingir a meta. Disponível em <strong>planejadorvinicius.com.br</strong>.</p>
+  </div>
+</div>
+
+<!-- CAPÍTULO 5 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 5</span>
+    <h2 class="chapter-title">Investimentos</h2>
+    <p class="chapter-intro">Investir não é sobre escolher o produto certo. É sobre montar uma carteira que equilibra crescimento, segurança e liquidez de acordo com os seus objetivos e o seu perfil de tolerância a risco.</p>
+  </div>
+
+  <h3>A lógica da carteira por objetivos</h3>
+
+  <p>Antes de escolher qualquer produto, separe os seus recursos por objetivo e prazo. Dinheiro com objetivos diferentes exige tratamentos diferentes:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Curto prazo (até 2 anos):</strong> reserva, viagem planejada, reforma. Renda fixa com liquidez. Não faz sentido correr risco com dinheiro que você vai precisar em breve.</li>
+    <li><strong>Médio prazo (2 a 7 anos):</strong> troca de carro, entrada de imóvel, educação dos filhos. Combinação de renda fixa e renda variável de menor risco.</li>
+    <li><strong>Longo prazo (7 anos ou mais):</strong> aposentadoria, independência financeira, herança. Aqui sim faz sentido assumir mais risco em troca de maior retorno.</li>
+  </ul>
+
+  <h3>Renda fixa: mais do que poupança</h3>
+
+  <p>Para quem tem renda alta, a renda fixa vai muito além do Tesouro Selic. Existem produtos com rentabilidade superior e benefícios fiscais importantes:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Tesouro IPCA+:</strong> protege o poder de compra do patrimônio no longo prazo. Ideal para objetivos de 5 anos ou mais.</li>
+    <li><strong>CDB, LCI e LCA:</strong> LCI e LCA são isentos de imposto de renda para pessoas físicas, o que aumenta o retorno líquido. Compare sempre o retorno líquido, não o bruto.</li>
+    <li><strong>Debêntures incentivadas:</strong> isentas de IR e com potencial de rentabilidade acima da renda fixa tradicional. Exigem análise mais cuidadosa de risco de crédito.</li>
+    <li><strong>CRI e CRA:</strong> certificados ligados ao setor imobiliário e agronegócio, também isentos de IR. Atenção à liquidez reduzida.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="example-label">Exemplo prático: CDB x LCA em 2 anos</div>
+    <p>Suponha CDI em 10,5% ao ano. Um CDB a 110% do CDI rende 11,55% ao ano bruto. Com IR de 15% (prazo de 2 anos), o retorno líquido é 9,82% ao ano.</p>
+    <p>Uma LCA a 95% do CDI rende 9,97% ao ano já líquido, sem IR. O CDB paga mais no bruto, mas a LCA entrega mais no bolso. Abaixo de 93,5% do CDI, a LCA perderia para esse CDB no líquido. Sempre compare o retorno líquido antes de decidir.</p>
+  </div>
+
+  <h3>Renda variável: quando e como entrar</h3>
+
+  <p>Renda variável faz sentido quando você já tem reserva consolidada, proteção estruturada e um horizonte de tempo longo para o dinheiro aplicado. Sem esses pré-requisitos, a volatilidade vira um problema real.</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Fundos de investimento:</strong> permitem diversificação com gestão profissional. Avalie taxa de administração, histórico e estratégia do gestor.</li>
+    <li><strong>ETFs (fundos de índice):</strong> replicam automaticamente um índice de mercado, como o Ibovespa ou o S&amp;P 500. Taxa de administração muito baixa e boa diversificação sem precisar escolher ativos individualmente. Uma opção simples e eficiente para quem quer exposição a renda variável sem acompanhamento ativo.</li>
+    <li><strong>Fundos imobiliários (FIIs):</strong> distribuem renda mensal isenta de IR e permitem exposição ao mercado imobiliário sem a necessidade de comprar um imóvel físico.</li>
+    <li><strong>Ações:</strong> maior potencial de retorno no longo prazo, maior volatilidade no curto. Para a maior parte dos perfis, faz sentido como parte de uma carteira diversificada, não como o investimento principal.</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Atenção</div>
+    <p>A indicação de quais ativos específicos comprar, como qual ação ou qual fundo, é atribuição do assessor de investimentos certificado. O planejador financeiro define a estratégia e a alocação por objetivo e perfil. Os dois papéis se complementam.</p>
+  </div>
+</div>
+
+<!-- CAPÍTULO 6 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 6</span>
+    <h2 class="chapter-title">Previdência privada</h2>
+    <p class="chapter-intro">Previdência privada é um dos instrumentos mais mal compreendidos no mercado financeiro. Para quem tem renda alta, quando usada de forma estratégica, ela é uma das ferramentas mais eficientes de planejamento de longo prazo disponíveis.</p>
+  </div>
+
+  <h3>PGBL ou VGBL: qual escolher</h3>
+
+  <div class="two-col">
+    <div class="two-col-item">
+      <div class="col-label">PGBL</div>
+      <p>Permite deduzir até 12% da renda bruta anual na declaração completa do IR. Indicado para quem declara pelo modelo completo. O imposto é cobrado no resgate sobre o valor total acumulado.</p>
+    </div>
+    <div class="two-col-item">
+      <div class="col-label">VGBL</div>
+      <p>Não tem dedução de IR. Indicado para quem declara pelo simplificado ou já atingiu o limite de dedução com o PGBL. O imposto no resgate incide apenas sobre os rendimentos.</p>
+    </div>
+  </div>
+
+  <h3>Por que a previdência vale para quem ganha bem</h3>
+
+  <p>Para um profissional que declara IR pelo modelo completo e tem renda tributável acima de R$10.000 por mês, aportar no PGBL equivale a receber um retorno imediato de até 27,5% sobre o valor investido, que é a alíquota máxima do IR devolvida na declaração. Nenhum outro investimento oferece esse retorno garantido no primeiro ano.</p>
+
+  <h3>Tabela progressiva ou regressiva de IR</h3>
+
+  <p>Na previdência privada, você escolhe entre dois regimes de tributação no momento da contratação. Na <strong>tabela progressiva</strong>, a alíquota segue a mesma faixa do seu IR anual, podendo chegar a 27,5%. É vantajosa apenas se você fizer saques pequenos na aposentadoria, com renda tributável baixa. Na <strong>tabela regressiva</strong>, quanto mais tempo o dinheiro fica aplicado, menor o imposto no resgate. Para dinheiro de longo prazo, essa é a escolha que faz mais sentido na maior parte dos casos:</p>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Prazo de acumulação</th>
+        <th>Alíquota de IR no resgate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Até 2 anos</td><td>35%</td></tr>
+      <tr><td>De 2 a 4 anos</td><td>30%</td></tr>
+      <tr><td>De 4 a 6 anos</td><td>25%</td></tr>
+      <tr><td>De 6 a 8 anos</td><td>20%</td></tr>
+      <tr><td>De 8 a 10 anos</td><td>15%</td></tr>
+      <tr><td>Acima de 10 anos</td><td class="highlight">10%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="example-label">Na prática</div>
+    <p>Se você tem 38 anos e pretende resgatar aos 65, o dinheiro ficará aplicado por 27 anos. Você já estará na alíquota de 10% após os primeiros 10 anos, e todo o crescimento posterior será tributado nesse patamar mínimo. Nenhum outro investimento de renda fixa no Brasil oferece essa vantagem fiscal para quem pensa no longo prazo.</p>
+  </div>
+
+  <h3>Previdência e sucessão</h3>
+
+  <p>A previdência privada não entra no inventário. O valor acumulado vai diretamente aos beneficiários indicados, sem custas de cartório, sem ITCMD em alguns estados e sem o tempo do processo judicial. Para planejamento sucessório, é um instrumento valioso.</p>
+
+  <h3>O que avaliar ao contratar</h3>
+
+  <p>Nem todo plano de previdência vale a pena. Os pontos críticos a avaliar:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Taxa de administração:</strong> acima de 1% ao ano já compromete significativamente o resultado no longo prazo. Planos modernos de gestoras independentes costumam cobrar menos.</li>
+    <li><strong>Taxa de carregamento:</strong> cobrada sobre cada aporte. Muitos planos modernos não cobram mais essa taxa. Evite planos que ainda cobram.</li>
+    <li><strong>Qualidade dos fundos disponíveis:</strong> avalie o histórico e a gestora dos fundos dentro do plano, não só o plano em si.</li>
+    <li><strong>Portabilidade:</strong> você tem o direito de transferir a previdência para outra instituição sem pagar IR, desde que não resgate o dinheiro. Use isso se encontrar condições melhores.</li>
+  </ul>
+</div>
+
+<!-- CAPÍTULO 7 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 7</span>
+    <h2 class="chapter-title">Aquisição de bens</h2>
+    <p class="chapter-intro">Imóvel, carro, viagem, reforma, intercâmbio dos filhos. Decisões de aquisição de bens têm impacto direto no fluxo de caixa e na composição do patrimônio. Tomadas sem planejamento, elas travam a capacidade de investir por anos.</p>
+  </div>
+
+  <h3>Imóvel: comprar, financiar ou alugar?</h3>
+
+  <p>A decisão de comprar um imóvel precisa ser avaliada financeiramente, não só emocionalmente. Alguns pontos que fazem diferença:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Custo real do financiamento:</strong> num financiamento de 30 anos, o valor total pago costuma ser o dobro ou mais do valor do imóvel. Isso precisa entrar na conta.</li>
+    <li><strong>Custo de oportunidade:</strong> o valor da entrada, investido a uma taxa razoável por 10 ou 15 anos, pode gerar um patrimônio equivalente ao imóvel sem o comprometimento do fluxo mensal.</li>
+    <li><strong>Liquidez:</strong> imóvel é um ativo de baixa liquidez. Em momento de necessidade, vender pode levar meses ou anos.</li>
+    <li><strong>Custos adicionais:</strong> ITBI, escritura, cartório, IPTU, condomínio e manutenção. Some tudo antes de decidir.</li>
+  </ul>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Importante</div>
+    <p>Isso não significa que comprar imóvel é sempre errado. Significa que a decisão precisa ser tomada com os números na mesa, não apenas com a sensação de segurança que a propriedade transmite.</p>
+  </div>
+
+  <h3>Veículos: o maior consumidor silencioso</h3>
+
+  <p>Carro é um dos ativos que mais consome patrimônio sem que a maioria das pessoas perceba. Depreciação, seguro, IPVA, manutenção, combustível e parcela do financiamento somados chegam facilmente a R$3.000 ou R$6.000 por mês numa família com dois carros financiados.</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Carro financiado novo:</strong> combina depreciação acelerada com juros de financiamento. O pior cenário financeiro, e o mais comum no Brasil.</li>
+    <li><strong>Carro usado à vista:</strong> financeiramente mais inteligente. A depreciação dos primeiros anos já foi absorvida pelo dono anterior.</li>
+    <li><strong>Carro por assinatura ou serviço de mobilidade:</strong> pode fazer sentido para quem usa pouco ou quer previsibilidade de custo sem comprometer capital.</li>
+  </ul>
+
+  <h3>Viagens e experiências: como planejar sem culpa</h3>
+
+  <p>Viagens e experiências têm valor real na vida. O problema não é gastar com elas. É gastar sem ter planejado, usando crédito ou comprometendo o que deveria ir para investimentos.</p>
+
+  <ul class="bullet-list">
+    <li>Crie uma reserva específica para viagens, separada da reserva de emergência. Defina o valor anual que faz sentido para o seu orçamento e vá acumulando ao longo do ano.</li>
+    <li>Nunca parcele uma viagem em mais prestações do que o número de meses até a data. Chegar numa viagem com parcelas ainda a pagar compromete o orçamento sem necessidade.</li>
+    <li>Use milhas e programas de fidelidade com estratégia. Para quem tem gastos altos no cartão, um bom programa de milhas pode financiar uma viagem por ano.</li>
+  </ul>
+</div>
+
+<!-- CAPÍTULO 8 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 8</span>
+    <h2 class="chapter-title">Planejamento sucessório</h2>
+    <p class="chapter-intro">Planejamento sucessório é o conjunto de decisões que você toma hoje para definir o que acontece com o seu patrimônio amanhã. É um assunto que a maioria das pessoas adia até ser tarde demais.</p>
+  </div>
+
+  <div class="callout">
+    <p>Inventário sem planejamento pode consumir de 15% a 20% do patrimônio acumulado em custos, impostos e tempo.</p>
+  </div>
+
+  <h3>O que acontece sem planejamento</h3>
+
+  <p>Sem nenhuma estrutura sucessória, o patrimônio passa pelos herdeiros via inventário judicial ou extrajudicial. Esse processo tem custos reais:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>ITCMD:</strong> imposto estadual sobre herança, que varia de 2% a 8% dependendo do estado, sobre o valor total do patrimônio.</li>
+    <li><strong>Custas de cartório e honorários:</strong> inventário extrajudicial custa em torno de 2% a 3% do patrimônio. O judicial pode ser muito mais caro e demorado.</li>
+    <li><strong>Tempo:</strong> inventários judiciais podem levar anos. Durante esse tempo, os bens ficam bloqueados e os herdeiros sem acesso.</li>
+    <li><strong>Conflitos familiares:</strong> a falta de clareza sobre a divisão do patrimônio é uma das principais causas de conflito entre herdeiros.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="example-label">O custo real de não planejar</div>
+    <p>Patrimônio de R$2.000.000: um apartamento de R$1.200.000, R$600.000 em investimentos e R$200.000 em outros bens.</p>
+    <p>Sem planejamento: ITCMD em São Paulo (4%) = R$80.000. Custas de cartório e honorários (3%) = R$60.000. Total consumido: R$140.000, ou 7% do patrimônio, além de até 3 anos sem acesso ao apartamento. Com planejamento adequado, boa parte desses custos pode ser reduzida ou eliminada.</p>
+  </div>
+
+  <h3>Instrumentos de planejamento sucessório</h3>
+
+  <ul class="bullet-list def">
+    <li><strong>Testamento:</strong> define como o patrimônio será distribuído entre os herdeiros, respeitando a parte legítima (50% reservada aos herdeiros necessários por lei).</li>
+    <li><strong>Doação em vida com usufruto:</strong> transfere os bens agora, mas o doador mantém o direito de uso enquanto vive. Pode reduzir o imposto em relação ao inventário, dependendo do estado.</li>
+    <li><strong>Holding familiar:</strong> estrutura jurídica que concentra o patrimônio numa empresa. Permite planejamento tributário, facilita a gestão e pode simplificar a sucessão. Exige assessoria jurídica e contábil especializada.</li>
+    <li><strong>Previdência privada com beneficiários:</strong> não entra no inventário e vai diretamente aos indicados, sem custas e sem espera.</li>
+    <li><strong>Seguros de vida:</strong> o capital segurado também não entra no inventário e garante liquidez imediata para os dependentes.</li>
+  </ul>
+
+  <h3>Quando começar</h3>
+
+  <p>O momento certo para pensar em planejamento sucessório é agora, independente da sua idade. Quanto mais cedo a estrutura for montada, mais tempo ela tem para ser ajustada e mais barato fica. Esse assunto exige um advogado especializado e, idealmente, a visão integrada de um planejador financeiro.</p>
+</div>
+
+<!-- CAPÍTULO 9 -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Capítulo 9</span>
+    <h2 class="chapter-title">Quando buscar um planejador financeiro</h2>
+    <p class="chapter-intro">Este guia cobre os fundamentos de uma estratégia patrimonial consistente. Mas há um ponto em que ter um profissional ao lado muda completamente a qualidade das decisões e a velocidade dos resultados.</p>
+  </div>
+
+  <h3>O que um planejador financeiro faz por quem tem alta renda</h3>
+
+  <p>Para profissionais e famílias com renda e patrimônio acima da média, o planejador financeiro não é um luxo. É alguém que pensa de forma integrada em tudo que afeta o seu patrimônio:</p>
+
+  <ul class="bullet-list">
+    <li>Diagnóstico completo da situação financeira atual.</li>
+    <li>Definição de metas com prazos e valores reais.</li>
+    <li>Estruturação da reserva e da proteção adequadas ao seu perfil.</li>
+    <li>Estratégia de alocação de investimentos por objetivo e prazo.</li>
+    <li>Orientação sobre previdência privada e uso do benefício fiscal.</li>
+    <li>Planejamento de aquisição de bens com impacto no fluxo de caixa.</li>
+    <li>Orientação sobre planejamento sucessório em parceria com advogado especializado.</li>
+    <li>Acompanhamento contínuo para ajustar o plano conforme a vida muda.</li>
+  </ul>
+
+  <h3>Os sinais de que chegou a hora</h3>
+
+  <p>Não existe um patrimônio mínimo para buscar um planejador. Muitas vezes o sinal não é nem falta de conhecimento: a pessoa sabe o que deveria fazer, mas não tem tempo nem atenção disponível para olhar para isso com o cuidado que a situação exige. Profissionais de alta renda chegam ao fim do dia sem energia para cuidar do próprio dinheiro. Faz sentido: o trabalho exige concentração total e é lá que está o maior retorno por hora investida. Você cuida do que te gera renda; o planejador cuida de fazer esse dinheiro trabalhar da forma certa. Além disso, há situações concretas que indicam que a complexidade já ultrapassou o que faz sentido gerenciar sozinho:</p>
+
+  <ul class="bullet-list def">
+    <li><strong>Renda aumentou, mas o dinheiro não sobra:</strong> você ganha bem e não consegue explicar para onde vai o dinheiro. A estrutura de gastos cresceu junto com a renda sem uma estratégia por trás.</li>
+    <li><strong>Decisões grandes à vista:</strong> compra de imóvel, mudança de emprego, venda de empresa, recebimento de herança. Momentos de transição patrimonial exigem visão integrada, não decisões isoladas.</li>
+    <li><strong>Investimentos sem estratégia:</strong> você tem dinheiro aplicado em vários lugares, mas sem saber se a alocação faz sentido para os seus objetivos ou se está pagando imposto a mais.</li>
+    <li><strong>Previdência privada sem planejamento fiscal:</strong> você tem PGBL ou VGBL, mas não sabe se está aproveitando o benefício da forma correta ou se o regime de tributação escolhido foi o adequado.</li>
+    <li><strong>Família com dependentes e sem proteção estruturada:</strong> você tem filhos, cônjuge ou pais dependentes e não tem seguros adequados nem planejamento sucessório básico.</li>
+    <li><strong>Sensação de que poderia fazer mais:</strong> a renda é boa, os investimentos existem, mas falta clareza sobre se o ritmo atual vai chegar onde você quer nos prazos que importam.</li>
+  </ul>
+
+  <h3>O que o planejador não faz</h3>
+
+  <p>A indicação de investimentos específicos, como qual ação ou qual fundo comprar, é atribuição do assessor de investimentos, que tem certificação própria para isso. O planejador financeiro atua na estratégia: quanto guardar, onde alocar de forma geral e como equilibrar risco e objetivo. Os dois papéis se complementam.</p>
+
+
+</div>
+
+<!-- O QUE FAZER AGORA -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">O que fazer agora</span>
+    <h2 class="chapter-title">Seus próximos 5 dias</h2>
+    <p class="chapter-intro">Você leu tudo. Agora é hora de sair da teoria e colocar em prática. O patrimônio não começa a crescer no momento em que você aprende a estratégia. Começa no momento em que você age.</p>
+  </div>
+
+  <div class="days-grid">
+    <div class="day-item">
+      <div class="day-label">Dia 1</div>
+      <div class="day-content">
+        <strong>Calcule os três indicadores</strong>
+        <p>Taxa de poupança, comprometimento da renda e patrimônio acumulado em relação à renda anual. Esses três números revelam exatamente onde você está.</p>
+      </div>
+    </div>
+    <div class="day-item">
+      <div class="day-label">Dia 2</div>
+      <div class="day-content">
+        <strong>Mapeie os custos fixos reais</strong>
+        <p>Some todos os custos fixos da sua família: escola, imóvel, veículos, planos de saúde, funcionários. O total vai surpreender.</p>
+      </div>
+    </div>
+    <div class="day-item">
+      <div class="day-label">Dia 3</div>
+      <div class="day-content">
+        <strong>Revise a proteção</strong>
+        <p>Verifique suas coberturas de seguro de vida, invalidez e saúde. Estão adequadas ao seu patrimônio e aos seus dependentes?</p>
+      </div>
+    </div>
+    <div class="day-item">
+      <div class="day-label">Dia 4</div>
+      <div class="day-content">
+        <strong>Defina um objetivo com número e prazo</strong>
+        <p>Escolha um objetivo financeiro: aposentadoria, imóvel, independência financeira. Coloque um valor e uma data. Isso muda tudo.</p>
+      </div>
+    </div>
+    <div class="day-item">
+      <div class="day-label">Dia 5</div>
+      <div class="day-content">
+        <strong>Monte o seu plano</strong>
+        <p>Com os números levantados nos quatro dias anteriores, escreva em uma página: onde você está, onde quer chegar e quais os três movimentos mais importantes para começar. Um plano simples vale mais do que a estratégia perfeita que fica na cabeça.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>Uma boa renda abre possibilidades. Um bom plano transforma essas possibilidades em patrimônio real.</p>
+  </div>
+
+  <div class="highlight-box" style="margin-top:12px;">
+    <div class="highlight-label">Planejamento Financeiro Estratégico</div>
+    <p>O Planejamento Financeiro Estratégico oferece acompanhamento próximo e um plano construído especificamente para a sua realidade, seus objetivos e seu momento de vida. Acesse <strong>planejadorvinicius.com.br</strong> e agende sua Sessão Estratégica de Diagnóstico.</p>
+  </div>
+</div>
+
+<!-- LEITURAS RECOMENDADAS -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Leituras recomendadas</span>
+    <h2 class="chapter-title">Para ir mais fundo</h2>
+    <p class="chapter-intro">Os livros abaixo vão aprofundar o que você aprendeu aqui. Cada um foi escolhido pela qualidade do conteúdo e pela aplicabilidade ao contexto brasileiro.</p>
+  </div>
+
+  <div class="reading-grid">
+    <div class="reading-item">
+      <div class="reading-title">A Psicologia Financeira</div>
+      <div class="reading-author">Morgan Housel · HarperCollins Brasil</div>
+      <p class="reading-desc">Por que pessoas inteligentes tomam decisões financeiras ruins. Um dos livros mais importantes sobre o tema, com linguagem acessível e exemplos que mudam a forma de pensar.</p>
+    </div>
+    <div class="reading-item">
+      <div class="reading-title">Investimentos Inteligentes</div>
+      <div class="reading-author">Gustavo Cerbasi · Sextante</div>
+      <p class="reading-desc">Guia prático sobre os principais tipos de investimento disponíveis no Brasil. Bom ponto de partida para quem quer entender como funcionam as diferentes classes de ativos.</p>
+    </div>
+    <div class="reading-item">
+      <div class="reading-title">O Investidor Inteligente</div>
+      <div class="reading-author">Benjamin Graham · HarperCollins Brasil</div>
+      <p class="reading-desc">O clássico sobre investimento em valor. Denso, mas fundamental para quem quer entender a lógica por trás da renda variável de longo prazo.</p>
+    </div>
+    <div class="reading-item">
+      <div class="reading-title">Pai Rico, Pai Pobre</div>
+      <div class="reading-author">Robert Kiyosaki · Alta Books</div>
+      <p class="reading-desc">Apresenta de forma acessível a diferença entre ativos e passivos e por que a forma como pensamos sobre dinheiro define os resultados financeiros.</p>
+    </div>
+    <div class="reading-item">
+      <div class="reading-title">Os Segredos da Mente Milionária</div>
+      <div class="reading-author">T. Harv Eker · Sextante</div>
+      <p class="reading-desc">Foca nos padrões mentais que determinam o comportamento financeiro. Complementa bem o conteúdo sobre comportamento e padrão de vida deste guia.</p>
+    </div>
+    <div class="reading-item">
+      <div class="reading-title">Casais Inteligentes Enriquecem Juntos</div>
+      <div class="reading-author">Gustavo Cerbasi · Sextante</div>
+      <p class="reading-desc">Essencial para quem toma decisões financeiras em conjunto com o parceiro. Aborda a relação com dinheiro, objetivos compartilhados e planejamento familiar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FERRAMENTAS GRATUITAS -->
+<div class="content print-break">
+  <div class="chapter-header">
+    <span class="chapter-number">Ferramentas gratuitas</span>
+    <h2 class="chapter-title">Que valem conhecer</h2>
+    <p class="chapter-intro">Recursos gratuitos para consultar informações, simular investimentos e acompanhar o mercado com fontes confiáveis.</p>
+  </div>
+
+  <div class="tools-list">
+    <div class="tool-item">
+      <span class="tool-url">bcb.gov.br</span>
+      <span class="tool-desc">Taxas de investimentos, comparador de tarifas bancárias e portabilidade de crédito.</span>
+    </div>
+    <div class="tool-item">
+      <span class="tool-url">tesourodireto.gov.br</span>
+      <span class="tool-desc">Simulador e compra direta de títulos públicos.</span>
+    </div>
+    <div class="tool-item">
+      <span class="tool-url">registrato.bcb.gov.br</span>
+      <span class="tool-desc">Extrato completo das suas operações de crédito e investimentos no sistema financeiro.</span>
+    </div>
+    <div class="tool-item">
+      <span class="tool-url">cvmweb.cvm.gov.br</span>
+      <span class="tool-desc">Consulta de fundos de investimento registrados na CVM.</span>
+    </div>
+    <div class="tool-item">
+      <span class="tool-url">susep.gov.br</span>
+      <span class="tool-desc">Consulta de seguradoras e produtos de previdência regulados.</span>
+    </div>
+  </div>
+
+  <p style="font-size:13px; color:rgba(200,195,187,0.6); margin-top:8px;">Este guia é atualizado periodicamente. Para informações sobre taxas, leis e produtos financeiros, consulte sempre as fontes oficiais, pois esses dados mudam com frequência.</p>
+</div>
+
+<!-- FOOTER -->
+<div class="guide-footer">
+  <span>© 2026 Vinícius Gomes Lima</span>
+  <strong>Guia Patrimônio Consistente · Nível 2</strong>
+  <span>planejadorvinicius.com.br</span>
+</div>
+
+</div>
+</body>
+</html>
