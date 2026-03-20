@@ -975,7 +975,7 @@
   <p>Da organização financeira à construção de patrimônio. Soluções para cada etapa da sua jornada financeira.</p>
   <div class="hero-cta" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
     <a href="quiz_latest.html" class="btn-gold" style="width:300px; display:inline-flex; align-items:center; justify-content:center;">Descubra onde você está</a>
-    <a href="#produtos" class="btn-outline" style="width:300px; display:inline-flex; align-items:center; justify-content:center;">Conheça os produtos</a>
+    <a href="#produtos" class="btn-outline" onclick="smoothScroll(event)" style="width:300px; display:inline-flex; align-items:center; justify-content:center;">Conheça os produtos</a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -1289,7 +1289,7 @@
   <h2 class="reveal">Sua vida financeira<br><em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-light)">merece uma estratégia.</em></h2>
   <p class="reveal">Seja saindo do vermelho ou construindo patrimônio. Existe um caminho claro para você. Comece hoje.</p>
   <div class="reveal" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-    <a href="#produtos" class="btn-gold">Ver todos os produtos</a>
+    <a href="#produtos" class="btn-gold" onclick="smoothScroll(event)">Ver todos os produtos</a>
     <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-outline">Agendar sessão gratuita</a>
   </div>
 </section>
@@ -1327,6 +1327,29 @@
 </footer>
 
 <script>
+  // Scroll suave para ancoras
+  function smoothScroll(e) {
+    e.preventDefault();
+    const id = e.currentTarget.getAttribute('href').replace('#', '');
+    const target = document.getElementById(id);
+    if (!target) return;
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start;
+    const duration = 1800;
+    let startTime = null;
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   // Intersection Observer for reveal animations
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
