@@ -707,9 +707,35 @@
     .guarantee-badge { margin: 0 auto; }
   }
 
+
+  /* BOTAO VOLTAR FIXO */
+  .btn-back-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: rgba(13,13,13,0.8);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.2s, color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-back-home:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
 </style>
 </head>
 <body>
+<a href="index.html" class="btn-back-home">&#8592; Voltar ao site</a>
 
 <!-- HERO -->
 <section class="hero">
