@@ -16,3 +16,4 @@ thumbnail.html
 # Sistema
 .DS_Store
 Thumbs.db
+.claude/

@@ -205,6 +205,23 @@
     animation: scrollPulse 2s ease infinite;
   }
 
+  .section-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 0 0;
+    opacity: 1;
+  }
+
+  .section-scroll-hint .scroll-line {
+    animation: scrollPulse 2s ease infinite;
+  }
+
   /* SECTION */
   section { position: relative; z-index: 1; }
 
@@ -840,9 +857,35 @@
       padding: 80px 20px;
     }
   }
+
+  /* BOTAO VOLTAR FIXO */
+  .btn-back-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: rgba(13,13,13,0.8);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: #888880;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.2s, color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-back-home:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
 </style>
 </head>
 <body>
+<a href="index.html" class="btn-back-home">&#8592; Voltar ao site</a>
 
 <!-- HERO -->
 <section class="hero">
@@ -850,7 +893,7 @@
   <h1>Planejamento financeiro com clareza <em>para cada dia</em></h1>
   <p>Da projeção de 24 meses ao teto de gastos diário. Uma planilha que transforma seus números em decisões claras e metas que funcionam na sua realidade.</p>
   <div class="hero-cta">
-    <a href="https://pay.hotmart.com/Q104986210Q" class="btn-gold" target="_blank">Obter acesso agora</a>
+    <a href="#video" class="btn-gold" onclick="smoothScroll(event)">Ver como funciona ↓</a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -995,7 +1038,7 @@
 </section>
 
 <!-- VIDEO DEMO -->
-<section class="video-demo">
+<section id="video" class="video-demo">
   <div class="section-label reveal">VEJA NA PRÁTICA</div>
   <h2 class="section-title reveal">Conheça a planilha<br>em <em>ação</em></h2>
   <p class="section-sub reveal">Assista um tour completo mostrando como a planilha funciona e como ela pode transformar sua organização financeira.</p>
@@ -1004,6 +1047,10 @@
     <iframe class="video-frame" src="https://www.youtube.com/embed/qzSL7Na8mnw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </section>
+
+<div class="section-scroll-hint">
+  <div class="scroll-line"></div>
+</div>
 
 <!-- HOW IT WORKS -->
 <section class="how-it-works">
@@ -1206,6 +1253,12 @@
         <path d="M97.733 127.809c-11.537.634-23.255-4.537-23.851-15.546-.427-8.028 5.765-16.972 24.853-18.071 2.175-.125 4.31-.187 6.41-.187 6.077 0 11.768.558 16.996 1.635-1.935 24.117-12.654 31.553-24.408 32.169Z"/>
       </svg>
     </a>
+    <a href="https://www.youtube.com/channel/UC5lcJeWwg3Wqyi_IOAQdOzA" target="_blank" class="footer-social-link" title="YouTube">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
   </div>
 </footer>
 
@@ -1224,6 +1277,34 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach(el => observer.observe(el));
+
+  // Scroll suave para ancoras
+  function smoothScroll(e) {
+    e.preventDefault();
+    const id = e.currentTarget.getAttribute('href').replace('#', '');
+    const target = document.getElementById(id);
+    if (!target) return;
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start;
+    const duration = 1800;
+    let startTime = null;
+    document.documentElement.style.scrollBehavior = 'auto';
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start + (end - start) * easeOutCubic(progress));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        document.documentElement.style.scrollBehavior = '';
+      }
+    }
+    requestAnimationFrame(step);
+  }
 
   // FAQ accordion
   function toggleFaq(btn) {
