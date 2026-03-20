@@ -1337,6 +1337,7 @@
     const end = target.getBoundingClientRect().top + start;
     const duration = 1800;
     let startTime = null;
+    document.documentElement.style.scrollBehavior = 'auto';
     function easeOutCubic(t) {
       return 1 - Math.pow(1 - t, 3);
     }
@@ -1345,7 +1346,11 @@
       const elapsed = timestamp - startTime;
       const progress = Math.min(elapsed / duration, 1);
       window.scrollTo(0, start + (end - start) * easeOutCubic(progress));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        document.documentElement.style.scrollBehavior = '';
+      }
     }
     requestAnimationFrame(step);
   }
