@@ -7,11 +7,24 @@
  * e reporta links quebrados.
  */
 
-const fs   = require('fs');
-const path = require('path');
+const fs             = require('fs');
+const path           = require('path');
+const child_process  = require('child_process');
 
 const DIR = __dirname;
-const HTML_FILES = fs.readdirSync(DIR).filter(f => f.endsWith('.html'));
+
+// Usar apenas arquivos rastreados pelo git (exclui entradas do .gitignore)
+function getTrackedHtmlFiles() {
+  try {
+    const out = child_process.execSync('git ls-files "*.html"', { cwd: DIR, encoding: 'utf8' });
+    return out.trim().split('\n').filter(Boolean);
+  } catch {
+    // Fallback se não estiver num repo git
+    return fs.readdirSync(DIR).filter(f => f.endsWith('.html'));
+  }
+}
+
+const HTML_FILES = getTrackedHtmlFiles();
 
 // Regex para capturar href e src com valores relativos
 const LINK_RE = /(?:href|src)="([^"#?]+)"/g;
