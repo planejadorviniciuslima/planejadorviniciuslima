@@ -1050,6 +1050,7 @@
       const key = this.dataset.key;
       const val = this.dataset.val;
       answers[key] = val;
+      gtag('event', 'quiz_answer', { question: key, answer: val, question_index: idx + 1 });
       answersByQ[idx] = Array.from(block.querySelectorAll('.option')).indexOf(this);
       advancing = true;
       setTimeout(() => {
@@ -1127,7 +1128,15 @@
 
   function showResult() {
     let tipo = decide(answers);
-    gtag('event', 'quiz_completed');
+    gtag('event', 'quiz_completed', {
+      result_type:   tipo,
+      renda:         answers.renda,
+      divida:        answers.divida,
+      org:           answers.org,
+      aposentadoria: answers.aposentadoria,
+      protecao:      answers.protecao,
+      investimentos: answers.investimentos
+    });
     gtag('event', 'quiz_result', { result_type: tipo });
 
     const configs = {
