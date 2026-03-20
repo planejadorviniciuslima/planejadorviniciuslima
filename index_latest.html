@@ -972,6 +972,28 @@
     .step { gap: 24px; }
   }
 </style>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82B08L56XT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-82B08L56XT');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "vyt0g6fzdi");
+</script>
+
+<!-- Meta Pixel — adicionar ID quando ativar conta no Instagram -->
+<!-- TikTok Pixel — adicionar quando ativar campanhas no TikTok -->
+
 </head>
 <body>
 
@@ -1396,6 +1418,25 @@
       answer.style.maxHeight = answer.scrollHeight + 'px';
     }
   }
+
+  // Analytics — CTA clicks
+  document.querySelector('a[href="quiz_latest.html"]').addEventListener('click', () => gtag('event', 'click_quiz'));
+  document.querySelector('a[href="selling_page_planilha_latest.html"]').addEventListener('click', () => gtag('event', 'click_planilha'));
+  document.querySelector('a[href="selling_page_guia1.html"]').addEventListener('click', () => gtag('event', 'click_guia1'));
+  document.querySelector('a[href="selling_page_guia2.html"]').addEventListener('click', () => gtag('event', 'click_guia2'));
+  document.querySelector('a[href="https://cal.com/planejadorvinicius/50min"]').addEventListener('click', () => gtag('event', 'click_mentoria'));
+
+  // Analytics — scroll depth
+  (function() {
+    const marks = [25, 50, 75, 100];
+    const fired = {};
+    window.addEventListener('scroll', function() {
+      const pct = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+      marks.forEach(function(m) {
+        if (!fired[m] && pct >= m) { fired[m] = true; gtag('event', 'scroll_depth', { depth: m }); }
+      });
+    }, { passive: true });
+  })();
 </script>
 
 </body>
