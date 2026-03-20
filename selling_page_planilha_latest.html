@@ -876,7 +876,7 @@
   <h1>Planejamento financeiro com clareza <em>para cada dia</em></h1>
   <p>Da projeção de 24 meses ao teto de gastos diário. Uma planilha que transforma seus números em decisões claras e metas que funcionam na sua realidade.</p>
   <div class="hero-cta">
-    <a href="https://pay.hotmart.com/Q104986210Q" class="btn-gold" target="_blank">Obter acesso agora</a>
+    <a href="#video" class="btn-gold" onclick="scrollToVideo(event)">Ver como funciona ↓</a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -1021,7 +1021,7 @@
 </section>
 
 <!-- VIDEO DEMO -->
-<section class="video-demo">
+<section id="video" class="video-demo">
   <div class="section-label reveal">VEJA NA PRÁTICA</div>
   <h2 class="section-title reveal">Conheça a planilha<br>em <em>ação</em></h2>
   <p class="section-sub reveal">Assista um tour completo mostrando como a planilha funciona e como ela pode transformar sua organização financeira.</p>
@@ -1256,6 +1256,28 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach(el => observer.observe(el));
+
+  // Scroll suave ate o video
+  function scrollToVideo(e) {
+    e.preventDefault();
+    const target = document.getElementById('video');
+    if (!target) return;
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start;
+    const duration = 1800;
+    let startTime = null;
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
   // FAQ accordion
   function toggleFaq(btn) {
