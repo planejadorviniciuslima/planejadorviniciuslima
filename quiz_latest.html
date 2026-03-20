@@ -760,6 +760,28 @@
     color: var(--gold);
   }
 </style>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82B08L56XT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-82B08L56XT');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "vyt0g6fzdi");
+</script>
+
+<!-- Meta Pixel — adicionar ID quando ativar conta no Instagram -->
+<!-- TikTok Pixel — adicionar quando ativar campanhas no TikTok -->
+
 </head>
 <body>
 <a href="index.html" class="btn-back-home">&#8592; Voltar ao site</a>
@@ -993,6 +1015,7 @@
       intro.style.display = 'none';
       document.getElementById('quiz').style.display = 'block';
       showQuestion(0, 'right');
+      gtag('event', 'quiz_started');
     }, 280);
   }
 
@@ -1027,6 +1050,7 @@
       const key = this.dataset.key;
       const val = this.dataset.val;
       answers[key] = val;
+      gtag('event', 'quiz_answer', { question: key, answer: val, question_index: idx + 1 });
       answersByQ[idx] = Array.from(block.querySelectorAll('.option')).indexOf(this);
       advancing = true;
       setTimeout(() => {
@@ -1104,6 +1128,16 @@
 
   function showResult() {
     let tipo = decide(answers);
+    gtag('event', 'quiz_completed', {
+      result_type:   tipo,
+      renda:         answers.renda,
+      divida:        answers.divida,
+      org:           answers.org,
+      aposentadoria: answers.aposentadoria,
+      protecao:      answers.protecao,
+      investimentos: answers.investimentos
+    });
+    gtag('event', 'quiz_result', { result_type: tipo });
 
     const configs = {
       GUIA_N1: {
