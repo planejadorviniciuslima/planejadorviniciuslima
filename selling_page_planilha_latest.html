@@ -205,6 +205,23 @@
     animation: scrollPulse 2s ease infinite;
   }
 
+  .section-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 0 0;
+    opacity: 1;
+  }
+
+  .section-scroll-hint .scroll-line {
+    animation: scrollPulse 2s ease infinite;
+  }
+
   /* SECTION */
   section { position: relative; z-index: 1; }
 
@@ -1030,6 +1047,10 @@
     <iframe class="video-frame" src="https://www.youtube.com/embed/qzSL7Na8mnw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </section>
+
+<div class="section-scroll-hint">
+  <div class="scroll-line"></div>
+</div>
 
 <!-- HOW IT WORKS -->
 <section class="how-it-works">
