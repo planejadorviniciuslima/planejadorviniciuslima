@@ -10,8 +10,9 @@ Materiais e versões antigas/
 *.mov
 *.avi
 
-# Thumbnail (apenas para screenshot local)
+# Arquivos locais apenas (não fazem parte do deploy)
 thumbnail.html
+index_latest.html
 
 # Sistema
 .DS_Store
