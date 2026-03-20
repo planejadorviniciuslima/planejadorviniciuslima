@@ -6,6 +6,8 @@
 <title>Planilha de Planejamento Financeiro | Vinicius Lima</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.clarity.ms">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -884,6 +886,7 @@
     border-color: var(--gold);
     color: var(--gold);
   }
+  @media (max-width: 768px) { .btn-back-home { display: none; } }
 </style>
 
 <!-- Google Analytics 4 -->
@@ -895,13 +898,20 @@
   gtag('config', 'G-82B08L56XT');
 </script>
 
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", "vyt0g6fzdi");
+<!-- Microsoft Clarity — defer no mobile para não atrasar carregamento -->
+<script>
+  (function() {
+    function loadClarity() {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "vyt0g6fzdi");
+    }
+    window.innerWidth <= 768
+      ? window.addEventListener('load', loadClarity)
+      : loadClarity();
+  })();
 </script>
 
 <!-- Meta Pixel — adicionar ID quando ativar conta no Instagram -->
@@ -1068,7 +1078,7 @@
   <p class="section-sub reveal">Assista um tour completo mostrando como a planilha funciona e como ela pode transformar sua organização financeira.</p>
 
   <div class="video-container reveal">
-    <iframe class="video-frame" src="https://www.youtube.com/embed/qzSL7Na8mnw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <iframe class="video-frame" src="https://www.youtube.com/embed/qzSL7Na8mnw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </section>
 
