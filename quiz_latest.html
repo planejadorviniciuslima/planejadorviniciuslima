@@ -993,7 +993,7 @@
     <div class="result-title" id="r-title"></div>
     <p class="result-desc" id="r-desc"></p>
     <div class="result-card" id="r-card"></div>
-    <div class="result-actions">
+    <div class="result-actions" style="opacity: 0.45; margin-top: 40px;">
       <button class="btn-restart" onclick="restart()">Refazer o quiz</button>
       <a href="index.html" class="btn-home">Voltar ao site</a>
     </div>
@@ -1158,28 +1158,28 @@
     const configs = {
       GUIA_N1: {
         tag: 'Fase 1 · Recomeço Financeiro',
-        title: 'Você está no momento do recomeço financeiro',
-        desc: 'Antes de pensar em investir ou crescer, o caminho passa por organizar, eliminar dívidas e criar uma base estável. Esse é o momento de agir com método.',
+        title: 'Seu dinheiro está saindo mais rápido do que entrando.',
+        desc: 'Dívidas que preocupam com renda limitada é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar com método.',
         card: `
           <div class="rc-label">Guia · Nível 1</div>
           <div class="rc-title">Guia Recomeço Financeiro</div>
-          <p class="rc-desc">Um guia prático para quem quer parar de afundar e construir o primeiro degrau de estabilidade financeira.</p>
+          <p class="rc-desc">Feito para quem está com dívidas no caminho e precisa de um plano claro para sair do ciclo, não de mais informação genérica.</p>
           <ul class="rc-includes">
             <li>Método prático para eliminar dívidas</li>
             <li>Diagnóstico completo das suas finanças</li>
             <li>Passo a passo para criar a reserva de emergência</li>
             <li>Plano de ação de 5 dias para sair da leitura em movimento</li>
           </ul>
-          <a href="selling_page_guia1.html" class="btn-cta">Ver detalhes do Guia →</a>`
+          <a href="selling_page_guia1.html" class="btn-cta">Quero sair do ciclo →</a>`
       },
       PLANILHA: {
         tag: 'Fase 2 · Organização Financeira',
-        title: 'Você está na fase de organização financeira',
-        desc: 'O próximo passo é criar um sistema claro para o seu dinheiro. Só com controle real é possível tomar decisões financeiras com confiança.',
+        title: 'Você até ganha, mas no fim do mês não sobra nada.',
+        desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer. O próximo passo é criar uma estrutura que funcione todos os meses.',
         card: `
           <div class="rc-label">Ferramenta · Organização Financeira</div>
           <div class="rc-title">Planilha de Planejamento Financeiro</div>
-          <p class="rc-desc">Para quem quer organizar entradas, gastos e dívidas e enxergar os próximos 24 meses com clareza.</p>
+          <p class="rc-desc">A ferramenta para quem quer parar de perder dinheiro sem saber para onde foi e começar a enxergar os próximos 24 meses com clareza.</p>
           <ul class="rc-includes">
             <li>Orçamento mensal com projeção de 24 meses</li>
             <li>Controle de dívidas e parcelas de cartão</li>
@@ -1187,16 +1187,16 @@
             <li>Cálculo de reserva de emergência</li>
             <li>Google Sheets com acesso vitalício</li>
           </ul>
-          <a href="selling_page_planilha_latest.html" class="btn-cta">Ver detalhes da Planilha →</a>`
+          <a href="selling_page_planilha_latest.html" class="btn-cta">Quero organizar de vez →</a>`
       },
       GUIA_N2: {
         tag: 'Fase 3 · Crescimento de Patrimônio',
-        title: 'Você está na fase de crescimento de patrimônio',
-        desc: 'Sua base está organizada. Agora o que separa quem acumula riqueza de quem apenas mantém é ter uma estratégia real de investimentos, aposentadoria e proteção.',
+        title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',
+        desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter. O próximo passo é sair do modo defensivo.',
         card: `
           <div class="rc-label">Guia Prático · Nível 2</div>
           <div class="rc-title">Guia Patrimônio Consistente</div>
-          <p class="rc-desc">Para quem já organiza as finanças mas ainda não tem estratégia de crescimento. Abre seus olhos para o que está faltando na construção do patrimônio.</p>
+          <p class="rc-desc">Para quem já controla as finanças mas ainda não tem uma estratégia real de crescimento. Mostra exatamente o que está faltando e como começar.</p>
           <ul class="rc-includes">
             <li>Os pilares: investimentos, aposentadoria e proteção patrimonial</li>
             <li>Como estruturar uma carteira por objetivo e prazo</li>
@@ -1204,18 +1204,18 @@
             <li>Quando e como buscar um planejador profissional</li>
             <li>Guia em PDF com acesso vitalício</li>
           </ul>
-          <a href="selling_page_guia2.html" class="btn-cta">Ver detalhes do Guia →</a>`
+          <a href="selling_page_guia2.html" class="btn-cta">Quero crescer de verdade →</a>`
       },
       MENTORIA: {
         tag: 'Fase 1 · Recomeço Financeiro',
-        title: 'Você está no momento do recomeço financeiro',
-        desc: 'Com dívidas no caminho, um guia genérico não é suficiente. O mais eficiente é resolver a situação com estratégia personalizada para a sua realidade.',
+        title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',
+        desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade. Um guia genérico não resolve isso.',
         card: null
       },
       EXCELENTE: {
         tag: 'Parabéns · Perfil Avançado',
-        title: 'Você já construiu uma base financeira sólida',
-        desc: 'Você organiza, investe, se protege e pensa no longo prazo. Isso é raro. E é exatamente o perfil de quem mais se beneficia de um olhar especializado de fora.',
+        title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.',
+        desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar. E otimização nesse nível não vem de conteúdo digital.',
         card: null
       },
     };
@@ -1227,9 +1227,9 @@
 
     if (tipo === 'MENTORIA') {
       document.getElementById('r-card').innerHTML = `
-        <div class="rc-label" style="color:var(--gold-light);">Fase 1 · Recomeço Financeiro · Serviço Personalizado</div>
+        <div class="rc-label" style="color:var(--gold-light);">Serviço Personalizado · Recomendado para o seu perfil</div>
         <div class="rc-title">Planejamento Financeiro Estratégico</div>
-        <p class="rc-desc">Para quem precisa resolver as dívidas sem abrir mão de construir patrimônio ao mesmo tempo. Acompanhamento próximo, estratégia real, sem conteúdo genérico.</p>
+        <p class="rc-desc">O seu caso exige um plano feito para você, não para uma média. Uma sessão gratuita é suficiente para entender o que está travando e o que precisa mudar.</p>
         <ul class="rc-includes">
           <li>Diagnóstico financeiro completo</li>
           <li>Plano de eliminação de dívidas integrado ao crescimento patrimonial</li>
@@ -1238,12 +1238,12 @@
           <li>Proteção e crescimento patrimonial</li>
           <li>Suporte online e sessões de acompanhamento</li>
         </ul>
-        <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar sessão estratégica gratuita →</a>`;
+        <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar sessão gratuita →</a>`;
     } else if (tipo === 'EXCELENTE') {
       document.getElementById('r-card').innerHTML = `
-        <div class="rc-label" style="color:var(--gold-light); font-size:13px; letter-spacing:2px;">Parabéns. Você está à frente da maioria.</div>
-        <div class="rc-title" style="font-size:1.3rem;">Organização. Investimentos. Proteção. Aposentadoria.</div>
-        <p class="rc-desc">Você cuida de todos os pilares. Quem chega nesse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar. Um planejador financeiro não vai reorganizar sua vida. Vai identificar ineficiências invisíveis, oportunidades que você ainda não enxergou e garantir que cada decisão esteja alinhada com o que realmente importa para você.</p>
+        <div class="rc-label" style="color:var(--gold-light); font-size:13px; letter-spacing:2px;">Serviço Personalizado · Perfil Avançado</div>
+        <div class="rc-title" style="font-size:1.3rem;">Planejamento Financeiro Estratégico</div>
+        <p class="rc-desc">Quem está no seu nível não precisa de reorganização. Precisa de alguém que enxergue o que você ainda não vê: ineficiências, oportunidades, decisões que parecem boas mas custam caro no longo prazo.</p>
         <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-cta">Agendar uma revisão estratégica gratuita →</a>`;
     } else {
       document.getElementById('r-card').innerHTML = c.card;
