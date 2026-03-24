@@ -921,6 +921,108 @@
     margin-bottom: 20px;
   }
 
+  /* INLINE QUIZ */
+  .quiz-section { padding: 100px 24px; background: var(--dark); }
+  .quiz-section-inner { max-width: 640px; margin: 0 auto; }
+  .iq-header { text-align: center; margin-bottom: 48px; }
+  .iq-wrapper {
+    background: var(--dark-2);
+    border: 1px solid rgba(74,130,196,0.12);
+    border-radius: 16px;
+    padding: 48px 40px;
+  }
+  @media (max-width: 480px) { .iq-wrapper { padding: 32px 20px; } }
+
+  .iq-intro-title { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 600; color: var(--white); margin-bottom: 10px; line-height: 1.3; }
+  .iq-intro-sub { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+  .iq-meta { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+  .iq-progress-bar { height: 3px; background: rgba(74,130,196,0.15); border-radius: 2px; margin-bottom: 32px; overflow: hidden; }
+  .iq-progress-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 0.4s ease; }
+
+  .iq-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 10px; }
+  .iq-q-text { font-size: clamp(1.05rem, 2.5vw, 1.3rem); font-weight: 600; color: var(--white); line-height: 1.4; margin-bottom: 24px; }
+
+  .iq-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .iq-option {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 15px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(74,130,196,0.15);
+    border-radius: 10px; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+  .iq-option:hover { border-color: rgba(74,130,196,0.4); background: rgba(74,130,196,0.06); }
+  .iq-option.selected { border-color: rgba(74,130,196,0.6); background: rgba(74,130,196,0.1); }
+
+  .iq-opt-check {
+    width: 20px; height: 20px; border: 2px solid rgba(74,130,196,0.35); border-radius: 50%;
+    flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .iq-option.selected .iq-opt-check { background: var(--blue); border-color: var(--blue); }
+  .iq-opt-check-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--white); opacity: 0; transform: scale(0); transition: all 0.15s; }
+  .iq-option.selected .iq-opt-check-dot { opacity: 1; transform: scale(1); }
+  .iq-opt-text { font-size: 14px; color: var(--white-2); line-height: 1.55; }
+  .iq-option.selected .iq-opt-text { color: var(--white); }
+
+  .iq-nav { display: flex; align-items: center; justify-content: space-between; }
+  .iq-btn-back {
+    background: none; border: none; cursor: pointer; font-family: 'Figtree', sans-serif;
+    font-size: 13px; color: var(--muted); padding: 8px 0; transition: color 0.2s; visibility: hidden;
+  }
+  .iq-btn-back.visible { visibility: visible; }
+  .iq-btn-back:hover { color: var(--white); }
+
+  .iq-result { animation: iq-fadein 0.4s ease forwards; }
+  @keyframes iq-fadein { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .iq-result-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 10px; }
+  .iq-result-title { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 12px; }
+  .iq-result-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+  .iq-result-card {
+    background: rgba(74,130,196,0.07); border: 1px solid rgba(74,130,196,0.2);
+    border-radius: 12px; padding: 24px; margin-bottom: 20px;
+  }
+  .iq-result-card-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); margin-bottom: 8px; }
+  .iq-result-card-title { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+  .iq-result-card-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .iq-result-cta { display: flex; flex-direction: column; gap: 10px; }
+  .iq-btn-cta {
+    display: block; width: 100%; text-align: center; background: var(--blue); color: var(--white);
+    font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 500;
+    padding: 14px 24px; border-radius: 8px; border: none; cursor: pointer;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
+  .iq-btn-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+  .iq-btn-cta-outline {
+    display: block; width: 100%; text-align: center; background: transparent;
+    border: 1px solid rgba(74,130,196,0.35); color: var(--blue-light);
+    font-family: 'Figtree', sans-serif; font-size: 14px;
+    padding: 12px 24px; border-radius: 8px; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .iq-btn-cta-outline:hover { border-color: var(--blue-light); color: var(--white); }
+  .iq-restart { text-align: center; margin-top: 20px; }
+  .iq-btn-restart {
+    background: none; border: none; cursor: pointer; font-family: 'Figtree', sans-serif;
+    font-size: 12px; color: var(--muted); text-decoration: underline;
+    text-underline-offset: 3px; transition: color 0.2s;
+  }
+  .iq-btn-restart:hover { color: var(--white); }
+
+  /* CAL EMBED */
+  .cal-embed-container {
+    display: none;
+    margin-top: 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(74,130,196,0.15);
+  }
+  .cal-embed-container.visible { display: block; }
+  #cal-inline { width: 100%; height: 620px; }
+  @media (max-width: 480px) { #cal-inline { height: 520px; } }
+
   /* FOOTER */
   footer {
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -1021,6 +1123,12 @@
   })();
 </script>
 
+<!-- Cal.com Embed -->
+<script>
+(function(C,A,L){let p=function(a,ar){a.q.push(ar)};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true}if(ar[0]===L){const api=function(){p(api,arguments)};const namespace=ar[1];api.q=api.q||[];typeof namespace==="string"?(cal.ns[namespace]=api)&&p(api,ar):p(cal,ar);return}p(cal,ar)};})(window,"https://app.cal.com/embed/embed.js","init");
+Cal("init",{origin:"https://cal.com"});
+</script>
+
 </head>
 <body>
 
@@ -1039,7 +1147,7 @@
   <h1>Organize as contas.<br>Construa <em>o que importa.</em></h1>
   <p>Do controle financeiro à construção de patrimônio. Com clareza, proximidade e um plano feito para a sua realidade.</p>
   <div class="hero-cta">
-    <a href="quiz_latest.html" class="btn-primary">Descubra por onde começar →</a>
+    <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra por onde começar →</a>
     <a href="#como-funciona" class="btn-secondary" onclick="smoothScroll(event)">Como funciona</a>
   </div>
   <div class="scroll-hint">
@@ -1071,7 +1179,7 @@
           <li>Controle de gastos e teto diário</li>
           <li>Primeira reserva de emergência</li>
         </ul>
-        <a href="quiz_latest.html" class="btn-primary" style="text-align:center;">Começar agora →</a>
+        <a href="#descubra" class="btn-primary" style="text-align:center;" onclick="smoothScroll(event)">Começar agora →</a>
       </div>
       <div class="momento-card reveal">
         <div class="momento-card-icon">
@@ -1094,6 +1202,58 @@
     <p class="momento-note reveal">Muitas vezes os dois caminhos se cruzam. A mentoria é personalizada para onde você está agora.</p>
   </div>
 </section>
+
+<!-- MINI DIAGNÓSTICO (QUIZ INLINE) -->
+<section id="descubra" class="quiz-section">
+  <div class="quiz-section-inner">
+    <div class="iq-header reveal">
+      <p class="section-eyebrow">Mini diagnóstico</p>
+      <h2 class="section-title">Descubra seu<br>momento financeiro</h2>
+      <p class="section-sub" style="margin: 0 auto;">6 perguntas. 2 minutos. Você sai com clareza sobre o próximo passo.</p>
+    </div>
+    <div class="iq-wrapper reveal">
+
+      <!-- Intro -->
+      <div id="iq-intro">
+        <div class="iq-intro-title">Qual é o seu ponto de partida hoje?</div>
+        <p class="iq-intro-sub">Responda honestamente. Não existe resposta certa ou errada. O resultado indica o melhor próximo passo para o seu momento.</p>
+        <button class="btn-primary" onclick="iqStart()">Começar o diagnóstico →</button>
+        <p class="iq-meta">6 perguntas · Menos de 2 minutos · Gratuito</p>
+      </div>
+
+      <!-- Quiz -->
+      <div id="iq-quiz" style="display:none;">
+        <div class="iq-progress-bar"><div class="iq-progress-fill" id="iq-progress-fill" style="width:0%"></div></div>
+        <div class="iq-eyebrow" id="iq-eyebrow"></div>
+        <div class="iq-q-text" id="iq-q-text"></div>
+        <div class="iq-options" id="iq-options"></div>
+        <div class="iq-nav">
+          <button class="iq-btn-back" id="iq-btn-back" onclick="iqBack()">← Voltar</button>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div id="iq-result" style="display:none;" class="iq-result">
+        <div class="iq-result-tag" id="iq-r-tag"></div>
+        <div class="iq-result-title" id="iq-r-title"></div>
+        <p class="iq-result-desc" id="iq-r-desc"></p>
+        <div class="iq-result-card">
+          <div class="iq-result-card-label" id="iq-r-card-label"></div>
+          <div class="iq-result-card-title" id="iq-r-card-title"></div>
+          <p class="iq-result-card-desc" id="iq-r-card-desc"></p>
+          <div class="iq-result-cta" id="iq-r-cta"></div>
+        </div>
+        <div class="iq-restart">
+          <button class="iq-btn-restart" onclick="iqRestart()">Refazer o diagnóstico</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
 
 <!-- COMO FUNCIONA -->
 <section id="como-funciona">
@@ -1333,15 +1493,16 @@
 
     <div class="reveal">
       <div class="lead-success" id="lead-success">
-        Recebemos seus dados! Você será redirecionado para agendar sua sessão. Se não acontecer automaticamente, <a href="https://cal.com/planejadorvinicius/50min" target="_blank" style="color:var(--blue-light);">clique aqui</a>.
+        Perfeito! Escolha um horário abaixo para sua sessão gratuita de diagnóstico.
       </div>
       <form name="diagnostico" class="lead-form" onsubmit="submitLead(event)">
         <input type="text" name="nome" placeholder="Seu nome" required>
         <input type="email" name="email" placeholder="Seu melhor e-mail" required>
         <button type="submit" class="btn-primary">Quero agendar minha sessão gratuita →</button>
       </form>
-      <div class="lead-divider">ou</div>
-      <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="btn-secondary" style="display:block; text-align:center;">Agendar direto no calendário</a>
+      <div class="cal-embed-container" id="cal-embed-container">
+        <div id="cal-inline"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1429,7 +1590,190 @@
     }
   }
 
-  // Lead form — captura o lead e redireciona para cal.com
+  // =====================
+  // INLINE QUIZ
+  // =====================
+  const iqQuestions = [
+    {
+      eyebrow: '01 · Renda', key: 'renda',
+      text: 'Qual é sua renda mensal aproximada?',
+      options: [
+        { label: 'Até R$ 6.000', val: 'low' },
+        { label: 'Entre R$ 6.000 e R$ 10.000', val: 'mid' },
+        { label: 'Entre R$ 10.000 e R$ 20.000', val: 'high' },
+        { label: 'Entre R$ 20.000 e R$ 30.000', val: 'high' },
+        { label: 'Entre R$ 30.000 e R$ 50.000', val: 'high' },
+        { label: 'Acima de R$ 50.000', val: 'high' }
+      ]
+    },
+    {
+      eyebrow: '02 · Dívidas', key: 'divida',
+      text: 'Como está sua situação com dívidas hoje?',
+      options: [
+        { label: 'Tenho dívidas que me preocupam ou me tiram o sono.', val: 'yes' },
+        { label: 'Tenho parcelas e compromissos, mas estão dentro do controle.', val: 'partial' },
+        { label: 'Não tenho dívidas.', val: 'no' }
+      ]
+    },
+    {
+      eyebrow: '03 · Organização', key: 'org',
+      text: 'Você controla seus gastos mensais com clareza?',
+      options: [
+        { label: 'Não. O dinheiro some e não sei exatamente para onde vai.', val: 'no' },
+        { label: 'Tenho uma ideia aproximada, mas não acompanho com precisão.', val: 'partial' },
+        { label: 'Sim, tenho controle claro das minhas entradas e saídas.', val: 'yes' }
+      ]
+    },
+    {
+      eyebrow: '04 · Aposentadoria', key: 'aposentadoria',
+      text: 'Você tem uma estratégia para a sua aposentadoria?',
+      options: [
+        { label: 'Não penso nisso hoje.', val: 'no' },
+        { label: 'Penso, mas ainda não fiz nada concreto a respeito.', val: 'thinking' },
+        { label: 'Tenho previdência ou algum investimento, mas sem estratégia clara.', val: 'partial' },
+        { label: 'Tenho uma estratégia de longo prazo definida e acompanho regularmente.', val: 'yes' }
+      ]
+    },
+    {
+      eyebrow: '05 · Proteção', key: 'protecao',
+      text: 'Seu patrimônio e sua renda estão protegidos?',
+      options: [
+        { label: 'Não tenho nenhuma proteção contratada.', val: 'no' },
+        { label: 'Tenho alguns seguros, mas não sei se são suficientes para a minha realidade.', val: 'partial' },
+        { label: 'Tenho seguros de vida, saúde e patrimônio adequados à minha situação.', val: 'yes' }
+      ]
+    },
+    {
+      eyebrow: '06 · Investimentos', key: 'investimentos',
+      text: 'Como estão seus investimentos hoje?',
+      options: [
+        { label: 'Não invisto nada.', val: 'no' },
+        { label: 'Tenho algo guardado, mas sem estratégia ou objetivo definido.', val: 'partial' },
+        { label: 'Invisto com regularidade, mas minha carteira poderia estar melhor estruturada.', val: 'yes' },
+        { label: 'Tenho uma carteira estruturada com objetivos e prazos definidos.', val: 'structured' }
+      ]
+    }
+  ];
+
+  let iqCurrent = 0, iqAnswers = {};
+
+  function iqStart() {
+    document.getElementById('iq-intro').style.display = 'none';
+    document.getElementById('iq-quiz').style.display = 'block';
+    iqRender();
+  }
+
+  function iqRender() {
+    const q = iqQuestions[iqCurrent];
+    document.getElementById('iq-eyebrow').textContent = q.eyebrow;
+    document.getElementById('iq-q-text').textContent = q.text;
+    document.getElementById('iq-progress-fill').style.width = ((iqCurrent / iqQuestions.length) * 100) + '%';
+    const opts = document.getElementById('iq-options');
+    opts.innerHTML = '';
+    q.options.forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'iq-option' + (iqAnswers[q.key] === opt.val ? ' selected' : '');
+      div.innerHTML = `<div class="iq-opt-check"><div class="iq-opt-check-dot"></div></div><div class="iq-opt-text">${opt.label}</div>`;
+      div.addEventListener('click', () => iqSelect(q.key, opt.val, div));
+      opts.appendChild(div);
+    });
+    const back = document.getElementById('iq-btn-back');
+    back.className = 'iq-btn-back' + (iqCurrent > 0 ? ' visible' : '');
+  }
+
+  function iqSelect(key, val, el) {
+    document.querySelectorAll('#iq-options .iq-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    iqAnswers[key] = val;
+    setTimeout(() => {
+      if (iqCurrent < iqQuestions.length - 1) { iqCurrent++; iqRender(); }
+      else iqShowResult();
+    }, 320);
+  }
+
+  function iqBack() { if (iqCurrent > 0) { iqCurrent--; iqRender(); } }
+
+  function iqRestart() {
+    iqCurrent = 0; iqAnswers = {};
+    document.getElementById('iq-result').style.display = 'none';
+    document.getElementById('iq-quiz').style.display = 'none';
+    document.getElementById('iq-intro').style.display = 'block';
+  }
+
+  function iqShowResult() {
+    document.getElementById('iq-quiz').style.display = 'none';
+    document.getElementById('iq-progress-fill').style.width = '100%';
+    const a = iqAnswers;
+    let score = 0;
+    if (a.divida === 'no') score += 3; else if (a.divida === 'partial') score += 1;
+    if (a.org === 'yes') score += 3; else if (a.org === 'partial') score += 1;
+    if (a.aposentadoria === 'yes') score += 3; else if (a.aposentadoria === 'partial') score += 2; else if (a.aposentadoria === 'thinking') score += 1;
+    if (a.protecao === 'yes') score += 3; else if (a.protecao === 'partial') score += 1;
+    if (a.investimentos === 'structured') score += 3; else if (a.investimentos === 'yes') score += 2; else if (a.investimentos === 'partial') score += 1;
+    let result;
+    if (score <= 4) {
+      result = {
+        tag: 'Momento · Recomeço',
+        title: 'Hora de criar ordem e retomar o controle.',
+        desc: 'Dívidas, falta de controle ou dinheiro sumindo sem destino. O ponto de partida é estruturar o básico. E o básico bem feito muda tudo.',
+        cardLabel: 'Próximo passo recomendado',
+        cardTitle: 'Guia Recomeço Financeiro',
+        cardDesc: 'Do diagnóstico honesto da sua situação até a primeira reserva de emergência. Passo a passo, sem enrolação.',
+        ctaHref: 'selling_page_guia1.html', ctaLabel: 'Conhecer o Guia →', ctaTarget: null,
+        altHref: 'https://cal.com/planejadorvinicius/50min', altLabel: 'Ou agendar sessão gratuita', altTarget: '_blank'
+      };
+    } else if (score <= 9) {
+      result = {
+        tag: 'Momento · Transição',
+        title: 'Você já tem controle. Falta estratégia de crescimento.',
+        desc: 'Organização está caminhando, mas o patrimônio não reflete o esforço. A diferença entre estagnação e acumulação real está na estratégia, não na disciplina.',
+        cardLabel: 'Próximo passo recomendado',
+        cardTitle: 'Mentoria Financeira Personalizada',
+        cardDesc: 'Uma sessão de 50 minutos para mapear onde você está e o que está travando o crescimento.',
+        ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
+        altHref: 'selling_page_guia2.html', altLabel: 'Ou ver o Guia Patrimônio', altTarget: null
+      };
+    } else {
+      result = {
+        tag: 'Momento · Construção',
+        title: 'Você está no lugar certo para crescer.',
+        desc: 'Organização, proteção e investimentos em andamento. Mas há espaço real para otimizar e acelerar. Um olhar de fora encontra o que você não consegue ver de dentro.',
+        cardLabel: 'Próximo passo recomendado',
+        cardTitle: 'Mentoria Financeira Personalizada',
+        cardDesc: 'Para quem já tem base e quer construir com método. Sessão de diagnóstico gratuita, sem compromisso.',
+        ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
+        altHref: '#recursos', altLabel: 'Ver recursos disponíveis', altTarget: null
+      };
+    }
+    document.getElementById('iq-r-tag').textContent = result.tag;
+    document.getElementById('iq-r-title').textContent = result.title;
+    document.getElementById('iq-r-desc').textContent = result.desc;
+    document.getElementById('iq-r-card-label').textContent = result.cardLabel;
+    document.getElementById('iq-r-card-title').textContent = result.cardTitle;
+    document.getElementById('iq-r-card-desc').textContent = result.cardDesc;
+    document.getElementById('iq-r-cta').innerHTML =
+      `<a href="${result.ctaHref}" class="iq-btn-cta"${result.ctaTarget ? ` target="${result.ctaTarget}"` : ''}>${result.ctaLabel}</a>` +
+      `<a href="${result.altHref}" class="iq-btn-cta-outline"${result.altTarget ? ` target="${result.altTarget}"` : ''}>${result.altLabel}</a>`;
+    document.getElementById('iq-result').style.display = 'block';
+    if (typeof gtag === 'function') gtag('event', 'quiz_inline_completed', { score });
+  }
+
+  // =====================
+  // LEAD FORM + CAL EMBED
+  // =====================
+  let calInitialized = false;
+  function initCalEmbed() {
+    if (calInitialized || typeof Cal === 'undefined') return;
+    calInitialized = true;
+    Cal("inline", {
+      elementOrSelector: "#cal-inline",
+      config: { layout: "month_view" },
+      calLink: "planejadorvinicius/50min"
+    });
+    Cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+  }
+
+  // Lead form — captura o lead e abre o Cal.com inline
   async function submitLead(e) {
     e.preventDefault();
     const form = e.target;
@@ -1447,14 +1791,14 @@
     } catch (_) {}
     form.style.display = 'none';
     document.getElementById('lead-success').style.display = 'block';
-    setTimeout(() => {
-      window.open('https://cal.com/planejadorvinicius/50min', '_blank');
-    }, 1200);
-    gtag('event', 'lead_form_submit');
+    const calContainer = document.getElementById('cal-embed-container');
+    calContainer.classList.add('visible');
+    setTimeout(() => initCalEmbed(), 200);
+    if (typeof gtag === 'function') gtag('event', 'lead_form_submit');
   }
 
   // Analytics — CTA clicks
-  document.querySelector('a[href="quiz_latest.html"]')?.addEventListener('click', () => gtag('event', 'click_quiz'));
+  document.querySelector('a[href="#descubra"]')?.addEventListener('click', () => typeof gtag === 'function' && gtag('event', 'click_quiz'));
   document.querySelector('a[href="selling_page_planilha_latest.html"]')?.addEventListener('click', () => gtag('event', 'click_planilha'));
   document.querySelector('a[href="selling_page_guia1.html"]')?.addEventListener('click', () => gtag('event', 'click_guia1'));
   document.querySelector('a[href="selling_page_guia2.html"]')?.addEventListener('click', () => gtag('event', 'click_guia2'));
