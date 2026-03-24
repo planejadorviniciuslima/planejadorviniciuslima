@@ -12,14 +12,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --dark: #0D0D0D;
-    --dark-2: #141414;
-    --dark-3: #1C1C1C;
-    --cream: #F5F0E8;
-    --cream-2: #EDE6D6;
-    --text-muted: #888880;
+    --gold: #4A82C4;
+    --gold-light: #7AABDE;
+    --dark: #0A1628;
+    --dark-2: #0F2040;
+    --dark-3: #162A50;
+    --cream: #E4EBF5;
+    --cream-2: #C0CEDF;
+    --text-muted: #7090A8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,6 +32,65 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 64px;
+    background: rgba(10,22,40,0.93);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    border-bottom: 1px solid rgba(74,130,196,0.12);
+  }
+
+  .navbar-logo-wrap {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 5px 14px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .navbar-logo-wrap:hover { opacity: 0.88; }
+
+  .navbar-logo-wrap img {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+
+  .navbar-cta-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(74,130,196,0.35);
+    padding: 9px 22px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .navbar-cta-link:hover {
+    background: rgba(74,130,196,0.1);
+    border-color: var(--gold);
+  }
+
+  @media (max-width: 480px) {
+    .navbar-cta-link { display: none; }
+    .navbar { padding: 0 20px; }
   }
 
   /* NOISE TEXTURE */
@@ -53,7 +112,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 80px 24px 140px;
+    padding: 144px 24px 140px;
     position: relative;
     overflow: hidden;
   }
@@ -63,7 +122,7 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(74,130,196,0.12) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -72,7 +131,7 @@
 
   .badge {
     display: inline-block;
-    border: 1px solid rgba(201,168,76,0.4);
+    border: 1px solid rgba(74,130,196,0.4);
     color: var(--gold);
     font-size: 11px;
     letter-spacing: 3px;
@@ -144,7 +203,7 @@
   }
 
   .btn-gold:hover::after { transform: translateX(0); }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.3); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(74,130,196,0.3); }
 
   .scroll-hint {
     position: absolute;
@@ -237,8 +296,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.1);
+    background: rgba(74,130,196,0.1);
+    border: 1px solid rgba(74,130,196,0.1);
   }
 
   .product-card {
@@ -293,7 +352,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(201,168,76,0.2);
+    background: rgba(74,130,196,0.2);
   }
 
   .card-icon {
@@ -383,13 +442,13 @@
   }
 
   .card-cta.outline {
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid rgba(74,130,196,0.3);
     color: var(--gold);
   }
 
   .card-cta.outline:hover {
     border-color: var(--gold);
-    background: rgba(201,168,76,0.08);
+    background: rgba(74,130,196,0.08);
   }
 
   .card-cta.filled {
@@ -400,7 +459,7 @@
   .card-cta.filled:hover {
     background: var(--gold-light);
     transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(201,168,76,0.25);
+    box-shadow: 0 8px 30px rgba(74,130,196,0.25);
   }
 
   .featured-badge {
@@ -481,7 +540,7 @@
   .step-num {
     width: 56px;
     height: 56px;
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid rgba(74,130,196,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -581,7 +640,7 @@
     position: absolute;
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(74,130,196,0.07) 0%, transparent 65%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -632,7 +691,7 @@
   .footer-social-link {
     width: 36px;
     height: 36px;
-    border: 1px solid rgba(201,168,76,0.2);
+    border: 1px solid rgba(74,130,196,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -687,7 +746,7 @@
     padding: 96px 24px;
     min-height: 70vw;
     background:
-      linear-gradient(135deg, rgba(13,13,13,0.78) 0%, rgba(18,13,4,0.68) 100%),
+      linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.75) 100%),
       url('IMG_1611_2.jpg') 82% 12% / cover no-repeat;
     position: relative;
     overflow: hidden;
@@ -717,7 +776,7 @@
 
   .about-body {
     font-size: 15px;
-    color: #BAB7AB;
+    color: #9BAFC5;
     line-height: 1.85;
     margin-bottom: 20px;
   }
@@ -746,7 +805,7 @@
   .photo-placeholder {
     width: 100%;
     aspect-ratio: 3/4;
-    border: 1px solid rgba(201,168,76,0.2);
+    border: 1px solid rgba(74,130,196,0.2);
     background: linear-gradient(160deg, #1a1508 0%, #0D0D0D 100%);
     display: flex;
     align-items: center;
@@ -758,7 +817,7 @@
     content: '';
     position: absolute;
     inset: 8px;
-    border: 1px solid rgba(201,168,76,0.08);
+    border: 1px solid rgba(74,130,196,0.08);
     pointer-events: none;
   }
 
@@ -784,14 +843,14 @@
     .about-photo { max-width: 280px; margin: 0 auto; width: 100%; }
     .about-section {
       background:
-        linear-gradient(135deg, rgba(13,13,13,0.65) 0%, rgba(18,13,4,0.55) 100%),
+        linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.65) 100%),
         url('IMG_1611_2.jpg') 70% 12% / cover no-repeat;
     }
     .about-section .about-body { color: var(--cream-2); }
   }
 
   .btn-outline {
-    border: 1px solid rgba(201,168,76,0.5);
+    border: 1px solid rgba(74,130,196,0.5);
     color: var(--gold);
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
@@ -807,14 +866,14 @@
 
   .btn-outline:hover {
     border-color: var(--gold);
-    background: rgba(201,168,76,0.08);
+    background: rgba(74,130,196,0.08);
     transform: translateY(-2px);
   }
 
   .card-price-premium {
     background: transparent;
     border: none;
-    border-top: 1px solid rgba(201,168,76,0.2);
+    border-top: 1px solid rgba(74,130,196,0.2);
     padding: 16px 0 0;
     text-align: left;
     position: relative;
@@ -874,14 +933,14 @@
   }
 
   .faq-item {
-    border: 1px solid rgba(201,168,76,0.1);
+    border: 1px solid rgba(74,130,196,0.1);
     background: var(--dark-2);
     overflow: hidden;
     transition: border-color 0.3s ease;
   }
 
-  .faq-item:hover { border-color: rgba(201,168,76,0.25); }
-  .faq-item.open { border-color: rgba(201,168,76,0.3); }
+  .faq-item:hover { border-color: rgba(74,130,196,0.25); }
+  .faq-item.open { border-color: rgba(74,130,196,0.3); }
 
   .faq-question {
     width: 100%;
@@ -907,7 +966,7 @@
   .faq-icon {
     width: 24px;
     height: 24px;
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid rgba(74,130,196,0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -920,7 +979,7 @@
 
   .faq-item.open .faq-icon {
     transform: rotate(45deg);
-    background: rgba(201,168,76,0.1);
+    background: rgba(74,130,196,0.1);
   }
 
   .faq-answer {
@@ -1007,6 +1066,13 @@
 </head>
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="navbar-logo-wrap">
+    <img src="Logo Vinicius Lima_Consultor.png" alt="Vinícius Lima · Planejador Financeiro">
+  </a>
+  <a href="https://cal.com/planejadorvinicius/50min" class="navbar-cta-link" target="_blank">Agendar sessão →</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -1037,7 +1103,7 @@
     <div class="product-card" style="text-align: center;">
       <div class="card-tier">Serviço Personalizado</div>
       <svg class="card-icon" viewBox="0 0 48 48" fill="none">
-        <path d="M24 8L28.5 18.5L40 20L31.5 28.5L34 40L24 34.5L14 40L16.5 28.5L8 20L19.5 18.5L24 8Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M24 8L28.5 18.5L40 20L31.5 28.5L34 40L24 34.5L14 40L16.5 28.5L8 20L19.5 18.5L24 8Z" stroke="#4A82C4" stroke-width="1.5" stroke-linejoin="round"/>
       </svg>
       <ul class="card-includes" style="display: inline-block; text-align: left;">
         <li>Diagnóstico financeiro completo</li>
@@ -1076,9 +1142,9 @@
     <div class="product-card">
       <div class="card-tier">Ferramenta · Organização Financeira</div>
       <svg class="card-icon" viewBox="0 0 48 48" fill="none">
-        <rect x="6" y="8" width="36" height="32" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-        <path d="M6 16h36M6 24h36M6 32h36" stroke="#C9A84C" stroke-width="1.5"/>
-        <path d="M18 16v24M30 16v24" stroke="#C9A84C" stroke-width="1.5"/>
+        <rect x="6" y="8" width="36" height="32" rx="2" stroke="#4A82C4" stroke-width="1.5"/>
+        <path d="M6 16h36M6 24h36M6 32h36" stroke="#4A82C4" stroke-width="1.5"/>
+        <path d="M18 16v24M30 16v24" stroke="#4A82C4" stroke-width="1.5"/>
       </svg>
       <div class="card-title">Planilha de Planejamento</div>
       <p class="card-desc">Para quem quer organizar entradas, gastos e dívidas e enxergar os próximos 24 meses com clareza. Funciona no Google Sheets, gratuito e sem instalação.</p>
@@ -1101,8 +1167,8 @@
     <div class="product-card">
       <div class="card-tier">Guia Prático · Nível 1</div>
       <svg class="card-icon" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="6" width="28" height="36" rx="2" stroke="#C9A84C" stroke-width="1.5"/>
-        <path d="M14 18h16M14 24h16M14 30h10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="8" y="6" width="28" height="36" rx="2" stroke="#4A82C4" stroke-width="1.5"/>
+        <path d="M14 18h16M14 24h16M14 30h10" stroke="#4A82C4" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <div class="card-title">Guia Recomeço Financeiro</div>
       <p class="card-desc">Para quem está endividado e quer sair do buraco de vez. Do diagnóstico completo à primeira reserva de emergência, com exemplos reais e plano de ação.</p>
@@ -1123,11 +1189,11 @@
     <div class="product-card">
       <div class="card-tier">Guia Prático · Nível 2</div>
       <svg class="card-icon" viewBox="0 0 48 48" fill="none">
-        <rect x="5" y="32" width="8" height="10" rx="1" stroke="#C9A84C" stroke-width="1.5"/>
-        <rect x="20" y="22" width="8" height="20" rx="1" stroke="#C9A84C" stroke-width="1.5"/>
-        <rect x="35" y="12" width="8" height="30" rx="1" stroke="#C9A84C" stroke-width="1.5"/>
-        <path d="M7 18 L18 11 L27 15 L39 6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <polyline points="34,6 39,6 39,11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="5" y="32" width="8" height="10" rx="1" stroke="#4A82C4" stroke-width="1.5"/>
+        <rect x="20" y="22" width="8" height="20" rx="1" stroke="#4A82C4" stroke-width="1.5"/>
+        <rect x="35" y="12" width="8" height="30" rx="1" stroke="#4A82C4" stroke-width="1.5"/>
+        <path d="M7 18 L18 11 L27 15 L39 6" stroke="#4A82C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="34,6 39,6 39,11" stroke="#4A82C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="card-title">Guia Patrimônio Consistente</div>
       <p class="card-desc">Para quem ganha bem mas ainda não tem estratégia. Este guia abre seus olhos para o que está faltando na construção do seu patrimônio.</p>
