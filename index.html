@@ -17,9 +17,9 @@
     --dark: #0A1628;
     --dark-2: #0F2040;
     --dark-3: #162A50;
-    --cream: #E4EBF5;
-    --cream-2: #C0CEDF;
-    --text-muted: #7090A8;
+    --cream: #FFFFFF;
+    --cream-2: #D5E3F0;
+    --text-muted: #8AAEC8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,7 +61,7 @@
   .navbar-logo-wrap:hover { opacity: 0.7; }
 
   .navbar-logo-wrap img {
-    height: 42px;
+    height: 56px;
     width: auto;
     display: block;
     filter: invert(1) brightness(1.8);
@@ -88,8 +88,13 @@
   }
 
   @media (max-width: 480px) {
-    .navbar-cta-link { display: none; }
-    .navbar { padding: 0 20px; }
+    .navbar { padding: 0 16px; }
+    .navbar-cta-link {
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 7px 12px;
+    }
+    .navbar-logo-wrap img { height: 44px; }
   }
 
   /* NOISE TEXTURE */
@@ -775,7 +780,7 @@
 
   .about-body {
     font-size: 15px;
-    color: #9BAFC5;
+    color: #C8DCF0;
     line-height: 1.85;
     margin-bottom: 20px;
   }
