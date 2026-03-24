@@ -94,20 +94,6 @@
       padding: 7px 12px;
     }
     .navbar-logo-wrap img { height: 56px; }
-    .hero {
-      min-height: 100svh;
-      justify-content: flex-start;
-      padding-top: 112px;
-      padding-bottom: 100px;
-    }
-    .hero h1 {
-      font-size: 40px;
-      letter-spacing: -1px;
-    }
-    .badge { margin-bottom: 24px; }
-    .hero p { margin-top: 20px; }
-    .hero-cta { margin-top: 32px; }
-    .scroll-hint { bottom: 24px; }
   }
 
   /* NOISE TEXTURE */
@@ -1056,6 +1042,20 @@
   @media (max-width: 600px) {
     .trust-inner { grid-template-columns: repeat(2, 1fr); }
     .step { gap: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      min-height: 100svh;
+      justify-content: flex-start;
+      padding-top: 112px;
+      padding-bottom: 100px;
+    }
+    .hero h1 { font-size: 40px; letter-spacing: -1px; }
+    .badge { margin-bottom: 24px; }
+    .hero p { margin-top: 20px; }
+    .hero-cta { margin-top: 32px; }
+    .scroll-hint { bottom: 24px; }
   }
 </style>
 
