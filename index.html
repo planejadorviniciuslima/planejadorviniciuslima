@@ -119,14 +119,26 @@
     position: relative;
     overflow: hidden;
     background-color: #0A1628;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: #0A1628;
     background-image:
       linear-gradient(rgba(10,22,40,0.42), rgba(10,22,40,0.42)),
       linear-gradient(to right, #0A1628 0%, #0A1628 36%, rgba(10,22,40,0.97) 50%, rgba(10,22,40,0.42) 60%, rgba(10,22,40,0.12) 72%),
       linear-gradient(to bottom, rgba(10,22,40,0.85) 0%, transparent 14%, transparent 80%, rgba(10,22,40,0.95) 100%),
       url('meu_perfil.png');
-    background-position: center center, center center, center center, 98% 28%;
-    background-size: auto, auto, auto, auto 82%;
-    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-position: center, center, center, 98% 28%;
+    background-size: 100% 100%, 100% 100%, 100% 100%, auto 82%;
+    background-repeat: no-repeat;
+  }
+
+  .hero > *:not(.hero-bg) {
+    position: relative;
+    z-index: 1;
   }
 
   .hero::after {
@@ -859,7 +871,7 @@
         url('IMG_1611_2.jpg') 70% 12% / cover no-repeat;
     }
     .about-section .about-body { color: var(--cream-2); }
-    .hero { background: #0A1628; }
+    .hero-bg { display: none; }
   }
 
   .btn-outline {
@@ -1103,6 +1115,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="badge">Vinícius Lima · Planejador Financeiro</div>
   <h1>Seu dinheiro trabalhando<br>com <em>intenção e clareza</em></h1>
   <p>Da organização financeira à construção de patrimônio. Soluções para cada etapa da sua jornada financeira.</p>
