@@ -123,29 +123,10 @@
     pointer-events: none;
   }
 
-  .hero-symbol {
-    position: absolute;
-    right: -2%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Rubik', sans-serif;
-    font-size: clamp(280px, 38vw, 560px);
-    font-weight: 700;
-    color: transparent;
-    -webkit-text-stroke: 1.5px rgba(74,130,196,0.07);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
-    letter-spacing: -10px;
-  }
-
-  @media (max-width: 768px) {
-    .hero-symbol {
-      font-size: 52vw;
-      right: -5%;
-      -webkit-text-stroke: 1px rgba(74,130,196,0.06);
-    }
+  .hero-coin {
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
   }
 
   .hero-eyebrow {
@@ -1158,7 +1139,13 @@ Cal("init",{origin:"https://cal.com"});
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-symbol" aria-hidden="true">R$</div>
+  <div class="hero-coin" aria-hidden="true">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="28" cy="28" r="26" stroke="#7AABDE" stroke-width="1.5"/>
+      <circle cx="28" cy="28" r="20" stroke="#7AABDE" stroke-width="0.75" stroke-opacity="0.45"/>
+      <text x="28" y="34" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#7AABDE">R$</text>
+    </svg>
+  </div>
   <p class="hero-eyebrow">Planejador Financeiro · Vinícius Lima</p>
   <h1>Organize as contas.<br>Construa <em>o que importa.</em></h1>
   <p>Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</p>
