@@ -89,49 +89,57 @@
   /* HERO */
   .hero {
     min-height: 100svh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0 64px;
-    padding: 120px 72px 100px;
     position: relative;
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    background-color: var(--dark);
+    background: var(--dark);
   }
 
   .hero-bg {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-color: var(--dark);
+    background: var(--dark);
   }
 
-  .hero::after {
-    content: '';
+  /* Foto editorial — ocupa a metade direita em altura total */
+  .hero-photo-side {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 58%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    display: block;
+  }
+
+  /* Overlay com gradiente puro (sem url()) — sem problemas cross-browser */
+  .hero-photo-overlay {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 55% 75% at 78% 50%, rgba(74,130,196,0.09) 0%, transparent 65%),
-      radial-gradient(ellipse 35% 40% at 10% 80%, rgba(74,130,196,0.05) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+      linear-gradient(to right, #0A1628 0%, #0A1628 6%, rgba(10,22,40,0.88) 28%, rgba(10,22,40,0.32) 56%, rgba(10,22,40,0.04) 82%, transparent 100%),
+      linear-gradient(to bottom, rgba(10,22,40,0.5) 0%, transparent 12%, transparent 78%, rgba(10,22,40,0.7) 100%);
   }
 
+  /* Conteúdo — flutua sobre a esquerda, próximo à foto */
   .hero-content {
     position: relative;
-    z-index: 1;
-  }
-
-  .hero-visual {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 2;
+    padding: 120px 0 80px 80px;
+    max-width: 560px;
   }
 
   .hero-badge {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     animation: fadeUp 0.6s ease forwards;
     opacity: 0;
   }
@@ -139,21 +147,20 @@
   .hero-eyebrow {
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--blue-light);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     animation: fadeUp 0.8s 0.1s ease forwards;
     opacity: 0;
   }
 
   .hero h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(38px, 4.8vw, 66px);
+    font-size: clamp(40px, 5.2vw, 72px);
     font-weight: 400;
-    line-height: 1.12;
+    line-height: 1.1;
     letter-spacing: -0.5px;
-    max-width: 520px;
     animation: fadeUp 0.8s 0.2s ease forwards;
     opacity: 0;
   }
@@ -168,7 +175,7 @@
     font-size: 17px;
     font-weight: 400;
     color: var(--white-2);
-    max-width: 420px;
+    max-width: 400px;
     line-height: 1.7;
     animation: fadeUp 0.8s 0.3s ease forwards;
     opacity: 0;
@@ -181,40 +188,6 @@
     flex-wrap: wrap;
     animation: fadeUp 0.8s 0.42s ease forwards;
     opacity: 0;
-  }
-
-  .hero-photo-wrap {
-    position: relative;
-    width: clamp(220px, 24vw, 360px);
-    height: clamp(220px, 24vw, 360px);
-    animation: fadeUp 0.9s 0.25s ease forwards;
-    opacity: 0;
-  }
-
-  .hero-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 50%;
-    border: 2px solid rgba(74,130,196,0.3);
-    display: block;
-  }
-
-  .hero-photo-ring {
-    position: absolute;
-    inset: -14px;
-    border-radius: 50%;
-    border: 1px solid rgba(74,130,196,0.1);
-    pointer-events: none;
-  }
-
-  .hero-photo-ring-2 {
-    position: absolute;
-    inset: -30px;
-    border-radius: 50%;
-    border: 1px dashed rgba(74,130,196,0.05);
-    pointer-events: none;
   }
 
   .btn-primary {
@@ -281,24 +254,23 @@
   }
 
   @media (max-width: 900px) {
-    .hero {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding: 120px 32px 100px;
-    }
+    .hero-photo-side { display: none; }
     .hero-content {
+      padding: 120px 32px 100px;
+      max-width: 100%;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
     .hero h1 { max-width: 100%; }
     .hero p { max-width: 100%; }
     .hero-cta { justify-content: center; }
-    .hero-visual { display: none; }
   }
 
   @media (max-width: 480px) {
-    .hero { padding: 100px 20px 90px; }
+    .hero-content { padding: 100px 20px 90px; }
     .hero h1 { font-size: 36px; letter-spacing: -0.25px; }
     .hero p { font-size: 16px; margin-top: 16px; }
     .hero-cta { margin-top: 28px; flex-direction: column; align-items: stretch; }
@@ -1207,12 +1179,9 @@ Cal("init",{origin:"https://cal.com"});
     </div>
   </div>
 
-  <div class="hero-visual" aria-hidden="true">
-    <div class="hero-photo-wrap">
-      <img src="meu_perfil.png" alt="Vinícius Lima, Planejador Financeiro" class="hero-photo">
-      <div class="hero-photo-ring"></div>
-      <div class="hero-photo-ring-2"></div>
-    </div>
+  <div class="hero-photo-side" aria-hidden="true">
+    <img src="meu_perfil.png" alt="" class="hero-photo-img">
+    <div class="hero-photo-overlay"></div>
   </div>
 
   <div class="scroll-hint">
