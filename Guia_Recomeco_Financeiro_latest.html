@@ -905,6 +905,9 @@
     .toc-dots { display: none; }
   }
 
+  /* ─── PROTEÇÃO DE CONTEÚDO ─── */
+  body { -webkit-user-select: none; user-select: none; }
+
 </style>
 </head>
 <body>
@@ -1662,6 +1665,20 @@
 </div>
 
 </div><!-- .page -->
+
+<script>
+  (function() {
+    document.addEventListener('copy', function(e) { e.preventDefault(); });
+    document.addEventListener('cut', function(e) { e.preventDefault(); });
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('keydown', function(e) {
+      var ctrl = e.ctrlKey || e.metaKey;
+      if (ctrl && ['c','a','u','s','p'].indexOf(e.key.toLowerCase()) !== -1) {
+        e.preventDefault();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
 }
