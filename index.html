@@ -1818,39 +1818,41 @@ Cal("init",{origin:"https://cal.com"});
     document.body.style.overflow = '';
   }
 
-  document.getElementById('modal-recursos').addEventListener('click', function(e) {
-    if (e.target === this) fecharModal();
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('modal-recursos').addEventListener('click', function(e) {
+      if (e.target === this) fecharModal();
+    });
+
+    document.getElementById('modal-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('modal-submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Aguarde...';
+      const nome = document.getElementById('modal-nome').value;
+      const email = document.getElementById('modal-email').value;
+      const recurso = document.getElementById('modal-recurso-input').value;
+      const href = this.dataset.recursoHref;
+      const token = this.dataset.recursoToken;
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            'form-name': 'recursos-gratuitos',
+            nome, email, recurso, origem: 'index'
+          }).toString()
+        });
+      } catch (_) {}
+      sessionStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
+      this.style.display = 'none';
+      document.getElementById('modal-success').style.display = 'block';
+      if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
+      setTimeout(() => { window.location.href = href; }, 800);
+    });
   });
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') fecharModal();
-  });
-
-  document.getElementById('modal-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('modal-submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Aguarde...';
-    const nome = document.getElementById('modal-nome').value;
-    const email = document.getElementById('modal-email').value;
-    const recurso = document.getElementById('modal-recurso-input').value;
-    const href = this.dataset.recursoHref;
-    const token = this.dataset.recursoToken;
-    try {
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'recursos-gratuitos',
-          nome, email, recurso, origem: 'index'
-        }).toString()
-      });
-    } catch (_) {}
-    sessionStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
-    this.style.display = 'none';
-    document.getElementById('modal-success').style.display = 'block';
-    if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
-    setTimeout(() => { window.location.href = href; }, 800);
   });
 </script>
 
