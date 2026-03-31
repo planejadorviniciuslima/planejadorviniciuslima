@@ -5,26 +5,39 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guia Patrimônio Consistente | Vinícius Gomes Lima</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --dark: #0D0D0D;
-    --dark-2: #141414;
-    --dark-3: #1C1C1C;
-    --cream: #F5F0E8;
-    --text: #F5F0E8;
-    --text-muted: #C8C3BB;
-    --border: rgba(255,255,255,0.07);
+    --blue: #3B82F6;
+    --blue-dim: #2563EB;
+    --blue-light: #93C5FD;
+    --blue-glow: rgba(59,130,246,0.10);
+    --blue-border: rgba(59,130,246,0.16);
+    --amber: #F59E0B;
+    --amber-hover: #D97706;
+    --bg:   #07090F;
+    --bg-2: #0A0E1A;
+    --bg-3: #0F1525;
+    --fg:   #FFFFFF;
+    --fg-2: #DBEAFE;
+    --muted: #6B8FBE;
+    --gold: var(--blue);
+    --gold-light: var(--blue-light);
+    --dark: var(--bg);
+    --dark-2: var(--bg-2);
+    --dark-3: var(--bg-3);
+    --cream: var(--fg);
+    --text: var(--fg);
+    --text-muted: var(--muted);
+    --border: var(--blue-border);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #0D0D0D;
-    font-family: 'DM Sans', sans-serif;
+    background: #07090F;
+    font-family: 'Nunito', sans-serif;
     font-weight: 300;
     color: var(--text);
     font-size: 15px;
@@ -54,7 +67,7 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -74,7 +87,7 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.4);
+    color: rgba(255,255,255,0.4);
   }
 
   .cover-main {
@@ -93,7 +106,7 @@
   }
 
   .cover h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(52px, 9vw, 80px);
     font-weight: 300;
     line-height: 1.0;
@@ -109,7 +122,7 @@
 
   .cover-tagline {
     font-size: 15px;
-    color: rgba(245,240,232,0.55);
+    color: rgba(255,255,255,0.55);
     max-width: 380px;
     line-height: 1.7;
     font-weight: 300;
@@ -119,7 +132,7 @@
 
   .cover-bottom p {
     font-size: 11px;
-    color: rgba(245,240,232,0.25);
+    color: rgba(255,255,255,0.25);
     letter-spacing: 1px;
   }
 
@@ -179,7 +192,7 @@
   }
 
   .chapter-number {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -189,7 +202,7 @@
   }
 
   .chapter-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(32px, 5vw, 44px);
     font-weight: 300;
     line-height: 1.1;
@@ -207,12 +220,12 @@
   }
 
   h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: var(--cream);
     margin: 36px 0 12px;
-    border-left: 2px solid rgba(201,168,76,0.5);
+    border-left: 2px solid rgba(59,130,246,0.5);
     padding-left: 14px;
     page-break-after: avoid;
   }
@@ -244,7 +257,7 @@
   }
 
   .stat-value {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
     font-weight: 300;
     color: var(--gold);
@@ -272,7 +285,7 @@
   }
 
   .callout p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 19px;
     font-style: italic;
     font-weight: 300;
@@ -284,7 +297,7 @@
   /* HIGHLIGHT BOX */
   .highlight-box {
     background: #1C1C1C;
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid rgba(59,130,246,0.3);
     border-left: 3px solid var(--gold);
     padding: 24px 28px;
     margin: 28px 0;
@@ -395,7 +408,7 @@
   }
 
   .priority-num {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 22px;
     color: var(--gold);
     font-weight: 300;
@@ -490,7 +503,7 @@
   .day-label {
     background: var(--dark);
     color: var(--gold);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 300;
     letter-spacing: 1px;
@@ -559,7 +572,7 @@
   }
 
   .reading-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 19px;
     font-weight: 400;
     color: var(--text);
@@ -599,7 +612,7 @@
 
     @page { size: A4; margin: 0; }
 
-    body { background: #0D0D0D !important; }
+    body { background: #07090F !important; }
     .page { max-width: 100%; margin: 0; box-shadow: none; background: #141414 !important; }
 
     .print-break { page-break-before: always; break-before: page; }
@@ -901,7 +914,7 @@
   <div class="highlight-box">
     <div class="highlight-label">Planilha de Planejamento</div>
     <p>A Planilha de Planejamento permite registrar cada objetivo com valor e prazo, calcular quanto guardar por mês para atingi-los e acompanhar o progresso mês a mês ao longo de 24 meses. Disponível em <strong>planejadorvinicius.com.br</strong>.</p>
-    <img src="foto_planilha.png" alt="Planilha de Planejamento" style="width:100%; max-width:320px; display:block; margin-top:12px; border:1px solid rgba(201,168,76,0.25); border-radius:2px;">
+    <img src="foto_planilha.png" alt="Planilha de Planejamento" style="width:100%; max-width:320px; display:block; margin-top:12px; border:1px solid rgba(59,130,246,0.25); border-radius:2px;">
   </div>
 </div>
 
