@@ -946,6 +946,86 @@
     transition: opacity 0.65s ease, transform 0.65s ease;
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MODAL RECURSOS ─── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(7,9,15,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-box {
+    background: var(--bg-3);
+    border: 1px solid var(--blue-border);
+    border-radius: 20px;
+    padding: 48px 40px;
+    max-width: 440px; width: 100%;
+    position: relative;
+    transform: translateY(16px);
+    transition: transform 0.25s;
+  }
+  .modal-overlay.active .modal-box { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 24px; line-height: 1;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--fg); }
+  .modal-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 8px;
+  }
+  .modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--fg); margin-bottom: 8px; line-height: 1.25;
+  }
+  .modal-sub {
+    font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+  }
+  .modal-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .modal-field label { font-size: 13px; font-weight: 600; color: var(--fg-2); }
+  .modal-field input {
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--fg); font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .modal-field input:focus { border-color: var(--blue); }
+  .modal-submit {
+    width: 100%;
+    background: var(--amber); color: #07090F;
+    border: none; border-radius: 100px;
+    padding: 14px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    margin-top: 4px;
+  }
+  .modal-submit:hover {
+    background: var(--amber-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(245,158,11,0.38);
+  }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+  .modal-privacy { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
+  .modal-success-msg {
+    text-align: center; color: var(--fg-2); font-size: 15px; padding: 16px 0;
+  }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+  @media (max-width: 480px) { .modal-box { padding: 36px 24px; } }
 </style>
 
 <!-- Google Analytics 4 -->
@@ -1006,8 +1086,8 @@ Cal("init",{origin:"https://cal.com"});
       <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
       <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</p>
       <div class="hero-cta">
-        <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra por onde começar →</a>
-        <a href="#como-funciona" class="btn-secondary" onclick="smoothScroll(event)">Como funciona</a>
+        <a href="https://cal.com/planejadorvinicius/50min" class="btn-primary" target="_blank">Agendar sessão gratuita →</a>
+        <a href="#recursos" class="btn-secondary" onclick="smoothScroll(event)">Ver recursos gratuitos</a>
       </div>
     </div>
 
@@ -1186,9 +1266,9 @@ Cal("init",{origin:"https://cal.com"});
 <!-- RECURSOS -->
 <section id="recursos" class="products-section">
   <div class="products-inner">
-    <p class="section-eyebrow reveal">Recursos</p>
-    <h2 class="section-title reveal">Prefere começar<br>por conta própria?</h2>
-    <p class="section-sub reveal" style="margin: 0 auto;">Guias e ferramentas para quem quer dar o primeiro passo com autonomia. Conteúdo prático, direto ao ponto.</p>
+    <p class="section-eyebrow reveal">Recursos gratuitos</p>
+    <h2 class="section-title reveal">Materiais para você<br>dar o primeiro passo</h2>
+    <p class="section-sub reveal" style="margin: 0 auto;">Guias e ferramentas práticos, sem custo. Deixe seu nome e email para acessar na hora.</p>
     <div class="products-grid">
 
       <div class="product-card reveal">
@@ -1207,10 +1287,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Cálculo da reserva de emergência</li>
           <li>Seção de objetivos de vida</li>
         </ul>
-        <div class="card-price">
-          <div class="price-value"><span>R$</span> 47</div>
-        </div>
-        <a href="selling_page_planilha_latest.html" class="card-cta outline">Conhecer a planilha →</a>
+        <button onclick="abrirModal('planilha')" class="card-cta filled">Acessar grátis →</button>
       </div>
 
       <div class="product-card reveal">
@@ -1227,10 +1304,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Passo a passo para a primeira reserva</li>
           <li>Plano de ação de 5 dias para sair em movimento</li>
         </ul>
-        <div class="card-price">
-          <div class="price-value"><span>R$</span> 77</div>
-        </div>
-        <a href="selling_page_guia1.html" class="card-cta outline">Quero recomeçar →</a>
+        <button onclick="abrirModal('guia1')" class="card-cta filled">Acessar grátis →</button>
       </div>
 
       <div class="product-card reveal">
@@ -1250,10 +1324,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Por que renda alta não garante riqueza</li>
           <li>Quando buscar um planejador profissional</li>
         </ul>
-        <div class="card-price">
-          <div class="price-value"><span>R$</span> 127</div>
-        </div>
-        <a href="selling_page_guia2.html" class="card-cta outline">Quero evoluir →</a>
+        <button onclick="abrirModal('guia2')" class="card-cta filled">Acessar grátis →</button>
       </div>
 
     </div>
@@ -1597,7 +1668,7 @@ Cal("init",{origin:"https://cal.com"});
         cardLabel: 'Próximo passo recomendado',
         cardTitle: 'Guia Recomeço Financeiro',
         cardDesc: 'Do diagnóstico honesto da sua situação até a primeira reserva de emergência. Passo a passo, sem enrolação.',
-        ctaHref: 'selling_page_guia1.html', ctaLabel: 'Conhecer o Guia →', ctaTarget: null,
+        ctaModal: 'guia1', ctaLabel: 'Acessar o Guia grátis →',
         altHref: 'https://cal.com/planejadorvinicius/50min', altLabel: 'Ou agendar sessão gratuita', altTarget: '_blank'
       };
     } else if (score <= 9) {
@@ -1609,7 +1680,7 @@ Cal("init",{origin:"https://cal.com"});
         cardTitle: 'Mentoria Financeira Personalizada',
         cardDesc: 'Uma sessão de 50 minutos para mapear onde você está e o que está travando o crescimento.',
         ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
-        altHref: 'selling_page_guia2.html', altLabel: 'Ou ver o Guia Patrimônio', altTarget: null
+        altModal: 'guia2', altLabel: 'Ou acessar o Guia Patrimônio grátis'
       };
     } else {
       result = {
@@ -1629,9 +1700,13 @@ Cal("init",{origin:"https://cal.com"});
     document.getElementById('iq-r-card-label').textContent = result.cardLabel;
     document.getElementById('iq-r-card-title').textContent = result.cardTitle;
     document.getElementById('iq-r-card-desc').textContent = result.cardDesc;
-    document.getElementById('iq-r-cta').innerHTML =
-      `<a href="${result.ctaHref}" class="iq-btn-cta"${result.ctaTarget ? ` target="${result.ctaTarget}"` : ''}>${result.ctaLabel}</a>` +
-      `<a href="${result.altHref}" class="iq-btn-cta-outline"${result.altTarget ? ` target="${result.altTarget}"` : ''}>${result.altLabel}</a>`;
+    const ctaTag = result.ctaModal
+      ? `<button class="iq-btn-cta" onclick="abrirModal('${result.ctaModal}')">${result.ctaLabel}</button>`
+      : `<a href="${result.ctaHref}" class="iq-btn-cta"${result.ctaTarget ? ` target="${result.ctaTarget}"` : ''}>${result.ctaLabel}</a>`;
+    const altTag = result.altModal
+      ? `<button class="iq-btn-cta-outline" onclick="abrirModal('${result.altModal}')">${result.altLabel}</button>`
+      : `<a href="${result.altHref}" class="iq-btn-cta-outline"${result.altTarget ? ` target="${result.altTarget}"` : ''}>${result.altLabel}</a>`;
+    document.getElementById('iq-r-cta').innerHTML = ctaTag + altTag;
     document.getElementById('iq-result').style.display = 'block';
     if (typeof gtag === 'function') gtag('event', 'quiz_inline_completed', { score });
   }
@@ -1676,10 +1751,6 @@ Cal("init",{origin:"https://cal.com"});
 
   // Analytics — CTA clicks
   document.querySelector('a[href="#descubra"]')?.addEventListener('click', () => typeof gtag === 'function' && gtag('event', 'click_quiz'));
-  document.querySelector('a[href="selling_page_planilha_latest.html"]')?.addEventListener('click', () => gtag('event', 'click_planilha'));
-  document.querySelector('a[href="selling_page_guia1.html"]')?.addEventListener('click', () => gtag('event', 'click_guia1'));
-  document.querySelector('a[href="selling_page_guia2.html"]')?.addEventListener('click', () => gtag('event', 'click_guia2'));
-
   // Analytics — scroll depth
   (function() {
     const marks = [25, 50, 75, 100];
@@ -1691,7 +1762,126 @@ Cal("init",{origin:"https://cal.com"});
       });
     }, { passive: true });
   })();
+
+  // =====================
+  // MODAL RECURSOS
+  // =====================
+  const RECURSOS = {
+    planilha: {
+      label: 'Ferramenta · Organização',
+      title: 'Planilha de Planejamento',
+      sub: 'Deixe seu nome e email para acessar a planilha gratuitamente.',
+      href: 'Planilha_Acesso.html',
+      token: 'planilha_ok'
+    },
+    guia1: {
+      label: 'Guia Prático · Nível 1',
+      title: 'Guia Recomeço Financeiro',
+      sub: 'Deixe seu nome e email para acessar o guia gratuitamente.',
+      href: 'Guia_Recomeco_Financeiro_latest.html',
+      token: 'guia1_ok'
+    },
+    guia2: {
+      label: 'Guia Prático · Nível 2',
+      title: 'Guia Patrimônio Consistente',
+      sub: 'Deixe seu nome e email para acessar o guia gratuitamente.',
+      href: 'Guia_Patrimonio_Consistente_latest.html',
+      token: 'guia2_ok'
+    }
+  };
+
+  function abrirModal(recurso) {
+    const r = RECURSOS[recurso];
+    if (!r) return;
+    document.getElementById('modal-recurso-label').textContent = r.label;
+    document.getElementById('modal-title').textContent = r.title;
+    document.getElementById('modal-sub').textContent = r.sub;
+    document.getElementById('modal-recurso-input').value = recurso;
+    document.getElementById('modal-form').dataset.recursoHref = r.href;
+    document.getElementById('modal-form').dataset.recursoToken = r.token;
+    document.getElementById('modal-form').style.display = '';
+    document.getElementById('modal-success').style.display = 'none';
+    const btn = document.getElementById('modal-submit-btn');
+    btn.disabled = false;
+    btn.textContent = 'Acessar gratuitamente →';
+    const overlay = document.getElementById('modal-recursos');
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('modal-nome').focus(), 100);
+  }
+
+  function fecharModal() {
+    const overlay = document.getElementById('modal-recursos');
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-recursos').addEventListener('click', function(e) {
+    if (e.target === this) fecharModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') fecharModal();
+  });
+
+  document.getElementById('modal-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('modal-submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Aguarde...';
+    const nome = document.getElementById('modal-nome').value;
+    const email = document.getElementById('modal-email').value;
+    const recurso = document.getElementById('modal-recurso-input').value;
+    const href = this.dataset.recursoHref;
+    const token = this.dataset.recursoToken;
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'recursos-gratuitos',
+          nome, email, recurso, origem: 'index'
+        }).toString()
+      });
+    } catch (_) {}
+    sessionStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
+    this.style.display = 'none';
+    document.getElementById('modal-success').style.display = 'block';
+    if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
+    setTimeout(() => { window.location.href = href; }, 800);
+  });
 </script>
+
+<!-- MODAL RECURSOS GRATUITOS -->
+<div id="modal-recursos" class="modal-overlay" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" onclick="fecharModal()" aria-label="Fechar">&times;</button>
+    <p class="modal-eyebrow" id="modal-recurso-label"></p>
+    <h3 class="modal-title" id="modal-title"></h3>
+    <p class="modal-sub" id="modal-sub"></p>
+    <form id="modal-form" data-netlify="true" name="recursos-gratuitos" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="recursos-gratuitos">
+      <input type="hidden" name="recurso" id="modal-recurso-input">
+      <input type="hidden" name="origem" value="index">
+      <p class="visually-hidden"><input name="bot-field"></p>
+      <div class="modal-field">
+        <label for="modal-nome">Nome</label>
+        <input type="text" id="modal-nome" name="nome" placeholder="Seu nome" required autocomplete="given-name">
+      </div>
+      <div class="modal-field">
+        <label for="modal-email">Email</label>
+        <input type="email" id="modal-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+      </div>
+      <button type="submit" class="modal-submit" id="modal-submit-btn">Acessar gratuitamente →</button>
+      <p class="modal-privacy">Sem spam. Seus dados ficam comigo.</p>
+    </form>
+    <div id="modal-success" style="display:none;">
+      <p class="modal-success-msg">Tudo certo! Abrindo o recurso...</p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
