@@ -41,8 +41,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--dark);
-    color: var(--cream);
+    background: var(--bg);
+    color: var(--fg);
     font-family: 'Nunito', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
@@ -87,7 +87,7 @@
   .badge {
     display: inline-block;
     border: 1px solid rgba(59,130,246,0.4);
-    color: var(--gold);
+    color: var(--blue);
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -111,13 +111,13 @@
 
   .hero h1 em {
     font-style: italic;
-    color: var(--gold-light);
+    color: var(--blue-light);
   }
 
   .hero p {
     margin-top: 28px;
     font-size: 16px;
-    color: var(--text-muted);
+    color: var(--muted);
     max-width: 480px;
     line-height: 1.7;
     animation: fadeUp 0.8s 0.4s ease forwards;
@@ -167,7 +167,7 @@
 
   .btn-outline {
     background: transparent;
-    color: var(--cream);
+    color: var(--fg);
     border: 1px solid rgba(59,130,246,0.5);
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
@@ -187,7 +187,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--gold);
+    background: var(--blue);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
@@ -196,8 +196,8 @@
 
   .btn-outline:hover::before { transform: scaleX(1); }
   .btn-outline:hover {
-    color: var(--dark);
-    border-color: var(--gold);
+    color: var(--bg);
+    border-color: var(--blue);
     transform: translateY(-2px);
   }
 
@@ -210,7 +210,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -221,7 +221,7 @@
   .scroll-line {
     width: 1px;
     height: 40px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
+    background: linear-gradient(to bottom, var(--blue), transparent);
     animation: scrollPulse 2s ease infinite;
   }
 
@@ -230,7 +230,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -250,7 +250,7 @@
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
     margin-bottom: 20px;
   }
 
@@ -265,7 +265,7 @@
 
   .section-sub {
     text-align: center;
-    color: var(--text-muted);
+    color: var(--muted);
     font-size: 15px;
     max-width: 500px;
     margin: 0 auto 64px;
@@ -276,7 +276,7 @@
   .divider {
     width: 60px;
     height: 1px;
-    background: var(--gold);
+    background: var(--blue);
     margin: 0 auto 24px;
     opacity: 0.5;
   }
@@ -300,14 +300,14 @@
     flex-direction: column;
     gap: 20px;
     padding: 36px;
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.1);
     transition: all 0.3s ease;
   }
 
   .feature-card:hover {
     border-color: rgba(59,130,246,0.3);
-    background: var(--dark-3);
+    background: var(--bg-3);
     transform: translateY(-4px);
   }
 
@@ -325,12 +325,12 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 1.3;
-    color: var(--cream);
+    color: var(--fg);
   }
 
   .feature-card p {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.7;
   }
 
@@ -353,7 +353,7 @@
     gap: 24px;
     align-items: flex-start;
     padding: 24px;
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.1);
     transition: border-color 0.3s ease;
   }
@@ -368,7 +368,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gold);
+    color: var(--blue);
     flex-shrink: 0;
     font-size: 18px;
   }
@@ -377,12 +377,12 @@
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;
-    color: var(--cream);
+    color: var(--fg);
   }
 
   .benefit-content p {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.6;
   }
 
@@ -397,7 +397,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.2);
     overflow: hidden;
     margin-top: 56px;
@@ -452,14 +452,14 @@
     top: 120px;
     width: 1px;
     height: 48px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
+    background: linear-gradient(to bottom, var(--blue), transparent);
   }
 
   .step-number {
     font-family: 'Poppins', sans-serif;
     font-size: 64px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--blue);
     opacity: 0.5;
   }
 
@@ -467,12 +467,12 @@
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 12px;
-    color: var(--cream);
+    color: var(--fg);
   }
 
   .step-content p {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.7;
   }
 
@@ -491,7 +491,7 @@
   }
 
   .testimonial-card {
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.1);
     padding: 32px;
     display: flex;
@@ -502,12 +502,12 @@
 
   .testimonial-card:hover {
     border-color: rgba(59,130,246,0.25);
-    background: var(--dark-3);
+    background: var(--bg-3);
   }
 
   .testimonial-text {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.8;
     font-style: italic;
   }
@@ -523,12 +523,12 @@
   .testimonial-name {
     font-size: 14px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
   }
 
   .testimonial-role {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     letter-spacing: 1px;
   }
 
@@ -541,9 +541,9 @@
   }
 
   .price-box {
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.25);
-    border-top: 2px solid var(--gold);
+    border-top: 2px solid var(--blue);
     padding: 56px 40px;
     margin-top: 56px;
     position: relative;
@@ -553,7 +553,7 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
     margin-bottom: 16px;
   }
 
@@ -561,7 +561,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 64px;
     font-weight: 300;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 8px;
   }
 
@@ -572,14 +572,14 @@
 
   .price-period {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 32px;
   }
 
   .price-includes {
     text-align: left;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 2;
     margin-bottom: 32px;
     display: flex;
@@ -596,16 +596,16 @@
 
   .price-includes li::before {
     content: '✓';
-    color: var(--gold);
+    color: var(--blue);
     font-weight: bold;
     flex-shrink: 0;
   }
 
   /* OFFER BOX */
   .offer-box {
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.25);
-    border-top: 2px solid var(--gold);
+    border-top: 2px solid var(--blue);
     padding: 48px 48px;
     text-align: center;
     position: relative;
@@ -631,7 +631,7 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 8px;
   }
 
@@ -639,7 +639,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
     font-weight: 300;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 32px;
   }
 
@@ -649,7 +649,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 72px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--blue);
     line-height: 1;
     display: flex;
     align-items: center;
@@ -674,13 +674,13 @@
     justify-content: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   .offer-guarantee svg {
     width: 18px;
     height: 18px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 1.5;
     flex-shrink: 0;
@@ -688,7 +688,7 @@
 
   .offer-installment {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 12px 0 32px;
   }
 
@@ -708,7 +708,7 @@
 
   .faq-item {
     border: 1px solid rgba(59,130,246,0.1);
-    background: var(--dark-2);
+    background: var(--bg-2);
     overflow: hidden;
     transition: border-color 0.3s ease;
   }
@@ -727,7 +727,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    color: var(--cream);
+    color: var(--fg);
     font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 400;
@@ -735,7 +735,7 @@
     transition: color 0.3s ease;
   }
 
-  .faq-item.open .faq-question { color: var(--gold-light); }
+  .faq-item.open .faq-question { color: var(--blue-light); }
 
   .faq-icon {
     width: 24px;
@@ -746,7 +746,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--gold);
+    color: var(--blue);
     font-size: 16px;
     transition: transform 0.3s ease, background 0.3s ease;
   }
@@ -765,12 +765,12 @@
   .faq-answer-inner {
     padding: 0 28px 24px;
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.85;
   }
 
   .faq-answer-inner strong {
-    color: var(--cream-2);
+    color: var(--fg-2);
     font-weight: 500;
   }
 
@@ -792,14 +792,14 @@
 
   .final-cta p {
     font-size: 15px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.7;
     margin-bottom: 40px;
   }
 
   /* FOOTER */
   footer {
-    background: var(--dark-2);
+    background: var(--bg-2);
     padding: 56px 24px;
     text-align: center;
     border-top: 1px solid rgba(59,130,246,0.1);
@@ -808,13 +808,13 @@
     align-items: center;
     gap: 16px;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   .footer-brand {
     font-family: 'Poppins', sans-serif;
     font-size: 24px;
-    color: var(--cream);
+    color: var(--fg);
     font-weight: 400;
   }
 
@@ -830,11 +830,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted);
+    color: var(--muted);
     transition: color 0.3s ease;
   }
 
-  .footer-social-link:hover { color: var(--gold); }
+  .footer-social-link:hover { color: var(--blue); }
 
   .footer-social-link svg {
     width: 100%;
@@ -1154,7 +1154,7 @@
     <div class="offer-price-block" style="margin-bottom:24px;">
       <div class="offer-price"><sup>R$</sup> 47</div>
     </div>
-    <p class="offer-installment" style="margin-top:0; margin-bottom:32px; color:#C8C3BB;">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
+    <p class="offer-installment" style="margin-top:0; margin-bottom:32px; color:#6B8FBE;">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
 
     <ul class="price-includes">
       <li>Projeção de 24 meses com data configurável</li>
@@ -1168,7 +1168,7 @@
 
     <a href="https://pay.hotmart.com/Q104986210Q" target="_blank" class="btn-gold">Comprar agora</a>
 
-    <div class="offer-guarantee" style="margin-top:24px; color:#C8C3BB;">
+    <div class="offer-guarantee" style="margin-top:24px; color:#6B8FBE;">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       Garantia de 7 dias. Se não for útil para você, basta solicitar o reembolso.
     </div>

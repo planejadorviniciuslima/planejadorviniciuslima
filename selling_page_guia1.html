@@ -26,25 +26,15 @@
     --fg:   #FFFFFF;
     --fg-2: #DBEAFE;
     --muted: #6B8FBE;
-    /* aliases para manter compatibilidade com seletores abaixo */
-    --gold: var(--blue);
-    --gold-light: var(--blue-light);
-    --dark: var(--bg);
-    --dark-2: var(--bg-2);
-    --dark-3: var(--bg-3);
-    --cream: var(--fg);
-    --text: var(--fg);
-    --text-muted: var(--muted);
-    --border: var(--blue-border);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--dark);
+    background: var(--bg);
     font-family: 'Nunito', sans-serif;
     font-weight: 300;
-    color: var(--text);
+    color: var(--fg);
     font-size: 16px;
     line-height: 1.75;
   }
@@ -60,7 +50,7 @@
 
   section {
     padding: 80px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--blue-border);
   }
 
   section:last-of-type { border-bottom: none; }
@@ -70,7 +60,7 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
     display: block;
     margin-bottom: 16px;
   }
@@ -81,20 +71,20 @@
     font-size: clamp(40px, 7vw, 64px);
     font-weight: 300;
     line-height: 1.05;
-    color: var(--cream);
+    color: var(--fg);
     letter-spacing: -0.5px;
   }
 
   h1 em {
     font-style: italic;
-    color: var(--gold-light);
+    color: var(--blue-light);
   }
 
   h2 {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(28px, 4vw, 38px);
     font-weight: 300;
-    color: var(--cream);
+    color: var(--fg);
     line-height: 1.2;
     margin-bottom: 8px;
   }
@@ -103,12 +93,12 @@
     font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 8px;
   }
 
   p {
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.8;
     margin-bottom: 16px;
   }
@@ -119,7 +109,7 @@
   .divider {
     width: 40px;
     height: 1px;
-    background: var(--gold);
+    background: var(--blue);
     opacity: 0.5;
     margin: 24px 0;
   }
@@ -153,7 +143,7 @@
   /* ─── HERO ─────────────────────────────────── */
   .hero {
     padding: 100px 0 80px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--blue-border);
   }
 
   .hero-inner {
@@ -167,7 +157,7 @@
 
   .hero-text p {
     font-size: 17px;
-    color: var(--text-muted);
+    color: var(--muted);
     max-width: 460px;
     margin-bottom: 40px;
   }
@@ -183,7 +173,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--blue);
     line-height: 1;
   }
 
@@ -195,14 +185,14 @@
 
   .price-label {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 24px;
     display: block;
   }
 
   /* BOOK MOCKUP */
   .book-mockup {
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.2);
     padding: 40px 32px;
     position: relative;
@@ -235,7 +225,7 @@
     font-size: 9px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
   }
 
   .book-mockup-tag {
@@ -253,7 +243,7 @@
   .book-mockup-divider {
     width: 32px;
     height: 1px;
-    background: var(--gold);
+    background: var(--blue);
     opacity: 0.5;
     margin-bottom: 16px;
   }
@@ -263,13 +253,13 @@
     font-size: 28px;
     font-weight: 300;
     line-height: 1.05;
-    color: var(--cream);
+    color: var(--fg);
     letter-spacing: -0.3px;
   }
 
   .book-mockup h4 em {
     font-style: italic;
-    color: var(--gold-light);
+    color: var(--blue-light);
     display: block;
   }
 
@@ -288,8 +278,8 @@
   }
 
   .pain-item {
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
     padding: 24px 28px;
     display: flex;
     gap: 16px;
@@ -310,14 +300,14 @@
   .pain-check svg {
     width: 10px;
     height: 10px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 2;
   }
 
   .pain-item p {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.6;
   }
@@ -333,21 +323,21 @@
   .chapter-row {
     display: grid;
     grid-template-columns: 48px 1fr;
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
     overflow: hidden;
   }
 
   .chapter-row-num {
-    background: var(--dark);
+    background: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 300;
-    color: var(--gold);
-    border-right: 1px solid var(--border);
+    color: var(--blue);
+    border-right: 1px solid var(--blue-border);
     flex-shrink: 0;
   }
 
@@ -359,13 +349,13 @@
     display: block;
     font-size: 14px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 4px;
   }
 
   .chapter-row-content p {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.6;
   }
@@ -378,8 +368,8 @@
   }
 
   .extra-item {
-    background: var(--dark-3);
-    border: 1px solid var(--border);
+    background: var(--bg-3);
+    border: 1px solid var(--blue-border);
     padding: 16px 20px;
     text-align: center;
   }
@@ -392,7 +382,7 @@
 
   .extra-item p {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.5;
   }
@@ -410,8 +400,8 @@
     gap: 16px;
     align-items: flex-start;
     padding: 20px 24px;
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
   }
 
   .include-icon {
@@ -427,7 +417,7 @@
   .include-icon svg {
     width: 20px;
     height: 20px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 1.5;
   }
@@ -436,7 +426,7 @@
     display: block;
     font-size: 14px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 4px;
   }
 
@@ -455,9 +445,9 @@
 
   /* ─── OFERTA ─────────────────────────────────── */
   .offer-box {
-    background: var(--dark-2);
+    background: var(--bg-2);
     border: 1px solid rgba(59,130,246,0.25);
-    border-top: 2px solid var(--gold);
+    border-top: 2px solid var(--blue);
     padding: 48px 48px;
     text-align: center;
     position: relative;
@@ -483,7 +473,7 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 8px;
   }
 
@@ -491,7 +481,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
     font-weight: 300;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 32px;
   }
 
@@ -513,7 +503,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 72px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--blue);
     line-height: 1;
   }
 
@@ -525,7 +515,7 @@
   .price-includes {
     text-align: left;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -542,14 +532,14 @@
 
   .price-includes li::before {
     content: '✓';
-    color: var(--gold);
+    color: var(--blue);
     font-weight: bold;
     flex-shrink: 0;
   }
 
   .offer-installment {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 12px 0 32px;
   }
 
@@ -565,13 +555,13 @@
     justify-content: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   .offer-guarantee svg {
     width: 18px;
     height: 18px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 1.5;
     flex-shrink: 0;
@@ -601,7 +591,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 32px;
     font-weight: 300;
-    color: var(--gold);
+    color: var(--blue);
     line-height: 1;
   }
 
@@ -609,7 +599,7 @@
     font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   /* ─── FAQ ───────────────────────────────────── */
@@ -621,15 +611,15 @@
   }
 
   .faq-item {
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
   }
 
   .faq-question {
     padding: 20px 24px;
     font-size: 15px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -644,7 +634,7 @@
   .faq-question svg {
     width: 16px;
     height: 16px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 2;
     flex-shrink: 0;
@@ -656,9 +646,9 @@
   .faq-answer {
     padding: 0 24px 20px;
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.8;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--blue-border);
     padding-top: 16px;
   }
 
@@ -683,7 +673,7 @@
   /* ─── FOOTER ─────────────────────────────────── */
   footer {
     padding: 32px 0;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--blue-border);
     text-align: center;
     font-size: 12px;
     color: rgba(255,255,255,0.25);
@@ -919,21 +909,21 @@
       </div>
     </div>
 
-    <div style="margin-top:24px; background:var(--dark-3); border:1px solid rgba(59,130,246,0.2); border-left:3px solid var(--gold); padding:24px 28px;">
+    <div style="margin-top:24px; background:var(--bg-3); border:1px solid rgba(59,130,246,0.2); border-left:3px solid var(--blue); padding:24px 28px;">
       <span class="label" style="margin-bottom:8px;">Complemento recomendado</span>
-      <strong style="display:block; font-size:16px; color:var(--cream); margin-bottom:8px;">Planilha de Planejamento</strong>
-      <p style="margin:0; font-size:14px;">O guia te mostra o que fazer. A <a href="selling_page_planilha_latest.html" style="color:var(--gold); text-decoration:underline; text-underline-offset:3px;">Planilha de Planejamento</a> calcula automaticamente: projeção de 24 meses, teto de gastos, reserva de emergência e objetivos de vida. Os dois juntos cobrem estratégia e execução.</p>
+      <strong style="display:block; font-size:16px; color:var(--fg); margin-bottom:8px;">Planilha de Planejamento</strong>
+      <p style="margin:0; font-size:14px;">O guia te mostra o que fazer. A <a href="selling_page_planilha_latest.html" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">Planilha de Planejamento</a> calcula automaticamente: projeção de 24 meses, teto de gastos, reserva de emergência e objetivos de vida. Os dois juntos cobrem estratégia e execução.</p>
     </div>
 
     <div class="chapters-extras">
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Seus próximos 5 dias</strong>Plano de ação prático para começar imediatamente após a leitura.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Seus próximos 5 dias</strong>Plano de ação prático para começar imediatamente após a leitura.</p>
       </div>
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Leituras recomendadas</strong>6 livros selecionados para aprofundar o que você aprendeu no guia.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Leituras recomendadas</strong>6 livros selecionados para aprofundar o que você aprendeu no guia.</p>
       </div>
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Ferramentas gratuitas</strong>Sites e plataformas para aplicar as estratégias sem gastar nada.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Ferramentas gratuitas</strong>Sites e plataformas para aplicar as estratégias sem gastar nada.</p>
       </div>
     </div>
   </div>
@@ -1035,7 +1025,7 @@
       </div>
       <p class="offer-installment">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
 
-      <ul class="price-includes" style="color:#888880">
+      <ul class="price-includes" style="color:#6B8FBE">
         <li>Entenda por onde começar, mesmo que as dívidas pareçam fora de controle</li>
         <li>Diagnóstico completo das suas finanças com tetos de gasto reais</li>
         <li>Como negociar dívidas e escolher quais atacar primeiro</li>
