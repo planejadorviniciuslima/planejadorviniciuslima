@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparação de Fontes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Nunito:wght@400;700;800&family=Poppins:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #07090F;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 48px 24px;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6B8FBE;
+    margin-bottom: 48px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #0F1525;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3B82F6;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(59,130,246,0.16);
+  }
+
+  .font-outfit  { font-family: 'Outfit', sans-serif; }
+  .font-nunito  { font-family: 'Nunito', sans-serif; }
+  .font-poppins { font-family: 'Poppins', sans-serif; }
+
+  .headline {
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+  }
+
+  .headline em {
+    font-style: normal;
+    color: #3B82F6;
+  }
+
+  .sub {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #DBEAFE;
+  }
+
+  .body-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6B8FBE;
+    line-height: 1.75;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 100px;
+    background: #F59E0B;
+    color: #07090F;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .numbers {
+    display: flex;
+    gap: 20px;
+  }
+
+  .num-item {}
+  .num-val {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .num-val span { color: #3B82F6; }
+  .num-label {
+    font-size: 12px;
+    color: #6B8FBE;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Comparação de Fontes · Headlines</h1>
+
+<div class="grid">
+
+  <!-- OUTFIT -->
+  <div class="card">
+    <div class="label">1 · Outfit — atual</div>
+    <div class="headline font-outfit">
+      Organize as contas.<br><em>Construa o que importa.</em>
+    </div>
+    <div class="sub font-outfit">Dois momentos,<br>um caminho.</div>
+    <div class="sub font-outfit" style="font-size:18px; font-weight:700;">Mentoria Financeira<br>Personalizada</div>
+    <div class="numbers">
+      <div class="num-item">
+        <div class="num-val font-outfit">16<span>+</span></div>
+        <div class="num-label">anos de mercado</div>
+      </div>
+      <div class="num-item">
+        <div class="num-val font-outfit">3<span>×</span></div>
+        <div class="num-label">certificações</div>
+      </div>
+    </div>
+    <div class="body-text">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</div>
+    <div class="btn font-outfit">Descubra por onde começar →</div>
+  </div>
+
+  <!-- NUNITO -->
+  <div class="card">
+    <div class="label">2 · Nunito</div>
+    <div class="headline font-nunito">
+      Organize as contas.<br><em>Construa o que importa.</em>
+    </div>
+    <div class="sub font-nunito">Dois momentos,<br>um caminho.</div>
+    <div class="sub font-nunito" style="font-size:18px; font-weight:700;">Mentoria Financeira<br>Personalizada</div>
+    <div class="numbers">
+      <div class="num-item">
+        <div class="num-val font-nunito">16<span>+</span></div>
+        <div class="num-label">anos de mercado</div>
+      </div>
+      <div class="num-item">
+        <div class="num-val font-nunito">3<span>×</span></div>
+        <div class="num-label">certificações</div>
+      </div>
+    </div>
+    <div class="body-text">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</div>
+    <div class="btn font-nunito">Descubra por onde começar →</div>
+  </div>
+
+  <!-- POPPINS -->
+  <div class="card">
+    <div class="label">3 · Poppins</div>
+    <div class="headline font-poppins">
+      Organize as contas.<br><em>Construa o que importa.</em>
+    </div>
+    <div class="sub font-poppins">Dois momentos,<br>um caminho.</div>
+    <div class="sub font-poppins" style="font-size:18px; font-weight:700;">Mentoria Financeira<br>Personalizada</div>
+    <div class="numbers">
+      <div class="num-item">
+        <div class="num-val font-poppins">16<span>+</span></div>
+        <div class="num-label">anos de mercado</div>
+      </div>
+      <div class="num-item">
+        <div class="num-val font-poppins">3<span>×</span></div>
+        <div class="num-label">certificações</div>
+      </div>
+    </div>
+    <div class="body-text">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</div>
+    <div class="btn font-poppins">Descubra por onde começar →</div>
+  </div>
+
+</div>
+
+</body>
+</html>
