@@ -113,12 +113,23 @@
     background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
     bottom: -80px; right: 28%;
   }
+  /* Hero inner — centraliza o par texto + foto */
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    max-width: 1120px;
+    width: 100%;
+    padding: 110px 64px 80px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
   /* Portrait card — foto contida com bordas arredondadas */
   .hero-photo-frame {
-    position: absolute;
-    right: 80px;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-shrink: 0;
+    position: relative;
     z-index: 1;
   }
   .hero-photo-frame::before {
@@ -149,8 +160,8 @@
   }
   .hero-content {
     position: relative; z-index: 2;
-    padding: 110px 0 80px 72px;
-    max-width: 580px;
+    flex: 1 1 0;
+    min-width: 0;
   }
   .hero-tag {
     display: inline-flex;
@@ -213,7 +224,7 @@
   }
   .scroll-hint {
     position: absolute;
-    bottom: 36px; left: 72px;
+    bottom: 36px; left: 64px;
     display: flex; align-items: center; gap: 12px;
     color: var(--muted);
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
@@ -231,12 +242,11 @@
   }
   @media (max-width: 960px) {
     .hero-photo-frame { display: none; }
-    .hero-content { padding: 110px 32px 90px; max-width: 100%; }
-    .hero-desc { max-width: 100%; }
+    .hero-inner { padding: 110px 32px 90px; }
     .scroll-hint { left: 32px; }
   }
   @media (max-width: 480px) {
-    .hero-content { padding: 100px 20px 80px; }
+    .hero-inner { padding: 100px 20px 80px; }
     .hero h1 { font-size: 40px; letter-spacing: -0.75px; }
     .hero-desc { font-size: 16px; margin-bottom: 32px; }
     .hero-cta { flex-direction: column; }
@@ -1013,23 +1023,25 @@ Cal("init",{origin:"https://cal.com"});
     <div class="hero-glow-b"></div>
   </div>
 
-  <div class="hero-photo-frame" aria-hidden="true">
-    <div class="hero-photo-side">
-      <img src="meu_perfil.png" alt="" class="hero-photo-img">
-      <div class="hero-photo-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag" aria-hidden="true">
+        <div class="hero-tag-dot"></div>
+        <span class="hero-tag-text">Planejador Financeiro · Vinícius Lima</span>
+      </div>
+      <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
+      <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</p>
+      <div class="hero-cta">
+        <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra por onde começar →</a>
+        <a href="#como-funciona" class="btn-secondary" onclick="smoothScroll(event)">Como funciona</a>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-content">
-    <div class="hero-tag" aria-hidden="true">
-      <div class="hero-tag-dot"></div>
-      <span class="hero-tag-text">Planejador Financeiro · Vinícius Lima</span>
-    </div>
-    <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
-    <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</p>
-    <div class="hero-cta">
-      <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra por onde começar →</a>
-      <a href="#como-funciona" class="btn-secondary" onclick="smoothScroll(event)">Como funciona</a>
+    <div class="hero-photo-frame" aria-hidden="true">
+      <div class="hero-photo-side">
+        <img src="meu_perfil.png" alt="" class="hero-photo-img">
+        <div class="hero-photo-overlay"></div>
+      </div>
     </div>
   </div>
 
