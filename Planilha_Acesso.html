@@ -42,13 +42,17 @@
     background: var(--bg-2);
     max-width: 720px;
     margin: 0 auto;
-    height: 297mm;
+    min-height: 297mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 56px 64px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+  }
+
+  @media print {
+    .page { height: 297mm; overflow: hidden; }
   }
 
   .page::before {

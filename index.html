@@ -427,7 +427,7 @@
     font-weight: 700; flex-shrink: 0;
   }
   .mentoria-cta-area {
-    display: flex; align-items: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 20px; flex-wrap: wrap;
   }
   .mentoria-price-note {
@@ -436,7 +436,7 @@
   @media (max-width: 700px) {
     .mentoria-card { padding: 40px 28px; }
     .mentoria-includes { grid-template-columns: 1fr; }
-    .mentoria-cta-area { flex-direction: column; align-items: flex-start; }
+    .mentoria-cta-area { flex-direction: column; align-items: center; }
   }
 
   /* ─── PRODUCTS ─── */
@@ -1697,11 +1697,22 @@ Cal("init",{origin:"https://cal.com"});
     document.getElementById('modal-recurso-label').textContent = r.label;
     document.getElementById('modal-title').textContent = r.title;
     document.getElementById('modal-sub').textContent = r.sub;
+    document.getElementById('modal-sub').style.display = '';
     document.getElementById('modal-recurso-input').value = recurso;
     document.getElementById('modal-form').dataset.recursoHref = r.href;
     document.getElementById('modal-form').dataset.recursoToken = r.token;
     document.getElementById('modal-form').style.display = '';
     document.getElementById('modal-success').style.display = 'none';
+    // Reset loading animation for fresh replay
+    const bar = document.getElementById('modal-loading-bar');
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    const iconEl = document.getElementById('modal-loading-icon');
+    iconEl.className = 'modal-loading-icon';
+    iconEl.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="6" y="13" width="14" height="10" rx="2" stroke="#3B82F6" stroke-width="1.5"/><path d="M9 13V9a4 4 0 0 1 8 0v4" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="18" r="1.5" fill="#3B82F6"/></svg>';
+    document.getElementById('modal-loading-text').textContent = 'Preparando seu acesso...';
+    document.getElementById('modal-loading-text').style.opacity = '1';
+    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = ''; }));
     const btn = document.getElementById('modal-submit-btn');
     btn.disabled = false;
     btn.textContent = 'Acessar gratuitamente →';
@@ -1752,6 +1763,7 @@ Cal("init",{origin:"https://cal.com"});
       } catch (_) {}
       localStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
       this.style.display = 'none';
+      document.getElementById('modal-sub').style.display = 'none';
       document.getElementById('modal-success').style.display = 'block';
       if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
       // Trigger progress bar (needs two rAF to start CSS transition)
