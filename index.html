@@ -1107,16 +1107,16 @@ Cal("init",{origin:"https://cal.com"});
 
 <div class="sep-line"></div>
 
-<!-- QUAL É O SEU MOMENTO -->
-<section class="momento-section">
-  <div class="momento-inner">
-    <div class="momento-header reveal">
-      <p class="section-eyebrow">Por onde começar?</p>
-      <h2 class="section-title">Dois momentos,<br>um caminho.</h2>
-      <p class="section-sub" style="margin: 0 auto;">Não existe planejamento universal. O que existe é o seu momento, o seu objetivo e um plano construído ao redor disso.</p>
+<!-- DIAGNÓSTICO + PERFIS -->
+<section id="descubra" class="quiz-section">
+  <div class="quiz-section-inner" style="max-width: 1060px;">
+    <div class="iq-header reveal">
+      <p class="section-eyebrow">Por onde você está hoje?</p>
+      <h2 class="section-title">Dois momentos,<br>um diagnóstico.</h2>
+      <p class="section-sub" style="margin: 0 auto;">Não existe planejamento universal. Veja os dois perfis, identifique o seu momento e responda ao diagnóstico para descobrir o próximo passo.</p>
     </div>
-    <div class="momento-cards">
-      <div class="momento-card reveal">
+    <div class="momento-cards reveal" style="margin: 52px 0;">
+      <div class="momento-card">
         <div class="momento-card-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -1131,7 +1131,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Primeira reserva de emergência</li>
         </ul>
       </div>
-      <div class="momento-card reveal">
+      <div class="momento-card">
         <div class="momento-card-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round">
             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
@@ -1148,29 +1148,15 @@ Cal("init",{origin:"https://cal.com"});
         </ul>
       </div>
     </div>
-    <p class="momento-note reveal">Na maioria das vezes, os dois caminhos se cruzam. O planejamento começa de onde você está, não de onde você acha que deveria estar.</p>
-    <div class="reveal" style="text-align:center; margin-top: 36px;">
-      <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descobrir meu momento →</a>
-    </div>
-  </div>
-</section>
-
-<!-- MINI DIAGNÓSTICO (QUIZ INLINE) -->
-<section id="descubra" class="quiz-section">
-  <div class="quiz-section-inner">
-    <div class="iq-header reveal">
-      <p class="section-eyebrow">Mini diagnóstico</p>
-      <h2 class="section-title">Descubra seu<br>momento financeiro</h2>
-      <p class="section-sub" style="margin: 0 auto;">6 perguntas. 2 minutos. Você sai com clareza sobre o próximo passo.</p>
-    </div>
+    <div style="max-width: 660px; margin: 0 auto;">
     <div class="iq-wrapper reveal">
 
       <!-- Intro -->
       <div id="iq-intro">
-        <div class="iq-intro-title">Qual é o seu ponto de partida hoje?</div>
-        <p class="iq-intro-sub">Responda honestamente. Não existe resposta certa ou errada. O resultado indica o melhor próximo passo para o seu momento.</p>
+        <div class="iq-intro-title">Pronto para descobrir o seu momento?</div>
+        <p class="iq-intro-sub">6 perguntas. Responda honestamente. Não existe resposta certa ou errada.</p>
         <button class="btn-primary" onclick="iqStart()">Começar o diagnóstico →</button>
-        <p class="iq-meta">6 perguntas · Menos de 2 minutos · Gratuito</p>
+        <p class="iq-meta">Menos de 2 minutos · Gratuito</p>
       </div>
 
       <!-- Quiz -->
@@ -1202,6 +1188,7 @@ Cal("init",{origin:"https://cal.com"});
       </div>
 
     </div>
+    </div><!-- /max-width wrapper -->
   </div>
 </section>
 
