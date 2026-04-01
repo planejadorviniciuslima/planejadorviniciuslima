@@ -13,11 +13,11 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"></noscript>
 <style>
   :root {
-    --blue: #3B82F6;
+    --blue: #60A5FA;
     --blue-dim: #2563EB;
     --blue-light: #93C5FD;
-    --blue-glow: rgba(59,130,246,0.10);
-    --blue-border: rgba(59,130,246,0.16);
+    --blue-glow: rgba(96,165,250,0.10);
+    --blue-border: rgba(96,165,250,0.16);
     --amber: #F59E0B;
     --amber-hover: #D97706;
     --bg:   #07090F;
@@ -67,12 +67,12 @@
   }
   .ambient-1 {
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%);
     top: -150px; left: -150px;
   }
   .ambient-2 {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(96,165,250,0.04) 0%, transparent 70%);
     bottom: -100px; right: -100px;
   }
 
@@ -116,21 +116,21 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: rgba(59,130,246,0.2);
+    background: rgba(96,165,250,0.2);
     transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
     position: relative;
   }
 
   .dot.done {
     background: var(--blue);
-    box-shadow: 0 0 8px rgba(59,130,246,0.5);
+    box-shadow: 0 0 8px rgba(96,165,250,0.5);
   }
 
   .dot.current {
     background: var(--blue);
     width: 20px;
     border-radius: 3px;
-    box-shadow: 0 0 12px rgba(59,130,246,0.6);
+    box-shadow: 0 0 12px rgba(96,165,250,0.6);
   }
 
   /* SLIDE CONTAINER */
@@ -219,7 +219,7 @@
     gap: 14px;
     padding: 18px 22px;
     background: var(--bg-2);
-    border: 1px solid rgba(59,130,246,0.1);
+    border: 1px solid rgba(96,165,250,0.1);
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
     position: relative;
@@ -235,20 +235,20 @@
     top: 0; left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59,130,246,0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(96,165,250,0.05), transparent);
     transition: left 0.5s ease;
   }
   .option:hover::after { left: 160%; }
 
   .option:hover {
-    border-color: rgba(59,130,246,0.35);
+    border-color: rgba(96,165,250,0.35);
     background: var(--bg-3);
   }
 
   .option:active { transform: scale(0.99); }
 
   .option.selected {
-    border-color: rgba(59,130,246,0.6);
+    border-color: rgba(96,165,250,0.6);
     background: var(--bg-3);
   }
 
@@ -256,7 +256,7 @@
   .opt-check {
     width: 20px;
     height: 20px;
-    border: 1px solid rgba(59,130,246,0.35);
+    border: 1px solid rgba(96,165,250,0.35);
     flex-shrink: 0;
     margin-top: 1px;
     transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
@@ -269,7 +269,7 @@
   .option.selected .opt-check {
     background: var(--blue);
     border-color: var(--blue);
-    box-shadow: 0 0 12px rgba(59,130,246,0.45);
+    box-shadow: 0 0 12px rgba(96,165,250,0.45);
     transform: scale(1.1);
   }
 
@@ -335,8 +335,8 @@
 
   .btn-next {
     background: transparent;
-    border: 1px solid rgba(59,130,246,0.25);
-    color: rgba(59,130,246,0.4);
+    border: 1px solid rgba(96,165,250,0.25);
+    color: rgba(96,165,250,0.4);
     font-family: 'Nunito', sans-serif;
     font-size: 11px;
     letter-spacing: 2.5px;
@@ -369,12 +369,12 @@
     border-color: var(--blue);
     color: var(--blue);
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(59,130,246,0.12);
+    box-shadow: 0 0 20px rgba(96,165,250,0.12);
   }
 
   .btn-next.enabled:hover::before { transform: scaleX(1); }
   .btn-next.enabled:hover span { color: var(--bg); }
-  .btn-next.enabled:hover { box-shadow: 0 0 28px rgba(59,130,246,0.25); }
+  .btn-next.enabled:hover { box-shadow: 0 0 28px rgba(96,165,250,0.25); }
 
   /* INTRO */
   #intro {
@@ -436,7 +436,7 @@
   .btn-start span { position: relative; z-index: 1; transition: color 0.3s; }
   .btn-start:hover::before { transform: scaleX(1); }
   .btn-start:hover span { color: var(--bg); }
-  .btn-start:hover { box-shadow: 0 0 32px rgba(59,130,246,0.25); }
+  .btn-start:hover { box-shadow: 0 0 32px rgba(96,165,250,0.25); }
 
   .intro-meta {
     margin-top: 20px;
@@ -488,7 +488,7 @@
 
   .result-card {
     background: var(--bg-2);
-    border: 1px solid rgba(59,130,246,0.2);
+    border: 1px solid rgba(96,165,250,0.2);
     padding: 36px;
     margin-bottom: 16px;
     position: relative;
@@ -571,7 +571,7 @@
     width: 100%;
     text-align: center;
     background: transparent;
-    border: 1px solid rgba(59,130,246,0.3);
+    border: 1px solid rgba(96,165,250,0.3);
     color: var(--blue);
     font-family: 'Nunito', sans-serif;
     font-size: 12px;
@@ -583,7 +583,7 @@
   }
   .btn-cta-outline:hover {
     border-color: var(--blue);
-    box-shadow: 0 0 20px rgba(59,130,246,0.12);
+    box-shadow: 0 0 20px rgba(96,165,250,0.12);
   }
 
   .result-also {
@@ -1123,7 +1123,7 @@
   }
 
   const pfeBanner = `
-    <div class="result-card" style="margin-top:16px; border-color:rgba(59,130,246,0.4);">
+    <div class="result-card" style="margin-top:16px; border-color:rgba(96,165,250,0.4);">
       <div class="rc-label" style="color:var(--blue);">Serviço Personalizado · Recomendado</div>
       <div class="rc-title">Planejamento Financeiro Estratégico</div>
       <p class="rc-desc">Nenhum produto digital substitui o acompanhamento próximo e personalizado. Com um planejador ao seu lado, cada decisão é tomada com base na sua realidade, não em conteúdo genérico.</p>
@@ -1131,7 +1131,7 @@
     </div>`;
 
   const planilhaBanner = `
-    <div class="result-card" style="margin-top:16px; border-color:rgba(59,130,246,0.2);">
+    <div class="result-card" style="margin-top:16px; border-color:rgba(96,165,250,0.2);">
       <div class="rc-label">Complemento recomendado</div>
       <div class="rc-title">Planilha de Planejamento</div>
       <p class="rc-desc">O guia te mostra o que fazer. A Planilha de Planejamento é a ferramenta para executar: projeção de 24 meses, teto de gastos, cálculo automático da reserva de emergência e seção de objetivos.</p>
@@ -1289,7 +1289,7 @@
 
     if (atencao.length > 0) {
       const atencaoHTML = `
-        <div class="result-card" style="margin-top:16px; border-color:rgba(59,130,246,0.15);">
+        <div class="result-card" style="margin-top:16px; border-color:rgba(96,165,250,0.15);">
           <div class="rc-label">Pontos de atenção identificados</div>
           <ul class="rc-includes">${atencao.map(a => `<li>${a}</li>`).join('')}</ul>
         </div>`;
