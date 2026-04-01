@@ -248,10 +248,46 @@
     text-transform: uppercase;
   }
 
+  /* TOP NAV */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--blue-border);
+  }
+  .top-nav-back {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .top-nav-back:hover { color: var(--fg); }
+  .top-nav-cta {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: #07090F;
+    text-decoration: none;
+    background: var(--amber);
+    padding: 10px 22px;
+    border-radius: 100px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .top-nav-cta:hover { background: var(--amber-hover); }
+  @media (max-width: 480px) {
+    .top-nav { padding: 12px 20px; }
+    .top-nav-back { font-size: 13px; }
+    .top-nav-cta { font-size: 13px; padding: 9px 16px; }
+  }
+
   /* PRINT */
   @page { margin: 0; size: A4; }
 
   @media print {
+    .top-nav { display: none; }
     body { background: var(--bg-2); }
     .page { box-shadow: none; }
   }
@@ -259,6 +295,11 @@
 </style>
 </head>
 <body>
+
+<nav class="top-nav">
+  <a href="/" class="top-nav-back">← Voltar ao site</a>
+  <a href="https://cal.com/planejadorvinicius/50min" target="_blank" class="top-nav-cta">Agendar sessão gratuita →</a>
+</nav>
 
 <div class="page">
 
