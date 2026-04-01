@@ -228,20 +228,20 @@
   .scroll-hint {
     position: absolute;
     bottom: 36px; left: 64px;
-    display: flex; align-items: center; gap: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
     color: var(--muted);
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
     animation: fadeUp 1s 1.1s ease forwards; opacity: 0;
     z-index: 2;
   }
   .scroll-line {
-    width: 40px; height: 1px;
-    background: linear-gradient(to right, var(--blue), transparent);
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--blue), transparent);
     animation: lineBreath 2s ease infinite;
   }
   @keyframes lineBreath {
-    0%,100% { width: 40px; opacity: 1; }
-    50% { width: 22px; opacity: 0.4; }
+    0%,100% { height: 40px; opacity: 1; }
+    50% { height: 22px; opacity: 0.4; }
   }
   @media (max-width: 960px) {
     .hero-photo-frame { display: none; }
@@ -1062,7 +1062,7 @@ Cal("init",{origin:"https://cal.com"});
       <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
       <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio, ou os dois.</p>
       <div class="hero-cta">
-        <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra em que momento você está →</a>
+        <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Descubra em que momento você está</a>
         <a href="#recursos" class="btn-secondary" onclick="smoothScroll(event)">Explorar recursos gratuitos</a>
       </div>
     </div>
