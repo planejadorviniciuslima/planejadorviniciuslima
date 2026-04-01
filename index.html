@@ -318,86 +318,6 @@
     background: linear-gradient(to right, transparent, var(--blue-border), transparent);
   }
 
-  /* ─── MOMENTO ─── */
-  .momento-section {
-    padding: 112px 24px;
-    background: var(--bg-2);
-  }
-  .momento-inner { max-width: 1060px; margin: 0 auto; }
-  .momento-header { text-align: center; margin-bottom: 60px; }
-  .momento-header .section-sub { margin: 0 auto; }
-  .momento-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .momento-card {
-    background: var(--bg-3);
-    border: 1px solid var(--blue-border);
-    border-radius: 20px;
-    padding: 44px 40px;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    display: flex; flex-direction: column;
-    position: relative; overflow: hidden;
-  }
-  .momento-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, var(--blue), var(--blue-light));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .momento-card:hover {
-    border-color: rgba(59,130,246,0.32);
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
-  }
-  .momento-card:hover::before { transform: scaleX(1); }
-  .momento-card-icon {
-    width: 52px; height: 52px;
-    background: var(--blue-glow);
-    border: 1px solid var(--blue-border);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px; flex-shrink: 0;
-  }
-  .momento-card h3 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px; font-weight: 700;
-    margin-bottom: 12px; line-height: 1.25;
-  }
-  .momento-card > p {
-    font-size: 15px; color: var(--muted);
-    line-height: 1.75; margin-bottom: 28px;
-  }
-  .momento-card ul {
-    list-style: none;
-    display: flex; flex-direction: column;
-    gap: 10px; margin-bottom: 36px; flex: 1;
-  }
-  .momento-card ul li {
-    font-size: 14px; color: var(--fg-2);
-    display: flex; align-items: flex-start;
-    gap: 10px; line-height: 1.55;
-  }
-  .momento-card ul li::before {
-    content: '✓';
-    color: var(--blue);
-    font-weight: 700; font-size: 13px;
-    flex-shrink: 0;
-  }
-  .momento-note {
-    text-align: center; margin-top: 36px;
-    font-size: 14px; color: var(--muted); font-style: italic;
-  }
-  @media (max-width: 700px) {
-    .momento-cards { grid-template-columns: 1fr; }
-    .momento-card { padding: 36px 28px; }
-  }
-
   /* ─── HOW IT WORKS ─── */
   .how-section-wrap { padding: 112px 24px; background: var(--bg); }
   .how-section { max-width: 900px; margin: 0 auto; text-align: center; }
@@ -1084,7 +1004,7 @@ Cal("init",{origin:"https://cal.com"});
         <span class="hero-tag-text">Planejador Financeiro · Vinícius Lima</span>
       </div>
       <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
-      <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio ou os dois.</p>
+      <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio, ou os dois.</p>
       <div class="hero-cta">
         <a href="https://cal.com/planejadorvinicius/50min" class="btn-primary" target="_blank">Agendar sessão gratuita →</a>
         <a href="#recursos" class="btn-secondary" onclick="smoothScroll(event)">Ver recursos disponíveis</a>
@@ -1107,54 +1027,20 @@ Cal("init",{origin:"https://cal.com"});
 
 <div class="sep-line"></div>
 
-<!-- DIAGNÓSTICO + PERFIS -->
+<!-- MINI DIAGNÓSTICO -->
 <section id="descubra" class="quiz-section">
-  <div class="quiz-section-inner" style="max-width: 1060px;">
+  <div class="quiz-section-inner">
     <div class="iq-header reveal">
-      <p class="section-eyebrow">Por onde você está hoje?</p>
-      <h2 class="section-title">Dois momentos,<br>um diagnóstico.</h2>
-      <p class="section-sub" style="margin: 0 auto;">Não existe planejamento universal. Veja os dois perfis, identifique o seu momento e responda ao diagnóstico para descobrir o próximo passo.</p>
+      <p class="section-eyebrow">Diagnóstico gratuito</p>
+      <h2 class="section-title">Em 2 minutos, você sabe<br>qual é o seu próximo passo.</h2>
+      <p class="section-sub" style="margin: 0 auto;">6 perguntas sobre a sua situação financeira real. O resultado indica o caminho mais direto para o seu momento.</p>
     </div>
-    <div class="momento-cards reveal" style="margin: 52px 0;">
-      <div class="momento-card">
-        <div class="momento-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-        </div>
-        <h3>Quero organizar minha vida financeira</h3>
-        <p>O dinheiro some no final do mês e você não sabe exatamente por quê. Vamos mudar isso.</p>
-        <ul>
-          <li>Diagnóstico completo das finanças</li>
-          <li>Estratégia para eliminar dívidas</li>
-          <li>Controle de gastos e teto diário</li>
-          <li>Primeira reserva de emergência</li>
-        </ul>
-      </div>
-      <div class="momento-card">
-        <div class="momento-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round">
-            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-            <polyline points="16 7 22 7 22 13"/>
-          </svg>
-        </div>
-        <h3>Quero construir e proteger patrimônio</h3>
-        <p>Organização em dia, mas o patrimônio não reflete o esforço. Falta estratégia e um destino definido para o dinheiro.</p>
-        <ul>
-          <li>Estratégia de investimentos por objetivo</li>
-          <li>Planejamento de aposentadoria</li>
-          <li>Proteção e crescimento patrimonial</li>
-          <li>Planejamento de aquisição de bens</li>
-        </ul>
-      </div>
-    </div>
-    <div style="max-width: 660px; margin: 0 auto;">
     <div class="iq-wrapper reveal">
 
       <!-- Intro -->
       <div id="iq-intro">
-        <div class="iq-intro-title">Pronto para descobrir o seu momento?</div>
-        <p class="iq-intro-sub">6 perguntas. Responda honestamente. Não existe resposta certa ou errada.</p>
+        <div class="iq-intro-title">Responda honestamente.</div>
+        <p class="iq-intro-sub">Não existe resposta certa ou errada. O resultado indica o melhor próximo passo para o seu momento.</p>
         <button class="btn-primary" onclick="iqStart()">Começar o diagnóstico →</button>
         <p class="iq-meta">Menos de 2 minutos · Gratuito</p>
       </div>
@@ -1188,7 +1074,6 @@ Cal("init",{origin:"https://cal.com"});
       </div>
 
     </div>
-    </div><!-- /max-width wrapper -->
   </div>
 </section>
 
