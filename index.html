@@ -1507,6 +1507,28 @@ Cal("init",{origin:"https://cal.com"});
     document.getElementById('iq-intro').style.display = 'none';
     document.getElementById('iq-quiz').style.display = 'block';
     iqRender();
+    requestAnimationFrame(() => {
+      const wrapper = document.querySelector('.iq-wrapper');
+      if (!wrapper) return;
+      const navbar = document.querySelector('.navbar');
+      const navH = navbar ? navbar.offsetHeight : 72;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const start = window.scrollY;
+      const wrapperAbsTop = wrapperRect.top + start;
+      const availH = window.innerHeight - navH;
+      const offset = navH + Math.max(0, (availH - wrapperRect.height) / 2);
+      const end = wrapperAbsTop - offset;
+      const duration = 800;
+      let startTime = null;
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        window.scrollTo(0, start + (end - start) * easeOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
   }
 
   function iqRender() {
