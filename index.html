@@ -227,7 +227,7 @@
   }
   .scroll-hint {
     position: absolute;
-    bottom: 36px; left: 64px;
+    bottom: 36px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 12px;
     color: var(--muted);
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
@@ -246,7 +246,7 @@
   @media (max-width: 960px) {
     .hero-photo-frame { display: none; }
     .hero-inner { padding: 110px 32px 90px; }
-    .scroll-hint { left: 32px; }
+    .scroll-hint { left: 50%; transform: translateX(-50%); }
   }
   @media (max-width: 480px) {
     .hero-inner { padding: 100px 20px 80px; }
