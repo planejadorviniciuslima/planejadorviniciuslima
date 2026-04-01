@@ -1395,7 +1395,7 @@ Cal("init",{origin:"https://cal.com"});
     const navH = navbar ? navbar.offsetHeight : 72;
     const padTop = parseInt(window.getComputedStyle(target).paddingTop) || 0;
     const start = window.scrollY;
-    const end = target.getBoundingClientRect().top + start - navH - padTop + 24;
+    const end = target.getBoundingClientRect().top + start + padTop - navH - 24;
     const duration = 1200;
     let startTime = null;
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
