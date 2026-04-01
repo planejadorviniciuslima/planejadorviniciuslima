@@ -1203,7 +1203,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Seção de objetivos de vida</li>
         </ul>
         <button onclick="abrirModal('planilha')" class="card-cta filled">Acessar grátis →</button>
-        <a href="selling_page_planilha_latest.html" class="card-cta outline" target="_blank">Conheça a planilha em ação →</a>
+        <a href="selling_page_planilha_latest.html" class="card-cta outline" target="_blank">Ver como funciona →</a>
       </div>
 
       <div class="product-card reveal">
@@ -1392,7 +1392,11 @@ Cal("init",{origin:"https://cal.com"});
     const target = document.getElementById(id);
     if (!target) return;
     const start = window.scrollY;
-    const end = target.getBoundingClientRect().top + start - 72;
+    const sectionHeight = target.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const navbarHeight = 72;
+    const offset = Math.max(navbarHeight, (viewportHeight - sectionHeight) / 2);
+    const end = target.getBoundingClientRect().top + start - offset;
     const duration = 1200;
     let startTime = null;
     document.documentElement.style.scrollBehavior = 'auto';
