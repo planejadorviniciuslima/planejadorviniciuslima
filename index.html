@@ -1587,57 +1587,86 @@ Cal("init",{origin:"https://cal.com"});
     });
   }
 
+  function iqDecide(r) {
+    const highRenda   = r.renda  === 'high';
+    const worriedDebt = r.divida === 'yes';
+    const organized   = r.org   === 'yes';
+    const allStrong = (
+      !worriedDebt &&
+      r.org           === 'yes' &&
+      r.aposentadoria === 'yes' &&
+      r.protecao      === 'yes' &&
+      (r.investimentos === 'yes' || r.investimentos === 'structured')
+    );
+    if (allStrong)                 return 'EXCELENTE';
+    if (highRenda && worriedDebt)  return 'MENTORIA';
+    if (!highRenda && worriedDebt) return 'GUIA_N1';
+    if (!worriedDebt && !organized) return 'PLANILHA';
+    return 'GUIA_N2';
+  }
+
   function iqShowResult() {
     document.getElementById('iq-quiz').style.display = 'none';
     document.getElementById('iq-progress-fill').style.width = '100%';
     const a = iqAnswers;
-    let score = 0;
-    if (a.divida === 'no') score += 3; else if (a.divida === 'partial') score += 1;
-    if (a.org === 'yes') score += 3; else if (a.org === 'partial') score += 1;
-    if (a.aposentadoria === 'yes') score += 3; else if (a.aposentadoria === 'partial') score += 2; else if (a.aposentadoria === 'thinking') score += 1;
-    if (a.protecao === 'yes') score += 3; else if (a.protecao === 'partial') score += 1;
-    if (a.investimentos === 'structured') score += 3; else if (a.investimentos === 'yes') score += 2; else if (a.investimentos === 'partial') score += 1;
-    let result;
-    if (score <= 4) {
-      result = {
-        tag: 'Momento · Recomeço',
-        title: 'Hora de criar ordem e retomar o controle.',
-        desc: 'Dívidas, falta de controle ou dinheiro sumindo sem destino. O ponto de partida é estruturar o básico. E o básico bem feito muda tudo.',
+    const tipo = iqDecide(a);
+
+    const configs = {
+      GUIA_N1: {
+        tag: 'Fase 1 · Recomeço Financeiro',
+        title: 'Seu dinheiro está saindo mais rápido do que entrando.',
+        desc: 'Dívidas que preocupam com renda limitada é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar com método.',
         cardLabel: 'Próximo passo recomendado',
         cardTitle: 'Guia Recomeço Financeiro',
-        cardDesc: 'Do diagnóstico honesto da sua situação até a primeira reserva de emergência. Passo a passo, sem enrolação.',
+        cardDesc: 'Feito para quem está com dívidas no caminho e precisa de um plano claro para sair do ciclo, não de mais informação genérica.',
         ctaModal: 'guia1', ctaLabel: 'Acessar o Guia grátis →',
-        altHref: 'https://cal.com/planejadorvinicius/50min', altLabel: 'Ou agendar sessão gratuita', altTarget: '_blank'
-      };
-    } else if (score <= 9) {
-      result = {
-        tag: 'Momento · Transição',
-        title: 'Você já tem controle. Falta estratégia de crescimento.',
-        desc: 'Organização está caminhando, mas o patrimônio não reflete o esforço. A diferença entre estagnação e acumulação real está na estratégia, não na disciplina.',
+        altModal: 'planilha', altLabel: 'Ver a Planilha de Planejamento →'
+      },
+      PLANILHA: {
+        tag: 'Fase 2 · Organização Financeira',
+        title: 'Você até ganha, mas no fim do mês não sobra nada.',
+        desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer. O próximo passo é criar uma estrutura que funcione todos os meses.',
         cardLabel: 'Próximo passo recomendado',
-        cardTitle: 'Mentoria Financeira Personalizada',
-        cardDesc: 'Uma sessão de 50 minutos para mapear onde você está e o que está travando o crescimento.',
+        cardTitle: 'Planilha de Planejamento Financeiro',
+        cardDesc: 'A ferramenta para quem quer parar de perder dinheiro sem saber para onde foi e começar a enxergar os próximos 24 meses com clareza.',
+        ctaModal: 'planilha', ctaLabel: 'Acessar a Planilha grátis →',
+        altHref: 'selling_page_planilha_latest.html', altLabel: 'Ver mais detalhes →', altTarget: null
+      },
+      GUIA_N2: {
+        tag: 'Fase 3 · Crescimento de Patrimônio',
+        title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',
+        desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter. O próximo passo é sair do modo defensivo.',
+        cardLabel: 'Próximo passo recomendado',
+        cardTitle: 'Guia Patrimônio Consistente',
+        cardDesc: 'Para quem já controla as finanças mas ainda não tem uma estratégia real de crescimento. Mostra exatamente o que está faltando e como começar.',
+        ctaModal: 'guia2', ctaLabel: 'Acessar o Guia grátis →',
+        altHref: a.renda === 'high' ? 'https://cal.com/planejadorvinicius/50min' : '#mentoria',
+        altLabel: a.renda === 'high' ? 'Ou agendar sessão gratuita' : 'Saiba como funciona →',
+        altTarget: a.renda === 'high' ? '_blank' : null
+      },
+      MENTORIA: {
+        tag: 'Fase 1 · Recomeço Financeiro',
+        title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',
+        desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade. Um guia genérico não resolve isso.',
+        cardLabel: 'Serviço Personalizado · Recomendado para o seu perfil',
+        cardTitle: 'Planejamento Financeiro Estratégico',
+        cardDesc: 'O seu caso exige um plano feito para você, não para uma média. Uma sessão gratuita é suficiente para entender o que está travando e o que precisa mudar.',
         ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
         altHref: '#mentoria', altLabel: 'Saiba como funciona →', altTarget: null
-      };
-    } else {
-      result = {
-        tag: 'Momento · Construção',
-        title: 'Você está no lugar certo para crescer.',
-        desc: 'Organização, proteção e investimentos em andamento. Mas há espaço real para otimizar e acelerar. Um olhar de fora encontra o que você não consegue ver de dentro.',
-        cardLabel: 'Próximo passo recomendado',
-        cardTitle: 'Mentoria Financeira Personalizada',
-        cardDesc: 'Para quem já tem base e quer construir com método. Sessão de diagnóstico gratuita, sem compromisso.',
-        ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
+      },
+      EXCELENTE: {
+        tag: 'Parabéns · Perfil Avançado',
+        title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.',
+        desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar. E otimização nesse nível não vem de conteúdo digital.',
+        cardLabel: 'Serviço Personalizado · Perfil Avançado',
+        cardTitle: 'Planejamento Financeiro Estratégico',
+        cardDesc: 'Quem está no seu nível não precisa de reorganização. Precisa de alguém que enxergue o que você ainda não vê: ineficiências, oportunidades, decisões que parecem boas mas custam caro no longo prazo.',
+        ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar uma revisão estratégica gratuita →', ctaTarget: '_blank',
         altHref: '#mentoria', altLabel: 'Saiba como funciona →', altTarget: null
-      };
-    }
-    if (a.org !== 'yes') {
-      result.altModal = 'planilha';
-      result.altLabel = 'Ver a Planilha de Planejamento →';
-      delete result.altHref;
-      delete result.altTarget;
-    }
+      }
+    };
+
+    const result = configs[tipo];
     document.getElementById('iq-r-tag').textContent = result.tag;
     document.getElementById('iq-r-title').textContent = result.title;
     document.getElementById('iq-r-desc').textContent = result.desc;
@@ -1652,7 +1681,7 @@ Cal("init",{origin:"https://cal.com"});
       : `<a href="${result.altHref}" class="iq-btn-cta-outline"${result.altTarget ? ` target="${result.altTarget}"` : ''}>${result.altLabel}</a>`;
     document.getElementById('iq-r-cta').innerHTML = ctaTag + altTag;
     document.getElementById('iq-result').style.display = 'block';
-    if (typeof gtag === 'function') gtag('event', 'quiz_inline_completed', { score });
+    if (typeof gtag === 'function') gtag('event', 'quiz_inline_completed', { result_type: tipo });
   }
 
   // =====================
