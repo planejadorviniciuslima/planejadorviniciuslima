@@ -1627,13 +1627,15 @@ Cal("init",{origin:"https://cal.com"});
     }
   };
 
-  function iqBuildCard(p) {
-    const cta = `<button class="iq-btn-cta" onclick="abrirModal('${p.ctaModal}')">${p.ctaLabel}</button>`;
-    const alt = `<a href="${p.altHref}" class="iq-btn-cta-outline">${p.altLabel}</a>`;
+  function iqBuildCard(p, override) {
+    const c = override ? Object.assign({}, p, override) : p;
+    const cta = `<button class="iq-btn-cta" onclick="abrirModal('${c.ctaModal}')">${c.ctaLabel}</button>`;
+    const alt = `<a href="${c.altHref}" class="iq-btn-cta-outline">${c.altLabel}</a>`;
+    const p2 = c;
     return `<div class="iq-result-card">
-      <div class="iq-result-card-label">${p.label}</div>
-      <div class="iq-result-card-title">${p.title}</div>
-      <p class="iq-result-card-desc">${p.desc}</p>
+      <div class="iq-result-card-label">${p2.label}</div>
+      <div class="iq-result-card-title">${p2.title}</div>
+      <p class="iq-result-card-desc">${p2.desc}</p>
       <div class="iq-result-cta">${cta}${alt}</div>
     </div>`;
   }
@@ -1660,10 +1662,12 @@ Cal("init",{origin:"https://cal.com"});
 
     if (tipo === 'GUIA_N1') {
       cardsEl.className = 'iq-result-cards';
-      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia1) + iqBuildCard(IQ_PRODUTOS.planilha);
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia1)
+        + iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'Use a planilha para acompanhar cada mês enquanto elimina as dívidas e não perder o controle do progresso.' });
     } else if (tipo === 'PLANILHA') {
       cardsEl.className = 'iq-result-cards';
-      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha) + iqBuildCard(IQ_PRODUTOS.guia1);
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha)
+        + iqBuildCard(IQ_PRODUTOS.guia1, { desc: 'Cobre os fundamentos: como entender sua situação real, estruturar um orçamento e construir a primeira reserva de emergência.' });
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
       const segundoCardGuia2 = a.renda === 'high'
@@ -1676,7 +1680,7 @@ Cal("init",{origin:"https://cal.com"});
               <a href="#mentoria" class="iq-btn-cta-outline" onclick="smoothScroll(event)">Como funciona →</a>
             </div>
           </div>`
-        : iqBuildCard(IQ_PRODUTOS.planilha);
+        : iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'Coloca sua estratégia em prática: projeção de 24 meses, metas de investimento e acompanhamento mensal dos seus objetivos.' });
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2) + segundoCardGuia2;
     } else if (tipo === 'MENTORIA') {
       cardsEl.className = 'iq-result-cards single';
