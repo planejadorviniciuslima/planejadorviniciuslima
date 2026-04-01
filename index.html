@@ -1544,6 +1544,12 @@ Cal("init",{origin:"https://cal.com"});
         altHref: '#mentoria', altLabel: 'Saiba como funciona →', altTarget: null
       };
     }
+    if (a.org !== 'yes') {
+      result.altModal = 'planilha';
+      result.altLabel = 'Ver a Planilha de Planejamento →';
+      delete result.altHref;
+      delete result.altTarget;
+    }
     document.getElementById('iq-r-tag').textContent = result.tag;
     document.getElementById('iq-r-title').textContent = result.title;
     document.getElementById('iq-r-desc').textContent = result.desc;
