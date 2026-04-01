@@ -61,9 +61,11 @@
     transition: opacity 0.2s;
   }
   .navbar-logo-wrap:hover { opacity: 0.7; }
-  .navbar-logo-wrap img {
-    height: 60px; width: auto; display: block;
-    filter: brightness(0) invert(1);
+  .navbar-logo-svg {
+    height: 56px; width: auto; display: block;
+  }
+  @media (max-width: 480px) {
+    .navbar-logo-svg { height: 44px; }
   }
   .navbar-cta-link {
     font-family: 'Nunito', sans-serif;
@@ -982,8 +984,18 @@ Cal("init",{origin:"https://cal.com"});
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <a href="/" class="navbar-logo-wrap">
-    <img src="Logo Vinicius Lima_Planejador_sem_fundo.png" alt="Vinícius Lima · Planejador Financeiro">
+  <a href="/" class="navbar-logo-wrap" aria-label="Vinícius Lima · Planejador Financeiro">
+    <svg class="navbar-logo-svg" viewBox="0 0 292 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="navbar-logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3B82F6"/>
+          <stop offset="100%" stop-color="#F59E0B"/>
+        </linearGradient>
+      </defs>
+      <text font-family="'Poppins', sans-serif" font-size="34" font-weight="800" fill="#FFFFFF" x="0" y="36">Vinícius Lima</text>
+      <rect x="0" y="43" width="292" height="2" fill="url(#navbar-logo-grad)" rx="1"/>
+      <text font-family="'Poppins', sans-serif" font-size="9" font-weight="500" fill="#DBEAFE" x="1" y="60" letter-spacing="2.5">PLANEJADOR FINANCEIRO</text>
+    </svg>
   </a>
   <a href="https://cal.com/planejadorvinicius/50min" class="navbar-cta-link" target="_blank">Agendar sessão gratuita</a>
 </nav>
