@@ -1642,7 +1642,7 @@ Cal("init",{origin:"https://cal.com"});
   function iqBuildCard(p, override) {
     const c = override ? Object.assign({}, p, override) : p;
     const cta = `<button class="iq-btn-cta" onclick="abrirModal('${c.ctaModal}')">${c.ctaLabel}</button>`;
-    const alt = `<a href="${c.altHref}" class="iq-btn-cta-outline">${c.altLabel}</a>`;
+    const alt = `<a href="${c.altHref}" class="iq-btn-cta-outline" target="_blank" rel="noopener">${c.altLabel}</a>`;
     const p2 = c;
     return `<div class="iq-result-card">
       <div class="iq-result-card-label">${p2.label}</div>
