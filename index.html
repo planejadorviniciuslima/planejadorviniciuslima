@@ -1822,11 +1822,11 @@ Cal("init",{origin:"https://cal.com"});
           }).toString()
         });
       } catch (_) {}
-      sessionStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
+      localStorage.setItem(token, JSON.stringify({ liberado: true, ts: Date.now() }));
       this.style.display = 'none';
       document.getElementById('modal-success').style.display = 'block';
       if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
-      setTimeout(() => { window.location.href = href; }, 800);
+      setTimeout(() => { window.open(href, '_blank'); fecharModal(); }, 800);
     });
   });
 
