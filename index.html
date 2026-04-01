@@ -1666,7 +1666,18 @@ Cal("init",{origin:"https://cal.com"});
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha) + iqBuildCard(IQ_PRODUTOS.guia1);
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
-      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2) + iqBuildCard(IQ_PRODUTOS.planilha);
+      const segundoCardGuia2 = a.renda === 'high'
+        ? `<div class="iq-result-card">
+            <div class="iq-result-card-label" style="color:var(--blue)">Serviço Personalizado · Recomendado</div>
+            <div class="iq-result-card-title">Planejamento Financeiro Estratégico</div>
+            <p class="iq-result-card-desc">Nenhum conteúdo digital substitui o acompanhamento próximo. Com um planejador ao seu lado, cada decisão é tomada com base na sua realidade.</p>
+            <div class="iq-result-cta">
+              <a href="https://cal.com/planejadorvinicius/50min" class="iq-btn-cta" target="_blank">Agendar sessão gratuita →</a>
+              <a href="#mentoria" class="iq-btn-cta-outline" onclick="smoothScroll(event)">Como funciona →</a>
+            </div>
+          </div>`
+        : iqBuildCard(IQ_PRODUTOS.planilha);
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2) + segundoCardGuia2;
     } else if (tipo === 'MENTORIA') {
       cardsEl.className = 'iq-result-cards single';
       cardsEl.innerHTML = `<div class="iq-result-card">
