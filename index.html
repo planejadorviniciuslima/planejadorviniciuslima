@@ -987,7 +987,7 @@ Cal("init",{origin:"https://cal.com"});
   <a href="/" class="navbar-logo-wrap">
     <img src="Logo Vinicius Lima_Planejador_sem_fundo.png" alt="Vinícius Lima · Planejador Financeiro">
   </a>
-  <a href="https://cal.com/planejadorvinicius/50min" class="navbar-cta-link" target="_blank">Agendar sessão</a>
+  <a href="https://cal.com/planejadorvinicius/50min" class="navbar-cta-link" target="_blank">Agendar sessão gratuita</a>
 </nav>
 
 <!-- HERO -->
@@ -1006,7 +1006,7 @@ Cal("init",{origin:"https://cal.com"});
       <h1>Organize as contas.<br><em>Construa o que importa.</em></h1>
       <p class="hero-desc">Planejamento financeiro que funciona na vida real. Para sair do vermelho, construir patrimônio, ou os dois.</p>
       <div class="hero-cta">
-        <a href="https://cal.com/planejadorvinicius/50min" class="btn-primary" target="_blank">Agendar sessão gratuita →</a>
+        <a href="#descubra" class="btn-primary" onclick="smoothScroll(event)">Fazer o diagnóstico gratuito →</a>
         <a href="#recursos" class="btn-secondary" onclick="smoothScroll(event)">Ver recursos disponíveis</a>
       </div>
     </div>
@@ -1108,7 +1108,7 @@ Cal("init",{origin:"https://cal.com"});
 <div class="sep-line"></div>
 
 <!-- MENTORIA -->
-<section class="mentoria-section">
+<section id="mentoria" class="mentoria-section">
   <div class="mentoria-inner">
     <p class="section-eyebrow reveal">Serviço principal</p>
     <h2 class="section-title reveal">Mentoria Financeira<br>Personalizada</h2>
@@ -1531,7 +1531,7 @@ Cal("init",{origin:"https://cal.com"});
         cardTitle: 'Mentoria Financeira Personalizada',
         cardDesc: 'Uma sessão de 50 minutos para mapear onde você está e o que está travando o crescimento.',
         ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
-        altModal: 'guia2', altLabel: 'Ou acessar o Guia Patrimônio grátis'
+        altHref: '#mentoria', altLabel: 'Saiba como funciona →', altTarget: null
       };
     } else {
       result = {
@@ -1542,7 +1542,7 @@ Cal("init",{origin:"https://cal.com"});
         cardTitle: 'Mentoria Financeira Personalizada',
         cardDesc: 'Para quem já tem base e quer construir com método. Sessão de diagnóstico gratuita, sem compromisso.',
         ctaHref: 'https://cal.com/planejadorvinicius/50min', ctaLabel: 'Agendar sessão gratuita →', ctaTarget: '_blank',
-        altHref: '#recursos', altLabel: 'Ver recursos disponíveis', altTarget: null
+        altHref: '#mentoria', altLabel: 'Saiba como funciona →', altTarget: null
       };
     }
     document.getElementById('iq-r-tag').textContent = result.tag;
