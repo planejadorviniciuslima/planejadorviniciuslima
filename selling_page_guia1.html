@@ -140,6 +140,20 @@
     box-shadow: 0 8px 28px rgba(245,158,11,0.38);
   }
 
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--fg-2);
+    font-family: 'Nunito', sans-serif; font-weight: 500; font-size: 14px;
+    padding: 12px 32px; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.18); border-radius: 100px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    width: 100%; max-width: 420px;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.45); color: var(--fg);
+    transform: translateY(-2px);
+  }
+
   /* ─── HERO ─────────────────────────────────── */
   .hero {
     padding: 100px 0 80px;
@@ -668,6 +682,8 @@
   .final-cta .btn-wrap {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   /* ─── FOOTER ─────────────────────────────────── */
@@ -794,7 +810,10 @@
         <div class="divider"></div>
         <p>Para quem está endividado e quer sair do buraco de vez. Do diagnóstico completo à primeira reserva de emergência, com exemplos reais e um plano de ação para começar hoje.</p>
 
-        <a href="https://pay.hotmart.com/P104807668W" class="btn-primary" style="margin-top:16px;">Quero o guia agora</a>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:16px;">
+          <a href="https://pay.hotmart.com/P104807668W" class="btn-primary">Quero o guia agora</a>
+          <a href="index.html?acessar=guia1" class="btn-secondary">Acessar grátis →</a>
+        </div>
       </div>
 
       <div class="book-mockup">
@@ -1127,6 +1146,7 @@
     <p>Você chegou até o final desta página. Isso já diz muito. Agora é só dar o próximo passo.</p>
     <div class="btn-wrap">
       <a href="https://pay.hotmart.com/P104807668W" class="btn-primary">Quero o guia agora</a>
+      <a href="index.html?acessar=guia1" class="btn-secondary">Acessar grátis →</a>
     </div>
   </div>
 </section>

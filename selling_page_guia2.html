@@ -140,6 +140,20 @@
     box-shadow: 0 8px 28px rgba(245,158,11,0.38);
   }
 
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--fg-2);
+    font-family: 'Nunito', sans-serif; font-weight: 500; font-size: 14px;
+    padding: 12px 32px; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.18); border-radius: 100px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    width: 100%; max-width: 420px;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.45); color: var(--fg);
+    transform: translateY(-2px);
+  }
+
   /* HERO */
   .hero {
     padding: 100px 0 80px;
@@ -666,6 +680,8 @@
   .final-cta .btn-wrap {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   /* FOOTER */
@@ -792,7 +808,10 @@
         <div class="divider"></div>
         <p>Para profissionais e famílias com renda alta que querem parar de improvisar e montar uma estratégia patrimonial consistente.</p>
 
-        <a href="https://pay.hotmart.com/K104807468F" class="btn-primary" style="margin-top:16px;">Quero o guia agora</a>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:16px;">
+          <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
+          <a href="index.html?acessar=guia2" class="btn-secondary">Acessar grátis →</a>
+        </div>
       </div>
 
       <div class="book-mockup">
@@ -1145,6 +1164,7 @@
     <p>O guia está pronto. O próximo passo depende de você.</p>
     <div class="btn-wrap">
       <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
+      <a href="index.html?acessar=guia2" class="btn-secondary">Acessar grátis →</a>
     </div>
   </div>
 </section>

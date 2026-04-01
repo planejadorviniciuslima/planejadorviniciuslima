@@ -48,6 +48,7 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 100;
+    transform: translateZ(0);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -653,6 +654,8 @@
   }
   .iq-intro-sub { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
   .iq-meta { font-size: 12px; color: var(--muted); margin-top: 14px; }
+  #iq-intro .btn-primary { display: block; width: fit-content; margin: 0 auto; }
+  #iq-intro .iq-meta { text-align: center; }
 
   .iq-progress-bar {
     height: 4px; background: rgba(59,130,246,0.1);
@@ -941,8 +944,47 @@
   }
   .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
   .modal-privacy { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
-  .modal-success-msg {
-    text-align: center; color: var(--fg-2); font-size: 15px; padding: 16px 0;
+  .modal-loading { text-align: center; padding: 28px 0 20px; }
+  .modal-loading-icon {
+    width: 60px; height: 60px;
+    background: var(--blue-glow);
+    border: 1px solid var(--blue-border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    animation: modal-icon-pulse 1s ease-in-out infinite;
+  }
+  .modal-loading-icon--success {
+    animation: modal-icon-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    background: rgba(245,158,11,0.12);
+    border-color: rgba(245,158,11,0.30);
+  }
+  .modal-loading-bar-wrap {
+    background: rgba(59,130,246,0.10);
+    border-radius: 100px;
+    height: 3px; overflow: hidden;
+    margin: 0 0 16px;
+  }
+  .modal-loading-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
+    border-radius: 100px;
+    width: 0%;
+    transition: width 1.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .modal-loading-text {
+    font-size: 14px; color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    transition: opacity 0.3s;
+  }
+  @keyframes modal-icon-pulse {
+    0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0.25); }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(59,130,246,0); }
+  }
+  @keyframes modal-icon-pop {
+    0% { transform: scale(0.7); opacity: 0.5; }
+    60% { transform: scale(1.12); }
+    100% { transform: scale(1); opacity: 1; }
   }
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
   @media (max-width: 480px) { .modal-box { padding: 36px 24px; } }
@@ -1160,6 +1202,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Seção de objetivos de vida</li>
         </ul>
         <button onclick="abrirModal('planilha')" class="card-cta filled">Acessar grátis →</button>
+        <a href="selling_page_planilha_latest.html" class="card-cta outline" target="_blank">Ver como funciona →</a>
       </div>
 
       <div class="product-card reveal">
@@ -1177,6 +1220,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Plano de ação de 5 dias para sair em movimento</li>
         </ul>
         <button onclick="abrirModal('guia1')" class="card-cta filled">Acessar grátis →</button>
+        <a href="selling_page_guia1.html" class="card-cta outline" target="_blank">Ver como funciona →</a>
       </div>
 
       <div class="product-card reveal">
@@ -1197,6 +1241,7 @@ Cal("init",{origin:"https://cal.com"});
           <li>Quando buscar um planejador profissional</li>
         </ul>
         <button onclick="abrirModal('guia2')" class="card-cta filled">Acessar grátis →</button>
+        <a href="selling_page_guia2.html" class="card-cta outline" target="_blank">Ver como funciona →</a>
       </div>
 
     </div>
@@ -1679,6 +1724,12 @@ Cal("init",{origin:"https://cal.com"});
       if (e.target === this) fecharModal();
     });
 
+    // Auto-open modal via URL param: index.html?acessar=guia1
+    const paramAcessar = new URLSearchParams(window.location.search).get('acessar');
+    if (paramAcessar && RECURSOS[paramAcessar]) {
+      setTimeout(() => abrirModal(paramAcessar), 400);
+    }
+
     document.getElementById('modal-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('modal-submit-btn');
@@ -1703,7 +1754,24 @@ Cal("init",{origin:"https://cal.com"});
       this.style.display = 'none';
       document.getElementById('modal-success').style.display = 'block';
       if (typeof gtag === 'function') gtag('event', 'modal_lead_submit', { recurso });
-      setTimeout(() => { window.open(href, '_blank'); fecharModal(); }, 800);
+      // Trigger progress bar (needs two rAF to start CSS transition)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('modal-loading-bar').style.width = '100%';
+        });
+      });
+      // Phase 2: show success state
+      setTimeout(() => {
+        const iconEl = document.getElementById('modal-loading-icon');
+        iconEl.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><polyline points="5,14 10,19 21,8" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        iconEl.classList.add('modal-loading-icon--success');
+        const textEl = document.getElementById('modal-loading-text');
+        textEl.style.opacity = '0';
+        setTimeout(() => { textEl.textContent = 'Pronto! Abrindo...'; textEl.style.opacity = '1'; }, 200);
+      }, 1400);
+      // Phase 3: close modal, then open resource
+      setTimeout(() => fecharModal(), 1750);
+      setTimeout(() => window.open(href, '_blank'), 2050);
     });
   });
 
@@ -1736,7 +1804,19 @@ Cal("init",{origin:"https://cal.com"});
       <p class="modal-privacy">Sem spam. Seus dados ficam comigo.</p>
     </form>
     <div id="modal-success" style="display:none;">
-      <p class="modal-success-msg">Tudo certo! Abrindo o recurso...</p>
+      <div class="modal-loading">
+        <div class="modal-loading-icon" id="modal-loading-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+            <rect x="6" y="13" width="14" height="10" rx="2" stroke="#3B82F6" stroke-width="1.5"/>
+            <path d="M9 13V9a4 4 0 0 1 8 0v4" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="18" r="1.5" fill="#3B82F6"/>
+          </svg>
+        </div>
+        <div class="modal-loading-bar-wrap">
+          <div class="modal-loading-bar" id="modal-loading-bar"></div>
+        </div>
+        <p class="modal-loading-text" id="modal-loading-text">Preparando seu acesso...</p>
+      </div>
     </div>
   </div>
 </div>
