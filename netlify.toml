@@ -8,3 +8,28 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/guia-recomeco"
+  to = "/selling_page_guia1.html"
+  status = 200
+
+[[redirects]]
+  from = "/guia-patrimonio"
+  to = "/selling_page_guia2.html"
+  status = 200
+
+[[redirects]]
+  from = "/planilha"
+  to = "/selling_page_planilha_latest.html"
+  status = 200
+
+[[redirects]]
+  from = "/guia-recomeco/conteudo"
+  to = "/Guia_Recomeco_Financeiro_latest.html"
+  status = 200
+
+[[redirects]]
+  from = "/guia-patrimonio/conteudo"
+  to = "/Guia_Patrimonio_Consistente_latest.html"
+  status = 200
