@@ -9,28 +9,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://www.clarity.ms">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --dark: #0D0D0D;
-    --dark-2: #141414;
-    --dark-3: #1C1C1C;
-    --cream: #F5F0E8;
-    --text: #F5F0E8;
-    --text-muted: #C8C3BB;
-    --border: rgba(255,255,255,0.07);
+    --blue: #60A5FA;
+    --blue-dim: #2563EB;
+    --blue-light: #93C5FD;
+    --blue-glow: rgba(96,165,250,0.10);
+    --blue-border: rgba(96,165,250,0.16);
+    --amber: #F59E0B;
+    --amber-hover: #D97706;
+    --bg:   #07090F;
+    --bg-2: #0A0E1A;
+    --bg-3: #0F1525;
+    --fg:   #FFFFFF;
+    --fg-2: #DBEAFE;
+    --muted: #60A5FA;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--dark);
-    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    font-family: 'Nunito', sans-serif;
     font-weight: 300;
-    color: var(--text);
+    color: var(--fg);
     font-size: 16px;
     line-height: 1.75;
   }
@@ -46,7 +50,7 @@
 
   section {
     padding: 80px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--blue-border);
   }
 
   section:last-of-type { border-bottom: none; }
@@ -56,45 +60,45 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
     display: block;
     margin-bottom: 16px;
   }
 
   /* HEADINGS */
   h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(40px, 7vw, 64px);
-    font-weight: 300;
+    font-weight: 700;
     line-height: 1.05;
-    color: var(--cream);
+    color: var(--fg);
     letter-spacing: -0.5px;
   }
 
   h1 em {
-    font-style: italic;
-    color: var(--gold-light);
+    font-style: normal;
+    color: var(--blue);
   }
 
   h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(28px, 4vw, 38px);
-    font-weight: 300;
-    color: var(--cream);
+    font-weight: 700;
+    color: var(--fg);
     line-height: 1.2;
     margin-bottom: 8px;
   }
 
   h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 8px;
   }
 
   p {
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.8;
     margin-bottom: 16px;
   }
@@ -105,7 +109,7 @@
   .divider {
     width: 40px;
     height: 1px;
-    background: var(--gold);
+    background: var(--blue);
     opacity: 0.5;
     margin: 24px 0;
   }
@@ -115,26 +119,45 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--gold);
-    color: var(--dark);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 18px 40px;
+    background: var(--amber);
+    color: #07090F;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 15px 40px;
     text-decoration: none;
-    transition: background 0.25s ease;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     width: 100%;
     max-width: 420px;
   }
 
-  .btn-primary:hover { background: var(--gold-light); }
+  .btn-primary:hover {
+    background: var(--amber-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(245,158,11,0.38);
+  }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--fg-2);
+    font-family: 'Nunito', sans-serif; font-weight: 500; font-size: 14px;
+    padding: 12px 32px; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.18); border-radius: 100px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    width: 100%; max-width: 420px;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.45); color: var(--fg);
+    transform: translateY(-2px);
+  }
 
   /* HERO */
   .hero {
     padding: 100px 0 80px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--blue-border);
   }
 
   .hero-inner {
@@ -148,7 +171,7 @@
 
   .hero-text p {
     font-size: 17px;
-    color: var(--text-muted);
+    color: var(--muted);
     max-width: 460px;
     margin-bottom: 40px;
   }
@@ -161,30 +184,30 @@
   }
 
   .price-current {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    font-weight: 300;
-    color: var(--gold);
+    font-weight: 700;
+    color: var(--blue);
     line-height: 1;
   }
 
   .price-original {
     font-size: 16px;
-    color: rgba(245,240,232,0.3);
+    color: rgba(255,255,255,0.3);
     text-decoration: line-through;
   }
 
   .price-label {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 24px;
     display: block;
   }
 
   /* BOOK MOCKUP */
   .book-mockup {
-    background: var(--dark-2);
-    border: 1px solid rgba(201,168,76,0.2);
+    background: var(--bg-2);
+    border: 1px solid rgba(96,165,250,0.2);
     padding: 40px 32px;
     position: relative;
     overflow: hidden;
@@ -199,7 +222,7 @@
     position: absolute;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -216,14 +239,14 @@
     font-size: 9px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--blue);
   }
 
   .book-mockup-tag {
     font-size: 9px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.3);
+    color: rgba(255,255,255,0.3);
   }
 
   .book-mockup-main {
@@ -234,29 +257,29 @@
   .book-mockup-divider {
     width: 32px;
     height: 1px;
-    background: var(--gold);
+    background: var(--blue);
     opacity: 0.5;
     margin-bottom: 16px;
   }
 
   .book-mockup h4 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    font-weight: 300;
+    font-weight: 700;
     line-height: 1.05;
-    color: var(--cream);
+    color: var(--fg);
     letter-spacing: -0.3px;
   }
 
   .book-mockup h4 em {
-    font-style: italic;
-    color: var(--gold-light);
+    font-style: normal;
+    color: var(--blue);
     display: block;
   }
 
   .book-mockup-bottom {
     font-size: 9px;
-    color: rgba(245,240,232,0.2);
+    color: rgba(255,255,255,0.2);
     letter-spacing: 0.5px;
   }
 
@@ -269,8 +292,8 @@
   }
 
   .pain-item {
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
     padding: 24px 28px;
     display: flex;
     gap: 16px;
@@ -280,7 +303,7 @@
   .pain-check {
     width: 20px;
     height: 20px;
-    border: 1px solid rgba(201,168,76,0.4);
+    border: 1px solid rgba(96,165,250,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -291,14 +314,14 @@
   .pain-check svg {
     width: 10px;
     height: 10px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 2;
   }
 
   .pain-item p {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.6;
   }
@@ -314,21 +337,21 @@
   .chapter-row {
     display: grid;
     grid-template-columns: 48px 1fr;
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
     overflow: hidden;
   }
 
   .chapter-row-num {
-    background: var(--dark);
+    background: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    font-weight: 300;
-    color: var(--gold);
-    border-right: 1px solid var(--border);
+    font-weight: 700;
+    color: var(--blue);
+    border-right: 1px solid var(--blue-border);
     flex-shrink: 0;
   }
 
@@ -340,13 +363,13 @@
     display: block;
     font-size: 14px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 4px;
   }
 
   .chapter-row-content p {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.6;
   }
@@ -359,15 +382,15 @@
   }
 
   .extra-item {
-    background: var(--dark-3);
-    border: 1px solid var(--border);
+    background: var(--bg-3);
+    border: 1px solid var(--blue-border);
     padding: 16px 20px;
     text-align: center;
   }
 
   .extra-item p {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
     line-height: 1.5;
   }
@@ -385,8 +408,8 @@
     gap: 16px;
     align-items: flex-start;
     padding: 20px 24px;
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
   }
 
   .include-icon {
@@ -402,7 +425,7 @@
   .include-icon svg {
     width: 20px;
     height: 20px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 1.5;
   }
@@ -411,7 +434,7 @@
     display: block;
     font-size: 14px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     margin-bottom: 4px;
   }
 
@@ -430,9 +453,9 @@
 
   /* OFERTA */
   .offer-box {
-    background: var(--dark-2);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-top: 2px solid var(--gold);
+    background: var(--bg-2);
+    border: 1px solid rgba(96,165,250,0.25);
+    border-top: 2px solid var(--blue);
     padding: 48px 48px;
     text-align: center;
     position: relative;
@@ -445,7 +468,7 @@
     position: absolute;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -458,15 +481,15 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
     margin-bottom: 8px;
   }
 
   .offer-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 28px;
-    font-weight: 300;
-    color: var(--cream);
+    font-weight: 700;
+    color: var(--fg);
     margin-bottom: 32px;
   }
 
@@ -476,7 +499,7 @@
 
   .offer-from {
     font-size: 14px;
-    color: rgba(245,240,232,0.35);
+    color: rgba(255,255,255,0.35);
     margin-bottom: 4px;
   }
 
@@ -485,10 +508,10 @@
   }
 
   .offer-price {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 72px;
-    font-weight: 300;
-    color: var(--gold);
+    font-weight: 700;
+    color: var(--blue);
     line-height: 1;
     display: flex;
     align-items: center;
@@ -504,7 +527,7 @@
   .price-includes {
     text-align: left;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -521,14 +544,14 @@
 
   .price-includes li::before {
     content: '✓';
-    color: var(--gold);
+    color: var(--blue);
     font-weight: bold;
     flex-shrink: 0;
   }
 
   .offer-installment {
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 12px 0 32px;
   }
 
@@ -544,13 +567,13 @@
     justify-content: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   .offer-guarantee svg {
     width: 18px;
     height: 18px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 1.5;
     flex-shrink: 0;
@@ -567,7 +590,7 @@
   .guarantee-badge {
     width: 96px;
     height: 96px;
-    border: 2px solid rgba(201,168,76,0.4);
+    border: 2px solid rgba(96,165,250,0.4);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -577,10 +600,10 @@
   }
 
   .guarantee-badge .badge-num {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 32px;
-    font-weight: 300;
-    color: var(--gold);
+    font-weight: 700;
+    color: var(--blue);
     line-height: 1;
   }
 
@@ -588,7 +611,7 @@
     font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--muted);
   }
 
   /* FAQ */
@@ -600,15 +623,15 @@
   }
 
   .faq-item {
-    background: var(--dark-2);
-    border: 1px solid var(--border);
+    background: var(--bg-2);
+    border: 1px solid var(--blue-border);
   }
 
   .faq-question {
     padding: 20px 24px;
     font-size: 15px;
     font-weight: 500;
-    color: var(--cream);
+    color: var(--fg);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -623,7 +646,7 @@
   .faq-question svg {
     width: 16px;
     height: 16px;
-    stroke: var(--gold);
+    stroke: var(--blue);
     fill: none;
     stroke-width: 2;
     flex-shrink: 0;
@@ -635,9 +658,9 @@
   .faq-answer {
     padding: 0 24px 20px;
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--muted);
     line-height: 1.8;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--blue-border);
     padding-top: 16px;
   }
 
@@ -657,20 +680,23 @@
   .final-cta .btn-wrap {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   /* FOOTER */
   footer {
     padding: 32px 0;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--blue-border);
     text-align: center;
     font-size: 12px;
-    color: rgba(245,240,232,0.25);
+    color: rgba(255,255,255,0.25);
     letter-spacing: 0.5px;
   }
 
   /* MOBILE */
   @media (max-width: 640px) {
+    .qual-guia-grid { grid-template-columns: 1fr !important; }
     section { padding: 56px 0; }
 
     .hero { padding: 64px 0 56px; }
@@ -719,14 +745,14 @@
     top: 20px;
     left: 20px;
     z-index: 9999;
-    background: rgba(13,13,13,0.8);
-    border: 1px solid rgba(201,168,76,0.25);
-    color: #888880;
-    font-family: 'DM Sans', sans-serif;
+    background: rgba(7,9,15,0.8);
+    border: 1px solid rgba(96,165,250,0.25);
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 400;
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 100px;
     text-decoration: none;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -734,8 +760,8 @@
     letter-spacing: 0.02em;
   }
   .btn-back-home:hover {
-    border-color: var(--gold);
-    color: var(--gold);
+    border-color: var(--blue);
+    color: var(--blue);
   }
   @media (max-width: 768px) { .btn-back-home { display: none; } }
 </style>
@@ -783,7 +809,6 @@
         <div class="divider"></div>
         <p>Para profissionais e famílias com renda alta que querem parar de improvisar e montar uma estratégia patrimonial consistente.</p>
 
-        <a href="https://pay.hotmart.com/K104807468F" class="btn-primary" style="margin-top:16px;">Quero o guia agora</a>
       </div>
 
       <div class="book-mockup">
@@ -848,6 +873,7 @@
     </div>
 
     <p style="margin-top:32px; font-size:15px;">Se você se identificou com pelo menos uma dessas situações, este guia foi escrito para você.</p>
+
   </div>
 </section>
 
@@ -926,14 +952,20 @@
 
     <div class="chapters-extras">
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Seus próximos 5 dias</strong>Plano de ação prático para começar a reorganizar a estratégia imediatamente após a leitura.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Seus próximos 5 dias</strong>Plano de ação prático para começar a reorganizar a estratégia imediatamente após a leitura.</p>
       </div>
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Leituras recomendadas</strong>6 livros selecionados para aprofundar cada pilar do guia.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Leituras recomendadas</strong>6 livros selecionados para aprofundar cada pilar do guia.</p>
       </div>
       <div class="extra-item">
-        <p><strong style="color:var(--cream); display:block; margin-bottom:4px;">Ferramentas gratuitas</strong>Sites e plataformas para aplicar as estratégias sem custo adicional.</p>
+        <p><strong style="color:var(--fg); display:block; margin-bottom:4px;">Ferramentas gratuitas</strong>Sites e plataformas para aplicar as estratégias sem custo adicional.</p>
       </div>
+    </div>
+
+    <div style="margin-top:24px; background:var(--bg-3); border:1px solid rgba(96,165,250,0.2); border-left:3px solid var(--blue); padding:24px 28px;">
+      <span class="label" style="margin-bottom:8px;">Complemento recomendado</span>
+      <strong style="display:block; font-size:16px; color:var(--fg); margin-bottom:8px;">Planilha de Planejamento</strong>
+      <p style="margin:0; font-size:14px;">A estratégia do guia ganha força quando acompanhada de uma ferramenta de acompanhamento. A <a href="selling_page_planilha_latest.html" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">Planilha de Planejamento</a> projeta 24 meses, calcula tetos de gasto, metas de investimento e reserva automática. Os dois juntos cobrem o planejamento e a execução diária.</p>
     </div>
   </div>
 </section>
@@ -941,8 +973,8 @@
 <!-- O QUE ESTÁ INCLUÍDO -->
 <section>
   <div class="container">
-    <span class="label">O que você recebe</span>
-    <h2>Tudo incluído no valor único</h2>
+    <span class="label">O que você acessa</span>
+    <h2>Tudo que está no guia</h2>
 
     <div class="includes-grid">
       <div class="include-item">
@@ -950,7 +982,7 @@
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <div class="include-text">
-          <strong>Guia Patrimônio Consistente (PDF)</strong>
+          <strong>Guia Patrimônio Consistente</strong>
           <p>9 capítulos com estratégias para quem tem renda alta, exemplos com números reais e linguagem direta.</p>
         </div>
       </div>
@@ -995,8 +1027,8 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <div class="include-text">
-          <strong>Acesso imediato e vitalício</strong>
-          <p>Disponível para download logo após a confirmação do pagamento, para sempre.</p>
+          <strong>Acesso imediato e gratuito</strong>
+          <p>Leia direto no navegador, sem download, assim que deixar seu email.</p>
         </div>
       </div>
     </div>
@@ -1018,43 +1050,6 @@
     </div>
   </div>
 </section>
-
-<!-- OFERTA -->
-<section>
-  <div class="container">
-    <h2>O guia completo por um valor único.</h2>
-    <p>9 capítulos, plano de ação, exemplos reais e ferramentas práticas. Tudo que você precisa para montar uma estratégia patrimonial consistente, com acesso imediato e vitalício.</p>
-
-    <div class="offer-box">
-      <p class="offer-product">Guia Patrimônio Consistente · Nível 2</p>
-      <p class="offer-title">Pagamento único. Acesso imediato e vitalício.</p>
-
-      <div class="offer-price-block">
-        <div class="offer-price"><sup>R$</sup> 127</div>
-      </div>
-      <p class="offer-installment">Pagamento único via Hotmart. Cartão, boleto ou Pix.</p>
-
-      <ul class="price-includes" style="color:#888880">
-        <li>Como estruturar um patrimônio real em qualquer faixa de renda</li>
-        <li>Estratégias de investimento para quem já tem reserva e quer crescer</li>
-        <li>Previdência privada: quando faz sentido, qual escolher e como calcular</li>
-        <li>Imóvel como investimento: o que os números realmente mostram</li>
-        <li>Proteção patrimonial: seguro de vida, DI e o que você provavelmente ignora</li>
-        <li>Plano de ação de 5 dias para sair da leitura já com decisões tomadas</li>
-      </ul>
-
-      <div class="offer-cta-wrap">
-        <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
-      </div>
-
-      <div class="offer-guarantee">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Garantia de 7 dias. Se não for útil para você, basta solicitar o reembolso.
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- FAQ -->
 <section>
@@ -1106,21 +1101,31 @@
 
       <details class="faq-item">
         <summary class="faq-question">
-          Como recebo o guia após a compra?
+          Como acesso o guia?
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </summary>
         <div class="faq-answer">
-          Imediatamente após o pagamento confirmado, você recebe um e-mail do Hotmart com o link para baixar o PDF. O acesso é vitalício.
+          Clique em "Acessar grátis", deixe seu nome e email e o guia abre na hora, diretamente no navegador. Sem download, sem cadastro em plataforma externa.
         </div>
       </details>
 
       <details class="faq-item">
         <summary class="faq-question">
-          E se eu não gostar?
+          Devo acessar os dois guias?
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </summary>
         <div class="faq-answer">
-          Você tem 7 dias de garantia. Se por qualquer motivo o guia não atender às suas expectativas, basta solicitar o reembolso diretamente pelo Hotmart. O processo é simples e sem questionamentos.
+          Não necessariamente. Se você tem renda alta, está sem dívidas graves e quer montar uma estratégia de patrimônio, este guia é o ponto certo de partida. O Guia Recomeço Financeiro (Nível 1) é para quem está endividado ou ainda sem controle básico. Se você já resolveu o básico, o Nível 2 sozinho resolve o que você precisa agora. Os dois são gratuitos, então você pode acessar os dois se quiser.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          O guia funciona junto com a Planilha de Planejamento?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </summary>
+        <div class="faq-answer">
+          Sim, e é uma combinação muito boa. O guia te dá a estratégia: onde alocar, quais pilares estruturar, como priorizar. A Planilha de Planejamento torna isso concreto no dia a dia: projeção de 24 meses, teto de gastos, metas de investimento automáticas. Um define o plano, o outro mantém você no rumo.
         </div>
       </details>
 
@@ -1132,10 +1137,10 @@
 <section class="final-cta">
   <div class="container">
     <span class="label">Comece agora</span>
-    <h2>A renda você já tem.<em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-light);"> Agora é hora da estratégia.</em></h2>
+    <h2>A renda você já tem.<em style="font-family:'Poppins',sans-serif; font-style:normal; color:var(--blue);"> Agora é hora da estratégia.</em></h2>
     <p>O guia está pronto. O próximo passo depende de você.</p>
     <div class="btn-wrap">
-      <a href="https://pay.hotmart.com/K104807468F" class="btn-primary">Quero o guia agora</a>
+      <a href="index.html?acessar=guia2" class="btn-primary">Acessar grátis →</a>
     </div>
   </div>
 </section>
@@ -1149,10 +1154,11 @@
 
 <script>
   // Analytics — CTA clicks
-  document.querySelectorAll('a[href="https://pay.hotmart.com/K104807468F"]').forEach(function(el) {
-    el.addEventListener('click', () => gtag('event', 'click_comprar_guia2'));
+  document.querySelectorAll('a[href^="index.html?acessar=guia2"]').forEach(function(el) {
+    el.addEventListener('click', () => typeof gtag === 'function' && gtag('event', 'click_acessar_guia2'));
   });
 </script>
 
 </body>
 </html>
+}
