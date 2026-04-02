@@ -49,6 +49,7 @@
     -webkit-backdrop-filter: blur(20px);
     z-index: 100;
     transform: translateZ(0);
+    will-change: transform;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1832,7 +1833,6 @@ Cal("init",{origin:"https://cal.com"});
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden', 'false');
-    window._modalScrollY = window.scrollY;
   }
 
   function fecharModal() {
@@ -1894,12 +1894,7 @@ Cal("init",{origin:"https://cal.com"});
       }, 1400);
       // Phase 3: close modal, then open resource
       setTimeout(() => fecharModal(), 1750);
-      setTimeout(() => {
-        const savedScroll = window._modalScrollY || 0;
-        window.open(href, '_blank');
-        window.scrollTo(0, savedScroll);
-        setTimeout(() => window.scrollTo(0, savedScroll), 100);
-      }, 2050);
+      setTimeout(() => window.open(href, '_blank'), 2050);
     });
   });
 
