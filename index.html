@@ -993,6 +993,19 @@
     font-family: 'Nunito', sans-serif;
     transition: opacity 0.3s;
   }
+  .modal-access-link {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--amber);
+    color: #07090F;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .modal-access-link:hover { background: var(--amber-hover); }
   @keyframes modal-icon-pulse {
     0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(96,165,250,0.25); }
     50% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(96,165,250,0); }
@@ -1824,6 +1837,9 @@ Cal("init",{origin:"https://cal.com"});
     iconEl.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="6" y="13" width="14" height="10" rx="2" stroke="#3B82F6" stroke-width="1.5"/><path d="M9 13V9a4 4 0 0 1 8 0v4" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="18" r="1.5" fill="#3B82F6"/></svg>';
     document.getElementById('modal-loading-text').textContent = 'Preparando seu acesso...';
     document.getElementById('modal-loading-text').style.opacity = '1';
+    const accessBtn = document.getElementById('modal-access-btn');
+    accessBtn.style.display = 'none';
+    accessBtn.href = '#';
     requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = ''; }));
     const btn = document.getElementById('modal-submit-btn');
     btn.disabled = false;
@@ -1881,18 +1897,19 @@ Cal("init",{origin:"https://cal.com"});
           document.getElementById('modal-loading-bar').style.width = '100%';
         });
       });
-      // Phase 2: show success state
+      // Phase 2: show success state and access button
       setTimeout(() => {
         const iconEl = document.getElementById('modal-loading-icon');
         iconEl.innerHTML = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><polyline points="5,14 10,19 21,8" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         iconEl.classList.add('modal-loading-icon--success');
         const textEl = document.getElementById('modal-loading-text');
         textEl.style.opacity = '0';
-        setTimeout(() => { textEl.textContent = 'Pronto! Abrindo...'; textEl.style.opacity = '1'; }, 200);
+        setTimeout(() => { textEl.textContent = 'Tudo pronto!'; textEl.style.opacity = '1'; }, 200);
+        const accessBtn = document.getElementById('modal-access-btn');
+        accessBtn.href = href;
+        accessBtn.style.display = 'inline-block';
+        accessBtn.onclick = () => setTimeout(() => fecharModal(), 300);
       }, 1400);
-      // Phase 3: close modal, then open resource
-      setTimeout(() => fecharModal(), 1750);
-      setTimeout(() => window.open(href, '_blank'), 2050);
     });
   });
 
@@ -1936,6 +1953,7 @@ Cal("init",{origin:"https://cal.com"});
           <div class="modal-loading-bar" id="modal-loading-bar"></div>
         </div>
         <p class="modal-loading-text" id="modal-loading-text">Preparando seu acesso...</p>
+        <a id="modal-access-btn" href="#" target="_blank" style="display:none;" class="modal-access-link">Acessar agora →</a>
       </div>
     </div>
   </div>
