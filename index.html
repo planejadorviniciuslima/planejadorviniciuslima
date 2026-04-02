@@ -1832,8 +1832,6 @@ Cal("init",{origin:"https://cal.com"});
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden', 'false');
-    window._modalScrollY = window.scrollY;
-    document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('modal-nome').focus(), 100);
   }
 
@@ -1842,10 +1840,6 @@ Cal("init",{origin:"https://cal.com"});
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (window._modalScrollY !== undefined) {
-      window.scrollTo(0, window._modalScrollY);
-    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
