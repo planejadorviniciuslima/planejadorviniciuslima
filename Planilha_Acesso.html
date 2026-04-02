@@ -258,6 +258,11 @@
   /* PRINT */
   @page { margin: 0; size: A4; }
 
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px; }
+    .access-box { padding: 28px 24px; }
+  }
+
   @media print {
     body { background: var(--bg-2); }
     .page { box-shadow: none; }
