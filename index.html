@@ -1833,13 +1833,9 @@ Cal("init",{origin:"https://cal.com"});
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden', 'false');
     window._modalScrollY = window.scrollY;
-    if (window.innerWidth > 768) {
-      setTimeout(() => document.getElementById('modal-nome').focus(), 100);
-    }
   }
 
   function fecharModal() {
-    if (document.activeElement) document.activeElement.blur();
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden', 'true');
