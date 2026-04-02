@@ -1832,15 +1832,25 @@ Cal("init",{origin:"https://cal.com"});
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.add('active');
     overlay.setAttribute('aria-hidden', 'false');
+    const scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
     setTimeout(() => document.getElementById('modal-nome').focus(), 100);
   }
 
   function fecharModal() {
+    if (document.activeElement) document.activeElement.blur();
+    const scrollY = parseInt(document.body.style.top || '0') * -1;
     const overlay = document.getElementById('modal-recursos');
     overlay.classList.remove('active');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
   }
 
   document.addEventListener('DOMContentLoaded', function() {
