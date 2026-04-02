@@ -765,6 +765,8 @@
     color: var(--blue);
   }
   @media (max-width: 768px) { .btn-back-home { display: none; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 
 <!-- Google Analytics 4 -->
@@ -805,7 +807,7 @@
     <div class="hero-inner">
 
       <div class="hero-text">
-        <span class="label">Guia · Nível 1</span>
+        <span class="label reveal">Guia · Nível 1</span>
         <h1>O passo a passo para sair das dívidas <em>e nunca mais voltar.</em></h1>
         <div class="divider"></div>
         <p>Para quem está endividado e quer sair do buraco de vez. Do diagnóstico completo à primeira reserva de emergência, com exemplos reais e um plano de ação para começar hoje.</p>
@@ -831,10 +833,10 @@
 <!-- ─── PARA QUEM É ──────────────────────────────── -->
 <section>
   <div class="container">
-    <span class="label">Para quem é este guia</span>
-    <h2>Você se identifica com alguma dessas situações?</h2>
+    <span class="label reveal">Para quem é este guia</span>
+    <h2 class="reveal">Você se identifica com alguma dessas situações?</h2>
 
-    <div class="pain-grid">
+    <div class="pain-grid reveal">
       <div class="pain-item">
         <div class="pain-check">
           <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
@@ -868,11 +870,11 @@
 <!-- ─── PREVIEW DO CONTEÚDO ──────────────────────── -->
 <section>
   <div class="container">
-    <span class="label">O que você vai encontrar</span>
-    <h2>O que você vai aprender.</h2>
+    <span class="label reveal">O que você vai encontrar</span>
+    <h2 class="reveal">O que você vai aprender.</h2>
     <p>7 capítulos diretos ao ponto, com exemplos do contexto brasileiro e um plano de ação para sair da leitura já em movimento.</p>
 
-    <div class="chapters-list">
+    <div class="chapters-list reveal">
       <div class="chapter-row">
         <div class="chapter-row-num">1</div>
         <div class="chapter-row-content">
@@ -925,7 +927,7 @@
     </div>
 
     <div style="margin-top:24px; background:var(--bg-3); border:1px solid rgba(96,165,250,0.2); border-left:3px solid var(--blue); padding:24px 28px;">
-      <span class="label" style="margin-bottom:8px;">Complemento recomendado</span>
+      <span class="label reveal" style="margin-bottom:8px;">Complemento recomendado</span>
       <strong style="display:block; font-size:16px; color:var(--fg); margin-bottom:8px;">Planilha de Planejamento</strong>
       <p style="margin:0; font-size:14px;">O guia te mostra o que fazer. A <a href="selling_page_planilha_latest.html" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">Planilha de Planejamento</a> calcula automaticamente: projeção de 24 meses, teto de gastos, reserva de emergência e objetivos de vida. Os dois juntos cobrem estratégia e execução.</p>
     </div>
@@ -947,10 +949,10 @@
 <!-- ─── O QUE ESTÁ INCLUÍDO ──────────────────────── -->
 <section>
   <div class="container">
-    <span class="label">O que você acessa</span>
-    <h2>Tudo que está no guia</h2>
+    <span class="label reveal">O que você acessa</span>
+    <h2 class="reveal">Tudo que está no guia</h2>
 
-    <div class="includes-grid">
+    <div class="includes-grid reveal">
       <div class="include-item">
         <div class="include-icon">
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -1014,8 +1016,8 @@
   <div class="container">
     <div class="author-inner">
       <div class="author-text">
-        <span class="label">Quem escreveu</span>
-        <h2>Vinícius Gomes Lima</h2>
+        <span class="label reveal">Quem escreveu</span>
+        <h2 class="reveal">Vinícius Gomes Lima</h2>
         <div class="divider"></div>
         <p>Planejador Financeiro Certificado, formado em Relações Internacionais e com MBA em Finanças, com mais de 16 anos de carreira em multinacionais.</p>
         <p>Cresceu vendo de perto o quanto a falta de organização financeira pode pesar na vida de uma família. Com o tempo, o que era curiosidade pessoal virou especialidade profissional.</p>
@@ -1028,10 +1030,10 @@
 <!-- ─── FAQ ───────────────────────────────────────── -->
 <section>
   <div class="container">
-    <span class="label">Dúvidas frequentes</span>
-    <h2>Perguntas e respostas</h2>
+    <span class="label reveal">Dúvidas frequentes</span>
+    <h2 class="reveal">Perguntas e respostas</h2>
 
-    <div class="faq-list">
+    <div class="faq-list reveal">
 
       <details class="faq-item">
         <summary class="faq-question">
@@ -1100,8 +1102,8 @@
 <!-- ─── FINAL CTA ──────────────────────────────────── -->
 <section class="final-cta">
   <div class="container">
-    <span class="label">Comece hoje</span>
-    <h2>O primeiro passo é o mais difícil.<em style="font-family:'Poppins',sans-serif; font-style:normal; color:var(--blue);"> Você já está dando.</em></h2>
+    <span class="label reveal">Comece hoje</span>
+    <h2 class="reveal">O primeiro passo é o mais difícil.<em style="font-family:'Poppins',sans-serif; font-style:normal; color:var(--blue);"> Você já está dando.</em></h2>
     <p>Você chegou até o final desta página. Isso já diz muito. Agora é só dar o próximo passo.</p>
     <div class="btn-wrap">
       <a href="index.html?acessar=guia1" class="btn-primary">Acessar grátis →</a>
@@ -1124,6 +1126,17 @@
   if (upsellLink) upsellLink.addEventListener('click', () => typeof gtag === 'function' && gtag('event', 'click_ver_planilha_from_guia1'));
 </script>
 
+<script>
+  const reveals = document.querySelectorAll(".reveal");
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add("visible"); }, 100);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  reveals.forEach(el => revealObs.observe(el));
+</script>
 </body>
 </html>
-}
