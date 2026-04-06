@@ -557,7 +557,7 @@
     padding: 112px 24px;
     min-height: 60vw;
     background:
-      linear-gradient(135deg, rgba(7,9,15,0.88) 0%, rgba(7,11,25,0.80) 100%),
+      linear-gradient(135deg, rgba(7,9,15,0.62) 0%, rgba(7,11,25,0.45) 100%),
       url('IMG_1611_2.jpg') 82% 12% / cover no-repeat;
     position: relative;
   }
@@ -586,7 +586,7 @@
   @media (max-width: 700px) {
     .about-section-wrap {
       background:
-        linear-gradient(135deg, rgba(7,9,15,0.82) 0%, rgba(7,11,25,0.75) 100%),
+        linear-gradient(135deg, rgba(7,9,15,0.70) 0%, rgba(7,11,25,0.58) 100%),
         url('IMG_1611_2.jpg') 70% 12% / cover no-repeat;
     }
   }
@@ -741,6 +741,7 @@
   .iq-result-card {
     background: rgba(96,165,250,0.05); border: 1px solid var(--blue-border);
     border-radius: 16px; padding: 24px; margin-bottom: 20px;
+    display: flex; flex-direction: column;
   }
   .iq-result-card-label {
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
@@ -751,7 +752,7 @@
     font-size: 1rem; font-weight: 700; color: var(--fg); margin-bottom: 8px;
   }
   .iq-result-card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-  .iq-result-cta { display: flex; flex-direction: column; gap: 10px; }
+  .iq-result-cta { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
   .iq-btn-cta {
     display: block; width: 100%; text-align: center;
     background: var(--amber); color: #07090F;
@@ -1615,7 +1616,6 @@ Cal("init",{origin:"https://cal.com"});
   function iqDecide(r) {
     const highRenda   = r.renda  === 'high';
     const worriedDebt = r.divida === 'yes';
-    const organized   = r.org   === 'yes';
     const allStrong = (
       !worriedDebt &&
       r.org           === 'yes' &&
@@ -1623,10 +1623,11 @@ Cal("init",{origin:"https://cal.com"});
       r.protecao      === 'yes' &&
       (r.investimentos === 'yes' || r.investimentos === 'structured')
     );
-    if (allStrong)                 return 'EXCELENTE';
-    if (highRenda && worriedDebt)  return 'MENTORIA';
-    if (!highRenda && worriedDebt) return 'GUIA_N1';
-    if (!worriedDebt && !organized) return 'PLANILHA';
+    if (allStrong)                           return 'EXCELENTE';
+    if (highRenda && worriedDebt)            return 'MENTORIA';
+    if (!highRenda && worriedDebt)           return 'GUIA_N1';
+    if (!worriedDebt && r.org === 'no')      return 'PLANILHA';
+    if (!worriedDebt && r.org === 'partial') return 'GUIA_N2_PARCIAL';
     return 'GUIA_N2';
   }
 
@@ -1674,11 +1675,12 @@ Cal("init",{origin:"https://cal.com"});
     const tipo = iqDecide(a);
 
     const meta = {
-      GUIA_N1:   { tag: 'Fase 1 · Recomeço Financeiro',      title: 'Seu dinheiro está saindo mais rápido do que entrando.',                                       desc: 'Dívidas que preocupam com renda limitada é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar com método.' },
-      PLANILHA:  { tag: 'Fase 2 · Organização Financeira',    title: 'Você até ganha, mas no fim do mês não sobra nada.',                                           desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer.' },
-      GUIA_N2:   { tag: 'Fase 3 · Crescimento de Patrimônio', title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',                         desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter.' },
-      MENTORIA:  { tag: 'Fase 1 · Recomeço Financeiro',       title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',                  desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade.' },
-      EXCELENTE: { tag: 'Parabéns · Perfil Avançado',         title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.', desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar.' }
+      GUIA_N1:        { tag: 'Recomeço Financeiro',        title: 'Seu dinheiro está saindo mais rápido do que entrando.',                                        desc: 'Dívidas que preocupam é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar, com método.' },
+      PLANILHA:       { tag: 'Organização Financeira',     title: 'O dinheiro entra, mas some sem deixar rastro.',                                                 desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer.' },
+      GUIA_N2_PARCIAL:{ tag: 'Organização e Crescimento',  title: 'Você tem algum controle. Mas sem sistema e sem estratégia, o dinheiro não cresce.',             desc: 'Ter uma ideia aproximada das finanças é melhor do que nada. Mas sem um controle real e uma estratégia de crescimento, a vida financeira fica no meio do caminho.' },
+      GUIA_N2:        { tag: 'Crescimento de Patrimônio',  title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',                          desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter.' },
+      MENTORIA:       { tag: 'Planejamento Personalizado', title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',                    desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade.' },
+      EXCELENTE:      { tag: 'Otimização Patrimonial',     title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.',  desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar.' }
     }[tipo];
 
     document.getElementById('iq-r-tag').textContent = meta.tag;
@@ -1694,27 +1696,29 @@ Cal("init",{origin:"https://cal.com"});
     } else if (tipo === 'PLANILHA') {
       cardsEl.className = 'iq-result-cards';
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha)
-        + iqBuildCard(IQ_PRODUTOS.guia1, { desc: 'Cobre os fundamentos: como entender sua situação real, estruturar um orçamento e construir a primeira reserva de emergência.' });
+        + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Depois de montar o controle, este é o próximo passo: transformar organização em crescimento real de patrimônio.' });
+    } else if (tipo === 'GUIA_N2_PARCIAL') {
+      cardsEl.className = 'iq-result-cards';
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha)
+        + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Com o controle no lugar, este é o próximo passo: construir uma estratégia real de crescimento de patrimônio.' });
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
-      const segundoCardGuia2 = a.renda === 'high'
-        ? `<div class="iq-result-card">
+      const segundoCardGuia2 = `<div class="iq-result-card">
             <div class="iq-result-card-label" style="color:var(--blue)">Serviço Personalizado · Recomendado</div>
             <div class="iq-result-card-title">Planejamento Financeiro Estratégico</div>
-            <p class="iq-result-card-desc">Nenhum conteúdo digital substitui o acompanhamento próximo. Com um planejador ao seu lado, cada decisão é tomada com base na sua realidade.</p>
+            <p class="iq-result-card-desc">Quem já organiza as finanças precisa de estratégia, não de mais conteúdo. Uma sessão gratuita é suficiente para entender onde você está deixando patrimônio na mesa.</p>
             <div class="iq-result-cta">
               <a href="https://cal.com/planejadorvinicius/50min" class="iq-btn-cta">Agendar sessão gratuita →</a>
               <a href="#mentoria" class="iq-btn-cta-outline" onclick="smoothScroll(event)">Como funciona →</a>
             </div>
-          </div>`
-        : iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'Coloca sua estratégia em prática: projeção de 24 meses, metas de investimento e acompanhamento mensal dos seus objetivos.' });
+          </div>`;
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2) + segundoCardGuia2;
     } else if (tipo === 'MENTORIA') {
       cardsEl.className = 'iq-result-cards single';
       cardsEl.innerHTML = `<div class="iq-result-card">
         <div class="iq-result-card-label" style="color:var(--blue)">Serviço Personalizado · Recomendado para o seu perfil</div>
         <div class="iq-result-card-title">Planejamento Financeiro Estratégico</div>
-        <p class="iq-result-card-desc">O seu caso exige um plano feito para você, não para uma média. Uma sessão gratuita é suficiente para entender o que está travando e o que precisa mudar.</p>
+        <p class="iq-result-card-desc">O seu caso exige um plano feito para você, não para uma média. Uma sessão gratuita é suficiente para entender o que está travando o seu patrimônio e o que precisa mudar.</p>
         <div class="iq-result-cta">
           <a href="https://cal.com/planejadorvinicius/50min" class="iq-btn-cta">Agendar sessão gratuita →</a>
           <a href="#mentoria" class="iq-btn-cta-outline" onclick="smoothScroll(event)">Como funciona →</a>
