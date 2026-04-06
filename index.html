@@ -1698,8 +1698,8 @@ Cal("init",{origin:"https://cal.com"});
         + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Depois de montar o controle, este é o próximo passo: transformar organização em crescimento real de patrimônio.' });
     } else if (tipo === 'GUIA_N2_PARCIAL') {
       cardsEl.className = 'iq-result-cards';
-      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2)
-        + iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'A ferramenta para transformar o controle aproximado em precisão real e acompanhar cada passo da sua estratégia.' });
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha)
+        + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Com o controle no lugar, este é o próximo passo: construir uma estratégia real de crescimento de patrimônio.' });
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
       const segundoCardGuia2 = a.renda === 'high'
