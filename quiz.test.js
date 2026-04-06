@@ -4,12 +4,11 @@
  * Sem dependências externas.
  */
 
-// ─── Cópia exata da função decide() de quiz_latest.html ───────────────────────
+// ─── Cópia exata da função decide() de index.html ────────────────────────────
 // ATENÇÃO: se a lógica do quiz mudar, atualizar aqui também.
 function decide(r) {
   const highRenda   = r.renda  === 'high';
   const worriedDebt = r.divida === 'yes';
-  const organized   = r.org    === 'yes';
 
   const allStrong = (
     !worriedDebt &&
@@ -19,10 +18,11 @@ function decide(r) {
     (r.investimentos === 'yes' || r.investimentos === 'structured')
   );
 
-  if (allStrong)                 return 'EXCELENTE';
-  if (highRenda && worriedDebt)  return 'MENTORIA';
-  if (!highRenda && worriedDebt) return 'GUIA_N1';
-  if (!worriedDebt && !organized) return 'PLANILHA';
+  if (allStrong)                           return 'EXCELENTE';
+  if (highRenda && worriedDebt)            return 'MENTORIA';
+  if (!highRenda && worriedDebt)           return 'GUIA_N1';
+  if (!worriedDebt && r.org === 'no')      return 'PLANILHA';
+  if (!worriedDebt && r.org === 'partial') return 'GUIA_N2_PARCIAL';
   return 'GUIA_N2';
 }
 
@@ -96,6 +96,11 @@ test(
   'GUIA_N1'
 );
 test(
+  'renda mid + dívidas preocupantes',
+  decide({ renda: 'mid', divida: 'yes', org: 'no', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
+  'GUIA_N1'
+);
+test(
   'renda low + dívidas preocupantes + org=yes (worriedDebt tem prioridade)',
   decide({ ...perfeito, renda: 'low', divida: 'yes' }),
   'GUIA_N1'
@@ -109,19 +114,37 @@ test(
   'PLANILHA'
 );
 test(
-  'sem dívidas + organização parcial (org=partial)',
-  decide({ renda: 'high', divida: 'no', org: 'partial', aposentadoria: 'yes', protecao: 'yes', investimentos: 'yes' }),
-  'PLANILHA'
-);
-test(
-  'dívida parcial (não preocupante) + sem organização',
+  'dívida parcial (não preocupante) + sem organização (org=no)',
   decide({ renda: 'high', divida: 'partial', org: 'no', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
   'PLANILHA'
 );
 test(
+  'renda low + sem dívidas + org=no',
+  decide({ renda: 'low', divida: 'no', org: 'no', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
+  'PLANILHA'
+);
+
+// ─── GUIA_N2_PARCIAL ──────────────────────────────────────────────────────────
+console.log('\nGUIA_N2_PARCIAL');
+test(
+  'sem dívidas + organização parcial (org=partial)',
+  decide({ renda: 'high', divida: 'no', org: 'partial', aposentadoria: 'yes', protecao: 'yes', investimentos: 'yes' }),
+  'GUIA_N2_PARCIAL'
+);
+test(
   'dívida parcial + organização parcial',
   decide({ renda: 'low', divida: 'partial', org: 'partial', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
-  'PLANILHA'
+  'GUIA_N2_PARCIAL'
+);
+test(
+  'renda alta + sem dívidas + org=partial + resto fraco',
+  decide({ renda: 'high', divida: 'no', org: 'partial', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
+  'GUIA_N2_PARCIAL'
+);
+test(
+  'org=partial não cai em PLANILHA (regressão)',
+  decide({ renda: 'high', divida: 'no', org: 'partial', aposentadoria: 'yes', protecao: 'yes', investimentos: 'structured' }),
+  'GUIA_N2_PARCIAL'
 );
 
 // ─── GUIA_N2 ──────────────────────────────────────────────────────────────────
@@ -158,6 +181,16 @@ test(
   'MENTORIA tem prioridade sobre GUIA_N2 quando renda=high e divida=yes',
   decide({ renda: 'high', divida: 'yes', org: 'yes', aposentadoria: 'yes', protecao: 'yes', investimentos: 'yes' }),
   'MENTORIA'
+);
+test(
+  'org=partial com divida=yes e renda=high → MENTORIA (divida tem prioridade)',
+  decide({ renda: 'high', divida: 'yes', org: 'partial', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
+  'MENTORIA'
+);
+test(
+  'org=partial com divida=yes e renda=low → GUIA_N1 (divida tem prioridade)',
+  decide({ renda: 'low', divida: 'yes', org: 'partial', aposentadoria: 'no', protecao: 'no', investimentos: 'no' }),
+  'GUIA_N1'
 );
 
 // ─── Resultado ───────────────────────────────────────────────────────────────

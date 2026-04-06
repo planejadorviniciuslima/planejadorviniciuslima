@@ -1615,7 +1615,6 @@ Cal("init",{origin:"https://cal.com"});
   function iqDecide(r) {
     const highRenda   = r.renda  === 'high';
     const worriedDebt = r.divida === 'yes';
-    const organized   = r.org   === 'yes';
     const allStrong = (
       !worriedDebt &&
       r.org           === 'yes' &&
@@ -1623,10 +1622,11 @@ Cal("init",{origin:"https://cal.com"});
       r.protecao      === 'yes' &&
       (r.investimentos === 'yes' || r.investimentos === 'structured')
     );
-    if (allStrong)                 return 'EXCELENTE';
-    if (highRenda && worriedDebt)  return 'MENTORIA';
-    if (!highRenda && worriedDebt) return 'GUIA_N1';
-    if (!worriedDebt && !organized) return 'PLANILHA';
+    if (allStrong)                           return 'EXCELENTE';
+    if (highRenda && worriedDebt)            return 'MENTORIA';
+    if (!highRenda && worriedDebt)           return 'GUIA_N1';
+    if (!worriedDebt && r.org === 'no')      return 'PLANILHA';
+    if (!worriedDebt && r.org === 'partial') return 'GUIA_N2_PARCIAL';
     return 'GUIA_N2';
   }
 
@@ -1674,11 +1674,12 @@ Cal("init",{origin:"https://cal.com"});
     const tipo = iqDecide(a);
 
     const meta = {
-      GUIA_N1:   { tag: 'Fase 1 · Recomeço Financeiro',      title: 'Seu dinheiro está saindo mais rápido do que entrando.',                                       desc: 'Dívidas que preocupam com renda limitada é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar com método.' },
-      PLANILHA:  { tag: 'Fase 2 · Organização Financeira',    title: 'Você até ganha, mas no fim do mês não sobra nada.',                                           desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer.' },
-      GUIA_N2:   { tag: 'Fase 3 · Crescimento de Patrimônio', title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',                         desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter.' },
-      MENTORIA:  { tag: 'Fase 1 · Recomeço Financeiro',       title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',                  desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade.' },
-      EXCELENTE: { tag: 'Parabéns · Perfil Avançado',         title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.', desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar.' }
+      GUIA_N1:        { tag: 'Recomeço Financeiro',        title: 'Seu dinheiro está saindo mais rápido do que entrando.',                                        desc: 'Dívidas que preocupam é a combinação mais desgastante. Cada mês sem um plano é mais juros, mais pressão, menos margem. O próximo passo não é poupar mais. É parar de afundar com método.' },
+      PLANILHA:       { tag: 'Organização Financeira',     title: 'O dinheiro entra, mas some sem deixar rastro.',                                                 desc: 'Sem dívidas preocupantes é um bom sinal. Mas sem um sistema de controle, o dinheiro some sem deixar rastro. E sem rastro, não tem como crescer.' },
+      GUIA_N2_PARCIAL:{ tag: 'Organização e Crescimento',  title: 'Você tem algum controle. Mas sem sistema e sem estratégia, o dinheiro não cresce.',             desc: 'Ter uma ideia aproximada das finanças é melhor do que nada. Mas sem um controle real e uma estratégia de crescimento, a vida financeira fica no meio do caminho.' },
+      GUIA_N2:        { tag: 'Crescimento de Patrimônio',  title: 'Você organiza. Mas ainda não está construindo patrimônio de verdade.',                          desc: 'Controle financeiro sem estratégia de crescimento é estagnação disfarçada de segurança. Quem para aqui perde para a inflação e chega na aposentadoria com menos do que poderia ter.' },
+      MENTORIA:       { tag: 'Planejamento Personalizado', title: 'Renda alta com dívidas que preocupam. Isso tem solução, mas não é simples.',                    desc: 'Ganhar bem e ainda assim se sentir preso é uma das situações mais frustrantes. O problema não é falta de informação. É falta de um plano feito para a sua realidade.' },
+      EXCELENTE:      { tag: 'Otimização Patrimonial',     title: 'Você está à frente de 95% das pessoas. E provavelmente sabe que ainda dá para ir mais longe.',  desc: 'Organização, investimentos, proteção, aposentadoria. Você cuida de tudo isso. Esse nível raramente tem um problema para resolver. Tem uma oportunidade para otimizar.' }
     }[tipo];
 
     document.getElementById('iq-r-tag').textContent = meta.tag;
@@ -1694,7 +1695,11 @@ Cal("init",{origin:"https://cal.com"});
     } else if (tipo === 'PLANILHA') {
       cardsEl.className = 'iq-result-cards';
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.planilha)
-        + iqBuildCard(IQ_PRODUTOS.guia1, { desc: 'Cobre os fundamentos: como entender sua situação real, estruturar um orçamento e construir a primeira reserva de emergência.' });
+        + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Depois de montar o controle, este é o próximo passo: transformar organização em crescimento real de patrimônio.' });
+    } else if (tipo === 'GUIA_N2_PARCIAL') {
+      cardsEl.className = 'iq-result-cards';
+      cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2)
+        + iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'A ferramenta para transformar o controle aproximado em precisão real e acompanhar cada passo da sua estratégia.' });
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
       const segundoCardGuia2 = a.renda === 'high'
