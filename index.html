@@ -1702,17 +1702,15 @@ Cal("init",{origin:"https://cal.com"});
         + iqBuildCard(IQ_PRODUTOS.guia2, { desc: 'Com o controle no lugar, este é o próximo passo: construir uma estratégia real de crescimento de patrimônio.' });
     } else if (tipo === 'GUIA_N2') {
       cardsEl.className = 'iq-result-cards';
-      const segundoCardGuia2 = a.renda === 'high'
-        ? `<div class="iq-result-card">
+      const segundoCardGuia2 = `<div class="iq-result-card">
             <div class="iq-result-card-label" style="color:var(--blue)">Serviço Personalizado · Recomendado</div>
             <div class="iq-result-card-title">Planejamento Financeiro Estratégico</div>
-            <p class="iq-result-card-desc">Nenhum conteúdo digital substitui o acompanhamento próximo. Com um planejador ao seu lado, cada decisão é tomada com base na sua realidade.</p>
+            <p class="iq-result-card-desc">Quem já organiza as finanças precisa de estratégia, não de mais conteúdo. Uma sessão gratuita é suficiente para entender onde você está deixando patrimônio na mesa.</p>
             <div class="iq-result-cta">
               <a href="https://cal.com/planejadorvinicius/50min" class="iq-btn-cta">Agendar sessão gratuita →</a>
               <a href="#mentoria" class="iq-btn-cta-outline" onclick="smoothScroll(event)">Como funciona →</a>
             </div>
-          </div>`
-        : iqBuildCard(IQ_PRODUTOS.planilha, { desc: 'Coloca sua estratégia em prática: projeção de 24 meses, metas de investimento e acompanhamento mensal dos seus objetivos.' });
+          </div>`;
       cardsEl.innerHTML = iqBuildCard(IQ_PRODUTOS.guia2) + segundoCardGuia2;
     } else if (tipo === 'MENTORIA') {
       cardsEl.className = 'iq-result-cards single';
